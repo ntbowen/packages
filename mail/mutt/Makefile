@@ -38,7 +38,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/mutt
   SECTION:=mail
   CATEGORY:=Mail
-  DEPENDS:=+MUTT_HCACHE:libgdbm +MUTT_GNUTLS:libgnutls +MUTT_OPENSSL:libopenssl +libncursesw +MUTT_SASL:libsasl2 +terminfo +zlib
+  DEPENDS:=+MUTT_HCACHE:libgdbm +MUTT_GNUTLS:libgnutls +MUTT_OPENSSL:libopenssl +libncursesw +MUTT_SASL:libsasl2 +terminfo +zlib +lmdb
   TITLE:=Console mail client
   URL:=http://www.mutt.org/
   MENU:=1
