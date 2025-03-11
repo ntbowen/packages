@@ -32,6 +32,8 @@ PKG_FIXUP:=autoreconf
 PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
 
+TARGET_LDFLAGS += -licuuc
+
 include $(INCLUDE_DIR)/package.mk
 # iconv is needed when compiling with MySQL support. iconv will also be used by
 # dovecot itself.
