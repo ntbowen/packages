@@ -31,9 +31,9 @@ define Package/gammu
 	CATEGORY:=Utilities
 	TITLE:=Cell phone/modem SMS and control tool
 	URL:=https://wammu.eu/gammu/
-	DEPENDS:=+libpthread +libcurl +glib2
+	DEPENDS:=+libpthread +libcurl +glib2 +libodbc
 	DEPENDS+=+PACKAGE_bluez-libs:bluez-libs
-	DEPENDS+=+PACKAGE_libmariadb:libmariadb +PACKAGE_unixodbc:unixodbc +PACKAGE_libpq:libpq
+	DEPENDS+=+PACKAGE_libmariadb:libmariadb +PACKAGE_libpq:libpq
 	DEPENDS+=+PACKAGE_libusb-1.0:libusb-1.0
 endef
 
