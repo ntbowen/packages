@@ -1,0 +1,24 @@
+--- a/qmi_wwan_f.c	2025-05-07 11:19:15.654433303 +0800
++++ b/qmi_wwan_f.c	2025-05-07 11:32:24.876834667 +0800
+@@ -12,6 +12,7 @@
+ 
+ #include <linux/module.h>
+ #include <linux/version.h>
++#include <linux/string.h>
+ #include <linux/interrupt.h>
+ #include <linux/netdevice.h>
+ #include <linux/ethtool.h>
+@@ -1772,8 +1773,13 @@
+ {
+     /* Inherit standard device info */
+     usbnet_get_drvinfo(net, info);
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0)
++    strscpy(info->driver, driver_name, sizeof(info->driver));
++    strscpy(info->version, VERSION_NUMBER, sizeof(info->version));
++#else
+     strlcpy(info->driver, driver_name, sizeof(info->driver));
+     strlcpy(info->version, VERSION_NUMBER, sizeof(info->version));
++#endif
+ }
+ 
+ static struct ethtool_ops ql_net_ethtool_ops;
