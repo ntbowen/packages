@@ -42,6 +42,12 @@ ifdef CONFIG_TARGET_x86
   TARGET_CFLAGS+= $(FPIC)
 endif
 
+# 针对 armv8-a 架构增加 crypto 指令集支持
+ifeq ($(findstring aarch64,$(ARCH)),aarch64)
+  TARGET_CFLAGS += -march=armv8-a+crypto
+  TARGET_CXXFLAGS += -march=armv8-a+crypto
+endif
+
 MAKE_FLAGS+= dynamic libcryptopp.pc
 
 define Build/InstallDev
