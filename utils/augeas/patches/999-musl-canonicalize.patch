@@ -1,0 +1,17 @@
+--- a/src/transform.c	2023-07-14 19:07:23.000000000 +0800
++++ b/src/transform.c	2025-05-07 14:41:51.380681191 +0800
+@@ -39,6 +39,14 @@
+ #include "transform.h"
+ #include "errcode.h"
+ 
++#include <stdlib.h>
++#ifndef HAVE_CANONICALIZE_FILE_NAME
++static char *my_canonicalize_file_name(const char *path) {
++    return realpath(path, NULL);
++}
++#define canonicalize_file_name my_canonicalize_file_name
++#endif
++
+ static const int fnm_flags = FNM_PATHNAME;
+ static const int glob_flags = GLOB_NOSORT;
+ 
