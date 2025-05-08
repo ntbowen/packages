@@ -4,27 +4,43 @@
 set -o errexit # failing commands causes script to fail
 set -o nounset # undefined variables causes script to fail
 
-echo "src/gz packages_ci file:///ci" >> /etc/opkg/distfeeds.conf
-
-FINGERPRINT="$(usign -F -p /ci/packages_ci.pub)"
-cp /ci/packages_ci.pub "/etc/opkg/keys/$FINGERPRINT"
-
 mkdir -p /var/lock/
+mkdir -p /var/log/
 
-opkg update
+if [ $PKG_MANAGER = "opkg" ]; then
+	echo "src/gz packages_ci file:///ci" >> /etc/opkg/distfeeds.conf
+
+	FINGERPRINT="$(usign -F -p /ci/packages_ci.pub)"
+	cp /ci/packages_ci.pub "/etc/opkg/keys/$FINGERPRINT"
+
+	opkg update
+elif [ $PKG_MANAGER = "apk" ]; then
+	cp /ci/packages-ci-public.pem "/etc/apk/keys/"
+fi
 
 export CI_HELPER="/ci/.github/workflows/ci_helpers.sh"
 
-for PKG in /ci/*.ipk; do
-	tar -xzOf "$PKG" ./control.tar.gz | tar xzf - ./control
-	# package name including variant
-	PKG_NAME=$(sed -ne 's#^Package: \(.*\)$#\1#p' ./control)
-	# package version without release
-	PKG_VERSION=$(sed -ne 's#^Version: \(.*\)$#\1#p' ./control)
-	PKG_VERSION="${PKG_VERSION%-[!-]*}"
-	# package source containing test.sh script
-	PKG_SOURCE=$(sed -ne 's#^Source: \(.*\)$#\1#p' ./control)
-	PKG_SOURCE="${PKG_SOURCE#/feed/}"
+for PKG in /ci/*.[ai]pk; do
+	if [ $PKG_MANAGER = "opkg" ]; then
+		tar -xzOf "$PKG" ./control.tar.gz | tar xzf - ./control
+		# package name including variant
+		PKG_NAME=$(sed -ne 's#^Package: \(.*\)$#\1#p' ./control)
+		# package version without release
+		PKG_VERSION=$(sed -ne 's#^Version: \(.*\)$#\1#p' ./control)
+		PKG_VERSION="${PKG_VERSION%-[!-]*}"
+		# package source containing test.sh script
+		PKG_SOURCE=$(sed -ne 's#^Source: \(.*\)$#\1#p' ./control)
+		PKG_SOURCE="${PKG_SOURCE#/feed/}"
+	elif [ $PKG_MANAGER = "apk" ]; then
+		# package name including variant
+		PKG_NAME=$(apk adbdump --format json "$PKG" | jsonfilter -e '@["info"]["name"]')
+		# package version without release
+		PKG_VERSION=$(apk adbdump --format json "$PKG" | jsonfilter -e '@["info"]["version"]')
+		PKG_VERSION="${PKG_VERSION%-[!-]*}"
+		# package source containing test.sh script
+		PKG_SOURCE=$(apk adbdump --format json "$PKG" | jsonfilter -e '@["info"]["origin"]')
+		PKG_SOURCE="${PKG_SOURCE#/feed/}"
+	fi
 
 	echo
 	echo "Testing package $PKG_NAME in version $PKG_VERSION from $PKG_SOURCE"
@@ -56,7 +72,11 @@ for PKG in /ci/*.ipk; do
 		echo "No pre-test.sh script available"
 	fi
 
-	opkg install "$PKG"
+	if [ $PKG_MANAGER = "opkg" ]; then
+		opkg install "$PKG"
+	elif [ $PKG_MANAGER = "apk" ]; then
+		apk add "$PKG"
+	fi
 
 	echo "Use package specific test.sh"
 	if sh "$TEST_SCRIPT" "$PKG_NAME" "$PKG_VERSION"; then
@@ -66,5 +86,9 @@ for PKG in /ci/*.ipk; do
 		exit 1
 	fi
 
-	opkg remove "$PKG_NAME" --force-removal-of-dependent-packages --force-remove --autoremove || true
+	if [ $PKG_MANAGER = "opkg" ]; then
+		opkg remove "$PKG_NAME" --force-removal-of-dependent-packages --force-remove --autoremove || true
+	elif [ $PKG_MANAGER = "apk" ]; then
+		apk del -r "$PKG_NAME"
+	fi
 done
