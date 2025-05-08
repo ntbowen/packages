@@ -1,0 +1,246 @@
+--- a/netifaces.c	2025-05-08 09:34:51.088335748 +0800
++++ b/netifaces.c	2025-05-08 09:35:57.534460740 +0800
+@@ -856,8 +856,8 @@
+ 
+           if (pPrefixAddr->sin_family != AF_INET
+               || (prefix_len >= 0
+-		  && pPrefix->PrefixLength < (unsigned)prefix_len)
+-	      || (prefix_len >= 0 && pPrefix->PrefixLength == 32))
++      && pPrefix->PrefixLength < (unsigned)prefix_len)
++        || (prefix_len >= 0 && pPrefix->PrefixLength == 32))
+             continue;
+ 
+           if (compare_bits (&pPrefixAddr->sin_addr,
+@@ -931,8 +931,8 @@
+ 
+           if (pPrefixAddr->sin6_family != AF_INET6
+               || (prefix_len >= 0
+-		  && pPrefix->PrefixLength < (unsigned)prefix_len)
+-	      || (prefix_len >= 0 && pPrefix->PrefixLength == 128))
++      && pPrefix->PrefixLength < (unsigned)prefix_len)
++        || (prefix_len >= 0 && pPrefix->PrefixLength == 128))
+             continue;
+ 
+           if (compare_bits (&pPrefixAddr->sin6_addr,
+@@ -1482,7 +1482,7 @@
+ 
+   HANDLE hIpHelper;
+   typedef NTSTATUS (WINAPI *PGETIPFORWARDTABLE2)(ADDRESS_FAMILY Family,
+-						 PMIB_IPFORWARD_TABLE2 *pTable);
++             PMIB_IPFORWARD_TABLE2 *pTable);
+   typedef VOID (WINAPI *PFREEMIBTABLE)(PVOID Memory);
+ 
+   PGETIPFORWARDTABLE2 pGetIpForwardTable2;
+@@ -1513,37 +1513,37 @@
+       defaults = PyDict_GetItemString (result, "default");
+ 
+       for (n = 0; n < table->NumEntries; ++n) {
+-	MIB_IFROW ifRow;
+-	PyObject *ifname;
+-	PyObject *gateway;
+-	PyObject *isdefault;
+-	PyObject *tuple, *deftuple = NULL;
+-	WCHAR *pwcsName;
+-	DWORD dwFamily = table->Table[n].NextHop.si_family;
+-	BOOL bBest = FALSE;
+-
+-	if (table->Table[n].DestinationPrefix.PrefixLength)
+-	  continue;
+-
+-	switch (dwFamily) {
+-	case AF_INET:
+-	  if (!table->Table[n].NextHop.Ipv4.sin_addr.s_addr)
+-	    continue;
+-	  break;
+-	case AF_INET6:
+-	  if (memcmp (&table->Table[n].NextHop.Ipv6.sin6_addr,
+-		      &in6addr_any,
+-		      sizeof (struct in6_addr)) == 0)
+-	    continue;
+-	  break;
+-	default:
+-	  continue;
+-	}
+-
+-	memset (&ifRow, 0, sizeof (ifRow));
+-	ifRow.dwIndex = table->Table[n].InterfaceIndex;
+-	if (GetIfEntry (&ifRow) != NO_ERROR)
+-	  continue;
++  MIB_IFROW ifRow;
++  PyObject *ifname;
++  PyObject *gateway;
++  PyObject *isdefault;
++  PyObject *tuple, *deftuple = NULL;
++  WCHAR *pwcsName;
++  DWORD dwFamily = table->Table[n].NextHop.si_family;
++  BOOL bBest = FALSE;
++
++  if (table->Table[n].DestinationPrefix.PrefixLength)
++    continue;
++
++  switch (dwFamily) {
++  case AF_INET:
++    if (!table->Table[n].NextHop.Ipv4.sin_addr.s_addr)
++      continue;
++    break;
++  case AF_INET6:
++    if (memcmp (&table->Table[n].NextHop.Ipv6.sin6_addr,
++          &in6addr_any,
++          sizeof (struct in6_addr)) == 0)
++      continue;
++    break;
++  default:
++    continue;
++  }
++
++  memset (&ifRow, 0, sizeof (ifRow));
++  ifRow.dwIndex = table->Table[n].InterfaceIndex;
++  if (GetIfEntry (&ifRow) != NO_ERROR)
++    continue;
+ 
+         gateway = string_from_address ((SOCKADDR *)&table->Table[n].NextHop,
+                                        sizeof (table->Table[n].NextHop));
+@@ -1551,48 +1551,48 @@
+         if (!gateway)
+           continue;
+ 
+-	/* Strip the prefix from the interface name */
+-	pwcsName = ifRow.wszName;
+-	if (_wcsnicmp (L"\\DEVICE\\TCPIP_", pwcsName, 14) == 0)
+-	  pwcsName += 14;
++  /* Strip the prefix from the interface name */
++  pwcsName = ifRow.wszName;
++  if (_wcsnicmp (L"\\DEVICE\\TCPIP_", pwcsName, 14) == 0)
++    pwcsName += 14;
+ 
+-	switch (dwFamily) {
+-	case AF_INET:
++  switch (dwFamily) {
++  case AF_INET:
+           bBest = table->Table[n].Metric < lBestInetMetric;
+           lBestInetMetric = table->Table[n].Metric;
+-	  break;
+-	case AF_INET6:
++    break;
++  case AF_INET6:
+           bBest = table->Table[n].Metric < lBestInet6Metric;
+           lBestInet6Metric = table->Table[n].Metric;
+-	  break;
+-	}
++    break;
++  }
+ 
+-	ifname = PyUnicode_FromWideChar (pwcsName, wcslen (pwcsName));
+-	isdefault = bBest ? Py_True : Py_False;
++  ifname = PyUnicode_FromWideChar (pwcsName, wcslen (pwcsName));
++  isdefault = bBest ? Py_True : Py_False;
+ 
+-	tuple = PyTuple_Pack (3, gateway, ifname, isdefault);
++  tuple = PyTuple_Pack (3, gateway, ifname, isdefault);
+ 
+-	if (PyObject_IsTrue (isdefault))
+-	  deftuple = PyTuple_Pack (2, gateway, ifname);
++  if (PyObject_IsTrue (isdefault))
++    deftuple = PyTuple_Pack (2, gateway, ifname);
+ 
+-	Py_DECREF (gateway);
+-	Py_DECREF (ifname);
++  Py_DECREF (gateway);
++  Py_DECREF (ifname);
+ 
+-	if (tuple && !add_to_family (result, dwFamily, tuple)) {
+-	  Py_DECREF (deftuple);
+-	  Py_DECREF (result);
+-	  free (table);
+-	  return NULL;
+-	}
++  if (tuple && !add_to_family (result, dwFamily, tuple)) {
++    Py_DECREF (deftuple);
++    Py_DECREF (result);
++    free (table);
++    return NULL;
++  }
+ 
+-	if (deftuple) {
+-	  PyObject *pyfamily = PyInt_FromLong (dwFamily);
++  if (deftuple) {
++    PyObject *pyfamily = PyInt_FromLong (dwFamily);
+ 
+-	  PyDict_SetItem (defaults, pyfamily, deftuple);
++    PyDict_SetItem (defaults, pyfamily, deftuple);
+ 
+-	  Py_DECREF (pyfamily);
+-	  Py_DECREF (deftuple);
+-	}
++    Py_DECREF (pyfamily);
++    Py_DECREF (deftuple);
++  }
+       }
+ 
+       pFreeMibTable (table);
+@@ -1618,7 +1618,7 @@
+           return NULL;
+         }
+ 
+-	table = tbl;
++  table = tbl;
+       }
+     } while (dwRet == ERROR_INSUFFICIENT_BUFFER);
+ 
+@@ -1660,15 +1660,15 @@
+       dwGateway = ntohl (table->table[n].dwForwardNextHop);
+ 
+       sprintf (gwbuf, "%u.%u.%u.%u",
+-	       (dwGateway >> 24) & 0xff,
+-	       (dwGateway >> 16) & 0xff,
+-	       (dwGateway >> 8) & 0xff,
+-	       dwGateway & 0xff);
++         (dwGateway >> 24) & 0xff,
++         (dwGateway >> 16) & 0xff,
++         (dwGateway >> 8) & 0xff,
++         dwGateway & 0xff);
+ 
+       /* Strip the prefix from the interface name */
+       pwcsName = ifRow.wszName;
+       if (_wcsnicmp (L"\\DEVICE\\TCPIP_", pwcsName, 14) == 0)
+-	pwcsName += 14;
++  pwcsName += 14;
+ 
+       bBest = table->table[n].dwForwardMetric1 < dwBestMetric;
+       if (bBest)
+@@ -1805,7 +1805,7 @@
+         sizeof(sanl_from),
+         &iov,
+         1,
+-        NULL,
++        0,
+         0,
+         0
+       };
+@@ -1975,7 +1975,7 @@
+         }
+ 
+       next:
+-	pmsg = (struct routing_msg *)NLMSG_NEXT(&pmsg->hdr, nllen);
++  pmsg = (struct routing_msg *)NLMSG_NEXT(&pmsg->hdr, nllen);
+       }
+     } while (is_multi);
+   } while (interrupted);
+@@ -2325,7 +2325,7 @@
+         PyObject *isdefault = PyBool_FromLong (!(pmsg->rtm_flags & RTF_IFSCOPE));
+ #else
+         PyObject *isdefault = Py_True;
+-	Py_INCREF(isdefault);
++  Py_INCREF(isdefault);
+ #endif
+ 
+         tuple = PyTuple_Pack (3, pyaddr, pyifname, isdefault);
+@@ -2504,7 +2504,7 @@
+         PyObject *isdefault = PyBool_FromLong (!(pmsg->rtm_flags & RTF_IFSCOPE));
+ #else
+         PyObject *isdefault = Py_True;
+-	Py_INCREF (isdefault);
++  Py_INCREF (isdefault);
+ #endif
+ 
+         tuple = PyTuple_Pack (3, pyaddr, pyifname, isdefault);
