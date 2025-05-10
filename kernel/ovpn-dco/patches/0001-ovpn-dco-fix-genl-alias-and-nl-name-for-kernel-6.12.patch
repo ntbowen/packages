@@ -1,0 +1,43 @@
+--- a/drivers/net/ovpn-dco/main.c	2024-02-02 21:55:03.000000000 +0800
++++ b/drivers/net/ovpn-dco/main.c	2025-05-10 15:12:25.284259632 +0800
+@@ -35,6 +35,10 @@
+ #define DRV_DESCRIPTION	"OpenVPN data channel offload (ovpn-dco)"
+ #define DRV_COPYRIGHT	"(C) 2020-2023 OpenVPN, Inc."
+ 
++#ifndef MODULE_ALIAS_GENL_FAMILY
++#define MODULE_ALIAS_GENL_FAMILY(name) MODULE_ALIAS("genl_family:" name)
++#endif
++
+ static void ovpn_struct_free(struct net_device *net)
+ {
+ 	struct ovpn_struct *ovpn = netdev_priv(net);
+@@ -126,7 +130,10 @@
+ 	const int overhead = sizeof(u32) + NONCE_WIRE_SIZE + 16 + sizeof(struct udphdr) +
+ 			     max(sizeof(struct ipv6hdr), sizeof(struct iphdr));
+ 
+-	netdev_features_t feat = NETIF_F_SG | NETIF_F_LLTX |
++	netdev_features_t feat = NETIF_F_SG |
++	#ifdef NETIF_F_LLTX
++                         	NETIF_F_LLTX |
++	#endif
+ 				 NETIF_F_HW_CSUM | NETIF_F_RXCSUM | NETIF_F_GSO |
+ 				 NETIF_F_GSO_SOFTWARE | NETIF_F_HIGHDMA;
+ 
+@@ -259,5 +266,4 @@
+ MODULE_AUTHOR(DRV_COPYRIGHT);
+ MODULE_LICENSE("GPL");
+ MODULE_VERSION(DRV_VERSION);
+-MODULE_ALIAS_RTNL_LINK(DRV_NAME);
+-MODULE_ALIAS_GENL_FAMILY(OVPN_NL_NAME);
++MODULE_ALIAS_GENL_FAMILY("ovpn-dco-v2");
+--- a/include/uapi/linux/ovpn_dco.h	2024-02-02 21:55:03.000000000 +0800
++++ b/include/uapi/linux/ovpn_dco.h	2025-05-10 15:13:20.421090486 +0800
+@@ -11,7 +11,8 @@
+ #ifndef _UAPI_LINUX_OVPN_DCO_H_
+ #define _UAPI_LINUX_OVPN_DCO_H_
+ 
+-#define OVPN_NL_NAME "ovpn-dco-v2"
++#define OVPN_NL_NAME ovpn_dco_v2
++#define ovpn_dco_v2 "ovpn-dco-v2"
+ 
+ #define OVPN_NL_MULTICAST_GROUP_PEERS "peers"
