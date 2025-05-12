@@ -1,0 +1,15 @@
+--- a/xr_usb_serial_common-1a/xr_usb_serial_common.c
++++ b/xr_usb_serial_common-1a/xr_usb_serial_common.c
+@@ -48,7 +48,11 @@
+ #include <linux/usb.h>
+ #include <linux/usb/cdc.h>
+ #include <asm/byteorder.h>
++#include "linux/version.h"
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0)
++#include <linux/unaligned.h>
++#else
+ #include <asm/unaligned.h>
++#endif
+ #include <linux/list.h>
+-#include "linux/version.h"
+ 
