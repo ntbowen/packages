@@ -44,6 +44,16 @@ define Package/yt-dlp/description
   thousands of sites.
 endef
 
+# 覆盖默认的编译过程，解决文件冲突问题
+define Py3Build/Compile
+	# 清理可能存在的冲突文件
+	rm -f $(PKG_BUILD_DIR)/ipkg-install/usr/bin/yt-dlp
+	# 执行标准编译
+	$(call Py3Build/Compile/Default)
+	# 确保安装前没有冲突文件
+	rm -f $(PKG_BUILD_DIR)/ipkg-install/usr/bin/yt-dlp
+endef
+
 $(eval $(call Py3Package,yt-dlp))
 $(eval $(call BuildPackage,yt-dlp))
 $(eval $(call BuildPackage,yt-dlp-src))
