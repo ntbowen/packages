@@ -37,6 +37,53 @@ define Package/python3-chardet/description
   Universal encoding detector for Python
 endef
 
+# 添加 Build/Prepare 阶段，确保在开始前清理可能存在的冲突文件
+define Build/Prepare
+	$(call Build/Prepare/Default)
+	# 确保目标目录存在
+	mkdir -p $(PKG_INSTALL_DIR)/usr/bin/
+	mkdir -p $(PKG_INSTALL_DIR)/usr/lib/python$(PYTHON3_VERSION)/site-packages/
+	# 删除可能存在的冲突文件
+	rm -f $(PKG_INSTALL_DIR)/usr/bin/chardetect
+	rm -f $(PKG_INSTALL_DIR)/usr/bin/chardetect3
+	rm -rf $(PKG_INSTALL_DIR)/usr/lib/python$(PYTHON3_VERSION)/site-packages/chardet
+	rm -rf $(PKG_INSTALL_DIR)/usr/lib/python$(PYTHON3_VERSION)/site-packages/chardet-*.egg-info
+	rm -rf $(PKG_INSTALL_DIR)/usr/lib/python$(PYTHON3_VERSION)/site-packages/chardet-*.dist-info
+endef
+
+# 修改 Build/Compile 阶段
+define Build/Compile
+	# 删除可能存在的冲突文件
+	rm -f $(PKG_INSTALL_DIR)/usr/bin/chardetect
+	rm -f $(PKG_INSTALL_DIR)/usr/bin/chardetect3
+	rm -rf $(PKG_INSTALL_DIR)/usr/lib/python$(PYTHON3_VERSION)/site-packages/chardet
+	rm -rf $(PKG_INSTALL_DIR)/usr/lib/python$(PYTHON3_VERSION)/site-packages/chardet-*.egg-info
+	rm -rf $(PKG_INSTALL_DIR)/usr/lib/python$(PYTHON3_VERSION)/site-packages/chardet-*.dist-info
+	
+	$(call Py3Build/Compile/Default)
+	
+	# 编译后再次删除可能存在的冲突文件
+	rm -f $(PKG_INSTALL_DIR)/usr/bin/chardetect
+	rm -f $(PKG_INSTALL_DIR)/usr/bin/chardetect3
+	rm -rf $(PKG_INSTALL_DIR)/usr/lib/python$(PYTHON3_VERSION)/site-packages/chardet
+	rm -rf $(PKG_INSTALL_DIR)/usr/lib/python$(PYTHON3_VERSION)/site-packages/chardet-*.egg-info
+	rm -rf $(PKG_INSTALL_DIR)/usr/lib/python$(PYTHON3_VERSION)/site-packages/chardet-*.dist-info
+endef
+
+# 修改 Build/Install 阶段
+define Build/Install
+	# 安装前删除可能存在的冲突文件
+	rm -f $(PKG_INSTALL_DIR)/usr/bin/chardetect
+	rm -f $(PKG_INSTALL_DIR)/usr/bin/chardetect3
+	rm -rf $(PKG_INSTALL_DIR)/usr/lib/python$(PYTHON3_VERSION)/site-packages/chardet
+	rm -rf $(PKG_INSTALL_DIR)/usr/lib/python$(PYTHON3_VERSION)/site-packages/chardet-*.egg-info
+	rm -rf $(PKG_INSTALL_DIR)/usr/lib/python$(PYTHON3_VERSION)/site-packages/chardet-*.dist-info
+	
+	# 使用 pip 直接安装而不是通过 installer 模块
+	cd "$(PKG_BUILD_DIR)" && \
+	$(HOST_PYTHON3_PIP) install --root="$(PKG_INSTALL_DIR)" --prefix="/usr" --ignore-installed .
+endef
+
 define Py3Package/python3-chardet/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(CP) $(PKG_INSTALL_DIR)/usr/bin/* $(1)/usr/bin/
