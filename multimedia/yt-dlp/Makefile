@@ -44,35 +44,14 @@ define Package/yt-dlp/description
   thousands of sites.
 endef
 
-# 添加 Build/Prepare 阶段，确保在开始前清理可能存在的冲突文件
-define Build/Prepare
-	$(call Build/Prepare/Default)
-	# 确保目标目录存在
-	mkdir -p $(PKG_INSTALL_DIR)/usr/bin/
-	# 删除可能存在的冲突文件
-	rm -f $(PKG_INSTALL_DIR)/usr/bin/yt-dlp
-endef
-
-# 修改 Build/Compile 阶段
-define Build/Compile
-	# 删除可能存在的冲突文件
-	rm -f $(PKG_INSTALL_DIR)/usr/bin/yt-dlp
+# 覆盖默认的编译过程，解决文件冲突问题
+define Py3Build/Compile
+	# 清理可能存在的冲突文件
+	rm -f $(PKG_BUILD_DIR)/ipkg-install/usr/bin/yt-dlp
+	# 执行标准编译
 	$(call Py3Build/Compile/Default)
-	# 编译后再次删除可能存在的冲突文件
-	rm -f $(PKG_INSTALL_DIR)/usr/bin/yt-dlp
-endef
-
-# 修改 Build/Install 阶段
-define Build/Install
-	# 安装前删除可能存在的冲突文件
-	rm -f $(PKG_INSTALL_DIR)/usr/bin/yt-dlp
-	
-	# 使用 pip 直接安装而不是通过 installer 模块
-	cd "$(PKG_BUILD_DIR)" && \
-		$(HOST_PYTHON3_PIP) install --root="$(PKG_INSTALL_DIR)" --prefix="/usr" --ignore-installed .
-	
-	# 安装后再次确保冲突文件被正确设置
-	chmod +x $(PKG_INSTALL_DIR)/usr/bin/yt-dlp || true
+	# 确保安装前没有冲突文件
+	rm -f $(PKG_BUILD_DIR)/ipkg-install/usr/bin/yt-dlp
 endef
 
 $(eval $(call Py3Package,yt-dlp))

@@ -63,26 +63,6 @@ $(call Package/python3-setuptools/description/Default)
 This is the main setuptools module.
 endef
 
-# 添加 Build/Compile 阶段
-define Build/Compile
-	$(call Py3Build/Compile/Default)
-	# 删除可能存在的冲突文件
-	rm -f $(PKG_INSTALL_DIR)/usr/lib/python3.11/site-packages/distutils-precedence.pth
-endef
-
-# 添加 Build/Install 阶段
-define Build/Install
-	# 先删除可能存在的冲突文件
-	rm -f $(PKG_INSTALL_DIR)/usr/lib/python3.11/site-packages/distutils-precedence.pth
-	$(call Py3Build/Install/Pip)
-	# 安装后再次确保文件被删除
-	rm -f $(PKG_INSTALL_DIR)/usr/lib/python3.11/site-packages/distutils-precedence.pth
-	
-	# 手动复制 pkg_resources 目录
-	mkdir -p $(PKG_INSTALL_DIR)/usr/lib/python3.11/site-packages/pkg_resources
-	cp -r $(PKG_BUILD_DIR)/pkg_resources/* $(PKG_INSTALL_DIR)/usr/lib/python3.11/site-packages/pkg_resources/
-endef
-
 define Py3Package/python3-pkg-resources/filespec
 +|$(PYTHON3_PKG_DIR)/pkg_resources
 endef
