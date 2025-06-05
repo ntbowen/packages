@@ -248,6 +248,7 @@ define Py3Build/Compile/Distutils
 endef
 
 define Py3Build/Compile/Default
+	rm -rf $(PKG_BUILD_DIR)/ipkg-install
 	$(call Py3Build/InstallBuildDepends)
 	$(call Python3/Run, \
 		$(PKG_BUILD_DIR), \
