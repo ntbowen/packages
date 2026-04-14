@@ -10,8 +10,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=tinycdb
 PKG_RELEASE:=2
 PKG_SOURCE_URL:=http://www.corpit.ru/mjt/tinycdb/
-PKG_VERSION:=0.78
-PKG_HASH:=50678f432d8ada8d69f728ec11c3140e151813a7847cf30a62d86f3a720ed63c
+PKG_VERSION:=0.81
+PKG_HASH:=469de2d445bf54880f652f4b6dc95c7cdf6f5502c35524a45b2122d70d47ebc2
 PKG_MAINTAINER:=Denis Shulyaka <Shulyaka@gmail.com>
 PKG_LICENSE:=NLPL
 

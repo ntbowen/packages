@@ -8,9 +8,9 @@ include $(TOPDIR)/rules.mk
 PECL_NAME:=raphf
 PECL_LONGNAME:=Resource and persistent handles factory
 
-PKG_VERSION:=2.0.1
+PKG_VERSION:=2.0.2
 PKG_RELEASE:=2
-PKG_HASH:=da3566db17422e5ef08b7ff144162952aabc14cb22407cc6b1d2a2d095812bd0
+PKG_HASH:=7e782fbe7b7de2b5f1c43f49d9eb8c427649b547573564c78baaf2b8f8160ef4
 
 PKG_NAME:=php8-pecl-raphf
 PKG_SOURCE:=$(PECL_NAME)-$(PKG_VERSION).tgz

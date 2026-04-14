@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libstrophe
-PKG_VERSION:=0.13.1
+PKG_VERSION:=0.14.0
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/strophe/libstrophe/releases/download/$(PKG_VERSION)
-PKG_HASH:=86c0abd348ae66feb40b6886f2c7f04525f1d5b20a48c10d4db4ed532dc63f22
+PKG_HASH:=8a7ebc274bd79fa4e5dfcfbf06123adbc9f70abd8bebf2843c2940e9086aeee0
 
 PKG_MAINTAINER:=Chih-Wei Chen <changeway@gmail.com>
 PKG_LICENSE:=GPL-3.0-only MIT

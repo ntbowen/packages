@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=onionshare-cli
-PKG_VERSION:=2.3.1
+PKG_VERSION:=2.6.3
 PKG_RELEASE:=3
 
 PYPI_NAME:=onionshare-cli
 PYPI_SOURCE_NAME:=onionshare_cli
-PKG_HASH:=47320a5f270b3629586c249fb2ae1c2f67682cb53c5013a8af9702d0d6e50193
+PKG_HASH:=aa7261397b39ae202abcfc337b8307c7d2532a9b7ee721f7a87a6f25aa59608d
 
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE:=GPL-3.0-or-later

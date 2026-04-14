@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libtorrent
-PKG_VERSION:=0.15.5
+PKG_VERSION:=0.16.9
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

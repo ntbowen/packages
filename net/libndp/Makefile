@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libndp
-PKG_VERSION:=1.8
+PKG_VERSION:=1.9
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://libndp.org/files/
-PKG_HASH:=88ffb66ee2eb527f146f5c02f5ccbc38ba97d2b0d57eb46bfba488821ab0c02b
+PKG_HASH:=a8ab214e01dc3a9b615276905395637f391298c84d77651f0cbf0b1082dd2dd4
 
 PKG_MAINTAINER:=Thomas Guyot-Sionnest <tguyot@gmail.com>
 PKG_LICENSE:=LGPL-2.1-or-later

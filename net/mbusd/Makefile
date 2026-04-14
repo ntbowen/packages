@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mbusd
-PKG_VERSION:=0.5.0
+PKG_VERSION:=0.5.3
 PKG_RELEASE:=4
 
 PKG_SOURCE_URL:=https://codeload.github.com/3cky/mbusd/tar.gz/v$(PKG_VERSION)?

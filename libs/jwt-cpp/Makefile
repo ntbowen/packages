@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=jwt-cpp
-PKG_VERSION:=0.7.1
+PKG_VERSION:=0.7.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-v$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/Thalhammer/jwt-cpp/releases/download/v$(PKG_VERSION)/
-PKG_HASH:=d45894f57437ce45233cfe0e07383c4e1f32f969edfd8df8347e177b13bf74e5
+PKG_HASH:=7c1b4f767bdd14f727f6114d9e35b761f10d00d6a27ef7650ee8c628f08df27c
 
 PKG_MAINTAINER:=David Woodhouse <dwmw2@infradead.org>
 PKG_LICENSE:=MIT

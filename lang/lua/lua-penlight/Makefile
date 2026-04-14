@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lua-penlight
-PKG_VERSION:=1.13.1
+PKG_VERSION:=1.15.0
 PKG_RELEASE:=1
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/Penlight-$(PKG_VERSION)

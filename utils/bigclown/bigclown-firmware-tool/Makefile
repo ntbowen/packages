@@ -5,11 +5,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=bigclown-firmware-tool
-PKG_VERSION:=1.5.2
+PKG_VERSION:=1.9.1
 PKG_RELEASE:=1
 
 PYPI_NAME:=bcf
-PKG_HASH:=8ad897586d02433d01a58b4978516621bea388cd230640eb0b8f8f9e40f10e6c
+PKG_HASH:=aa7261397b39ae202abcfc337b8307c7d2532a9b7ee721f7a87a6f25aa59608d
 
 PKG_MAINTAINER:=Josef Schlehofer <pepe.schlehofer@gmail.com> 
 PKG_LICENSE:=MIT

@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=spice
-PKG_VERSION:=0.15.0
+PKG_VERSION:=0.16.0
 PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://www.spice-space.org/download/releases/spice-server
-PKG_HASH:=b320cf8f4bd2852750acb703c15b72856027e5a8554f8217dfbb3cc09deba0f5
+PKG_HASH:=0a6ec9528f05371261bbb2d46ff35e7b5c45ff89bb975a99af95a5f20ff4717d
 
 PKG_MAINTAINER:=Yousong Zhou <yszhou4tech@gmail.com>
 PKG_LICENSE:=LGPL-2.1-only

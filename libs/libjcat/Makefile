@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libjcat
-PKG_VERSION:=0.2.3
+PKG_VERSION:=0.2.5
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/hughsie/libjcat/releases/download/$(PKG_VERSION)
-PKG_HASH:=f2f115aad8a8f16b8dde1ed55de7abacb91d0878539aa29b2b60854b499db639
+PKG_HASH:=066e402168c51bffddcf325190e5901402b266fbda2a4eed772fd06a88b941bf
 
 PKG_MAINTAINER:=Lukas Voegl <lvoegl@tdt.de>
 PKG_LICENSE:=LGPL-2.1-or-later

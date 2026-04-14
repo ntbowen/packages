@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=yara
-PKG_VERSION:=4.5.0
+PKG_VERSION:=4.5.5
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

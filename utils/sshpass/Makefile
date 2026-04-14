@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=sshpass
-PKG_VERSION:=1.09
+PKG_VERSION:=1.10
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@SF/sshpass
-PKG_HASH:=71746e5e057ffe9b00b44ac40453bf47091930cba96bbea8dc48717dedc49fb7
+PKG_HASH:=c5f3bd7c36fc148215ff332e18fc0b2a131d5b5ce8139a9a1f7de2dfe1031228
 
 PKG_MAINTAINER:=Josef Schlehofer <pepe.schlehofer@gmail.com>
 PKG_LICENSE:=GPL-2.0-or-later

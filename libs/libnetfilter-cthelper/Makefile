@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libnetfilter_cthelper
-PKG_VERSION:=1.0.0
+PKG_VERSION:=1.0.1
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=http://www.netfilter.org/projects/libnetfilter_cthelper/files/
-PKG_HASH:=07618e71c4d9a6b6b3dc1986540486ee310a9838ba754926c7d14a17d8fccf3d
+PKG_HASH:=14073d5487233897355d3ff04ddc1c8d03cc5ba8d2356236aa88161a9f2dc912
 
 PKG_FIXUP:=autoreconf
 PKG_LICENSE:=GPL-2.0+

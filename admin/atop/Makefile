@@ -7,12 +7,12 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/nls.mk
 
 PKG_NAME:=atop
-PKG_VERSION:=2.12.0
+PKG_VERSION:=2.12.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://www.atoptool.nl/download/
-PKG_HASH:=0d09ecc90c14e6ef41c22e3c57c142c3e4fb9cf3c94379077a33c961d5343086
+PKG_HASH:=4fdbe67c5dfaf89405639e18599f4eae77978073ffa54f3c78c368ab54bd12f6
 
 PKG_MAINTAINER:=Toni Uhlig <matzeton@googlemail.com>
 PKG_LICENSE:=GPL-2.0-or-later

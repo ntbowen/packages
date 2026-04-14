@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=taskwarrior
-PKG_VERSION:=2.6.2
+PKG_VERSION:=3.4.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=task-$(PKG_VERSION).tar.gz

@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=madplay
-PKG_VERSION:=0.15.2b
+PKG_VERSION:=1.0
 PKG_RELEASE:=11
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@SF/mad \
 	https://ftp.mars.org/pub/mpeg/
-PKG_HASH:=5a79c7516ff7560dffc6a14399a389432bc619c905b13d3b73da22fa65acede0
+PKG_HASH:=92f37b90b36da02e6738bfeac5dd9c2af934f0c27782607ca01dc0d9f240dc32
 
 PKG_MAINTAINER:=Simon Peter <probono@puredarwin.org>
 PKG_LICENSE:=GPL-2.0-or-later

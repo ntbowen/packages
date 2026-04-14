@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=zlog
-PKG_VERSION:=1.2.17
+PKG_VERSION:=1.2.18
 PKG_RELEASE:=3
 
 PKG_SOURCE_PROTO:=git

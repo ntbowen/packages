@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cni-plugins
-PKG_VERSION:=1.1.1
+PKG_VERSION:=1.9.1
 PKG_RELEASE:=2
 
 PKG_SOURCE_PROTO:=git

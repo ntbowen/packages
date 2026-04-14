@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-net-cidr-lite
-PKG_VERSION:=0.21
+PKG_VERSION:=0.23
 PKG_RELEASE:=1
 
 PKG_SOURCE:=Net-CIDR-Lite-$(PKG_VERSION).tar.gz

@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-file-sharedir-install
-PKG_VERSION:=0.13
+PKG_VERSION:=0.14
 PKG_RELEASE:=1
 
 PKG_SOURCE:=File-ShareDir-Install-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://www.cpan.org/authors/id/E/ET/ETHER
-PKG_HASH:=45befdf0d95cbefe7c25a1daf293d85f780d6d2576146546e6828aad26e580f9
+PKG_HASH:=8f9533b198f2d4a9a5288cbc7d224f7679ad05a7a8573745599789428bc5aea0
 
 PKG_MAINTAINER:=Marcel Denia <naoir@gmx.net>
 PKG_LICENSE:=GPL-1.0-or-later Artistic-1.0-Perl

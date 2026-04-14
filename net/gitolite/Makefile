@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gitolite
-PKG_VERSION:=3.6.13
+PKG_VERSION:=3.6.14
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

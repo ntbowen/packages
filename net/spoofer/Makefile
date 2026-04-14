@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=spoofer
-PKG_VERSION:=1.4.8
+PKG_VERSION:=1.4.13
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://www.caida.org/projects/spoofer/downloads
-PKG_HASH:=9e94810b8b84db6005d78bd1db13d7f4c1307e50c28824e27e0629c5abfd317c
+PKG_HASH:=9f7076c807246dc9b6932bf94330468789ef29ad12ffe11b182c5ed1ec961b55
 
 PKG_MAINTAINER:=Ken Keys <spoofer-info@caida.org>
 PKG_LICENSE:=GPL-3.0-or-later

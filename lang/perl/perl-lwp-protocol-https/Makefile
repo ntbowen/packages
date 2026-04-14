@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-lwp-protocol-https
-PKG_VERSION:=6.14
+PKG_VERSION:=6.15
 PKG_RELEASE:=1
 
 METACPAN_NAME:=LWP-Protocol-https
 METACPAN_AUTHOR:=OALDERS
-PKG_HASH:=59cdeabf26950d4f1bef70f096b0d77c5b1c5a7b5ad1b66d71b681ba279cbb2a
+PKG_HASH:=aa7261397b39ae202abcfc337b8307c7d2532a9b7ee721f7a87a6f25aa59608d
 
 PKG_MAINTAINER:=Jens Wagner <jens@wagner2013.de>
 PKG_LICENSE:=GPL-1.0-or-later Artistic-1.0-Perl

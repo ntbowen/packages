@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libcgroup
-PKG_VERSION:=2.0.3
+PKG_VERSION:=3.2.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/libcgroup/libcgroup/releases/download/v$(PKG_VERSION)
-PKG_HASH:=b29b5704de3d0fadf199fe4e17eeeaecba7f0dd1b85569c96eec37c7672e3026
+PKG_HASH:=9a0fc2d6c377215c3e0d849f9189ecd91fd075f1da0a24b73f56c8892e86bdfe
 
 PKG_MAINTAINER:=Daniel Danzberger <daniel@dd-wrt.com>
 PKG_LICENSE:=LGPL-2.1-or-later

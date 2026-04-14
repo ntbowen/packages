@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ell
-PKG_VERSION:=0.82
+PKG_VERSION:=0.83
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-fnv-hash-fast
-PKG_VERSION:=0.5.0
+PKG_VERSION:=2.0.2
 PKG_RELEASE:=1
 
 PYPI_NAME:=fnv-hash-fast
 PYPI_SOURCE_NAME:=fnv_hash_fast
-PKG_HASH:=a84d658952776a186418f4158fc8e55ff3c576ac32cc9ef7f8077efdf2d0b89f
+PKG_HASH:=aa7261397b39ae202abcfc337b8307c7d2532a9b7ee721f7a87a6f25aa59608d
 
 PKG_MAINTAINER:=Timothy Ace <openwrt@timothyace.com>
 PKG_LICENSE:=MIT

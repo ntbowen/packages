@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-authen-sasl-xs
-PKG_VERSION:=1.00
+PKG_VERSION:=1.02
 PKG_RELEASE:=3
 
 PKG_SOURCE_NAME:=Authen-SASL-XS

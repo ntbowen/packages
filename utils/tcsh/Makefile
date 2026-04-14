@@ -7,7 +7,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=tcsh
-PKG_VERSION:=6.22.04
+PKG_VERSION:=6.24.16
 PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
@@ -16,7 +16,7 @@ PKG_SOURCE_URL:= \
 	https://astron.com/pub/tcsh/old \
 	https://ftp.funet.fi/pub/mirrors/ftp.astron.com/pub/tcsh \
 	https://ftp.funet.fi/pub/mirrors/ftp.astron.com/pub/tcsh/old
-PKG_HASH:=eb16356243218c32f39e07258d72bf8b21e62ce94bb0e8a95e318b151397e231
+PKG_HASH:=4208cf4630fb64d91d81987f854f9570a5a0e8a001a92827def37d0ed8f37364
 
 PKG_MAINTAINER:=Nuno Goncalves <nunojpg@gmail.com>
 PKG_LICENSE:=BSD-3-Clause

@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lua-copas
-PKG_VERSION:=2.0.2
+PKG_VERSION:=4.10.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=copas-$(PKG_VERSION).tar.gz

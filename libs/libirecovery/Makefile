@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libirecovery
-PKG_VERSION:=1.2.1
+PKG_VERSION:=1.3.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/libimobiledevice/libirecovery/releases/download/$(PKG_VERSION)
-PKG_HASH:=d25f4b85c24df206efbbbd2d6d45d1637229e756c52d535eef047a163799f67c
+PKG_HASH:=28a3a521782063c8eb2ee5f4c0f38a517e023853edb55856052cdd7ac400381b
 
 PKG_MAINTAINER:=Rosen Penev <rosenp@gmail.com>
 PKG_LICENSE:=LGPL-2.1-or-later

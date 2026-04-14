@@ -6,7 +6,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=totem-pl-parser
-PKG_VERSION:=3.26.6
+PKG_VERSION:=3.26.7
 PKG_RELEASE:=1
 
 PKG_SOURCE:=totem-pl-parser-$(PKG_VERSION).tar.xz

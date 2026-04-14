@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-ruamel-yaml
-PKG_VERSION:=0.18.16
+PKG_VERSION:=0.19.1
 PKG_RELEASE:=1
 
 PYPI_NAME:=ruamel.yaml
 PYTHON3_PKG_WHEEL_NAME:=ruamel_yaml
-PKG_HASH:=a6e587512f3c998b2225d68aa1f35111c29fad14aed561a26e73fab729ec5e5a
+PKG_HASH:=aa7261397b39ae202abcfc337b8307c7d2532a9b7ee721f7a87a6f25aa59608d
 
 PKG_MAINTAINER:=Josef Schlehofer <pepe.schlehofer@gmail.com>
 PKG_LICENSE:=MIT

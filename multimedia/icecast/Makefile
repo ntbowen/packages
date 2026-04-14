@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=icecast
-PKG_VERSION:=2.4.4
+PKG_VERSION:=2.5.0
 PKG_RELEASE:=5
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://downloads.xiph.org/releases/icecast/
-PKG_HASH:=49b5979f9f614140b6a38046154203ee28218d8fc549888596a683ad604e4d44
+PKG_HASH:=d9aa07c7429aec19d950ff6fd425c371f77158cd34ff220fc191b2c186c67c7a
 
 PKG_MAINTAINER:=André Gaul <andre@gaul.io>, \
 		Ted Hess <thess@kitschensync.net>

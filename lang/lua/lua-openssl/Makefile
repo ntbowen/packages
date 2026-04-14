@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lua-openssl
-PKG_SOURCE_VERSION:=0.10.0-0
+PKG_SOURCE_VERSION:=0.11.0-3
 PKG_VERSION:=$(subst -,.,$(PKG_SOURCE_VERSION))
 PKG_RELEASE:=1
 

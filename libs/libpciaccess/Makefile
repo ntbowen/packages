@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libpciaccess
-PKG_VERSION:=0.18.1
+PKG_VERSION:=0.19
 PKG_RELEASE:=1
 
 PKG_SOURCE_URL:=https://www.x.org/releases/individual/lib/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_HASH:=4af43444b38adb5545d0ed1c2ce46d9608cc47b31c2387fc5181656765a6fa76
+PKG_HASH:=3c55aa86c82e54a4e3109786f0463530d53b36b6d1cfd14616454f985dd2aa43
 
 PKG_MAINTAINER:= Lucian Cristian <lucian.cristian@gmail.com>
 PKG_LICENSE:=MIT

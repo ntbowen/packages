@@ -1,13 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-future-asyncawait
-PKG_VERSION:=0.70
+PKG_VERSION:=0.71
 PKG_RELEASE:=2
 
 PKG_SOURCE_NAME:=Future-AsyncAwait
 PKG_SOURCE_URL:=https://cpan.metacpan.org/authors/id/P/PE/PEVANS
 PKG_SOURCE:=$(PKG_SOURCE_NAME)-$(PKG_VERSION).tar.gz
-PKG_HASH:=842899049c977fb2326a8096926441e57beca912bb2b4918d5ce090df4d4a6b7
+PKG_HASH:=16caa557a3e7a95e0e6ff5fe39672aa8580047c75fa7748eb8b1cb183a7beb70
 PKG_BUILD_DIR:=$(BUILD_DIR)/perl/$(PKG_SOURCE_NAME)-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Jens Wagner <jens@wagner2013.de>

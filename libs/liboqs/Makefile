@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=liboqs
-PKG_VERSION:=0.14.0
+PKG_VERSION:=0.15.0
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/open-quantum-safe/liboqs.git
-PKG_SOURCE_VERSION:=94b421ebb82405c843dba4e9aa521a56ee5a333d
+PKG_SOURCE_VERSION:=b0853b2439d3cf00b7981cf99f009dad872cbe60
 PKG_MIRROR_HASH:=c57180c12968b5798e39c97780aab2a51d988c8710125406ab22b3c5ddceba1c
 
 PKG_MAINTAINER:=Christian Marangi <ansuelsmth@gmail.com>

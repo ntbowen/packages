@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mt-st
-PKG_VERSION:=1.7
+PKG_VERSION:=1.8
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/iustin/mt-st/releases/download/v$(PKG_VERSION)
-PKG_HASH:=6d675488d89dad4fc76043afa379e7c967f3dd4d4306848e8cf69a20e582988d
+PKG_HASH:=e0549f55185bfdc82220e6dd530a2470189dd8017ee109fe91867dc0d6ac43dd
 
 PKG_MAINTAINER:=Giuseppe Magnotta <giuseppe.magnotta@gmail.com>
 PKG_LICENSE:=GPL-2.0-or-later

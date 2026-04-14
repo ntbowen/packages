@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=avrdude
-PKG_VERSION:=7.3
+PKG_VERSION:=8.1
 PKG_RELEASE:=4
 
 PKG_SOURCE_PROTO:=git

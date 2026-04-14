@@ -8,11 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-pybind11
-PKG_VERSION:=2.13.6
+PKG_VERSION:=3.0.3
 PKG_RELEASE:=1
 
 PYPI_NAME:=pybind11
-PKG_HASH:=ba6af10348c12b24e92fa086b39cfba0eff619b61ac77c406167d813b096d39a
+PKG_HASH:=aa7261397b39ae202abcfc337b8307c7d2532a9b7ee721f7a87a6f25aa59608d
 
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE:=BSD-3-Clause

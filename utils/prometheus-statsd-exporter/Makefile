@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=prometheus-statsd-exporter
-PKG_VERSION:=0.15.0
+PKG_VERSION:=0.29.0
 PKG_RELEASE:=2
 
 PKG_SOURCE:=statsd_exporter-$(PKG_VERSION).tar.gz

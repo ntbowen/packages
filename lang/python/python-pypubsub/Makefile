@@ -5,12 +5,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-pypubsub
-PKG_VERSION:=4.0.3
+PKG_VERSION:=4.0.7
 PKG_RELEASE:=2
 
 PYPI_NAME:=Pypubsub
 PYPI_SOURCE_NAME:=pypubsub
-PKG_HASH:=32d662de3ade0fb0880da92df209c62a4803684de5ccb8d19421c92747a258c7
+PKG_HASH:=aa7261397b39ae202abcfc337b8307c7d2532a9b7ee721f7a87a6f25aa59608d
 
 PKG_BUILD_DEPENDS:=python-setuptools/host
 

@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luarocks
-PKG_VERSION:=2.2.2
+PKG_VERSION:=3.13.0
 PKG_RELEASE:=4
 
 PKG_SOURCE_PROTO:=git

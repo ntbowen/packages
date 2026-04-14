@@ -7,12 +7,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=checksec.sh
-PKG_VERSION:=2.5.0
+PKG_VERSION:=3.1.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/slimm609/checksec.sh/archive/$(PKG_VERSION)
-PKG_HASH:=1034459d7cd2b0ee515c2b6b003375fec566fb59c838fc5e1961e1fcf76b54fa
+PKG_HASH:=cd3112fb02577726dd6945a11d9225d508ac0d59984d772fbbda5d9cf2d2c290
 
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE_FILES:=LICENSE.txt

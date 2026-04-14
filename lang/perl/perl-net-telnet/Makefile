@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-net-telnet
-PKG_VERSION:=3.04
+PKG_VERSION:=3.05
 PKG_RELEASE:=4
 
 PKG_SOURCE_URL:=https://www.cpan.org/authors/id/J/JR/JROGERS/
 PKG_SOURCE:=Net-Telnet-$(PKG_VERSION).tar.gz
-PKG_HASH:=e64d567a4e16295ecba949368e7a6b8b5ae2a16b3ad682121d9b007dc5d2a37a
+PKG_HASH:=677f68ba2cd2a824fae323fa82e183bf7e3d03c3c499c91d923bd6283796a743
 
 PKG_LICENSE:=GPL-1.0-or-later Artistic-1.0-Perl
 PKG_MAINTAINER:=Marcel Denia <naoir@gmx.net>

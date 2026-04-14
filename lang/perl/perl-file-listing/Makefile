@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-file-listing
-PKG_VERSION:=6.04
+PKG_VERSION:=6.16
 PKG_RELEASE:=2
 
 PKG_SOURCE_URL:=https://www.cpan.org/authors/id/G/GA/GAAS

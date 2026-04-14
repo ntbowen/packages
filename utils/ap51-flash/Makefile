@@ -7,12 +7,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ap51-flash
-PKG_VERSION:=2022.0
+PKG_VERSION:=2025.0
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/ap51-flash/ap51-flash/releases/download/v$(PKG_VERSION)
-PKG_HASH:=54999e07906296f213b298a2a80ba5df59273da30ecba1b82f94d0edf1d5d7f8
+PKG_HASH:=b61c1987c0da9a58b8ffcdcbcadfdbbe25148dbf845bd7d9f785c6761b4eb0da
 
 PKG_MAINTAINER:=Russell Senior <russell@personaltelco.net>
 PKG_LICENSE:=GPL-3.0-or-later CC0-1.0

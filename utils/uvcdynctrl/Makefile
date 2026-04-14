@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=uvcdynctrl
-PKG_VERSION:=0.2.5
+PKG_VERSION:=1.0
 PKG_RELEASE:=4
 
 PKG_SOURCE:=libwebcam-src-$(PKG_VERSION).tar.gz

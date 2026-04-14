@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=moreutils
-PKG_VERSION:=0.69
+PKG_VERSION:=0.70
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://git.kitenet.net/index.cgi/moreutils.git/snapshot
-PKG_HASH:=0f795d25356ca61544966646fb707d5be0b9864116be0269df5433f62d4e05d1
+PKG_HASH:=f2bf46d410ba567cc8d01507e94916994e48742722e690dc498fab59f5250132
 
 PKG_MAINTAINER:=Nikil Mehta <nikil.mehta@gmail.com>
 PKG_LICENSE:=GPL-2.0-or-later

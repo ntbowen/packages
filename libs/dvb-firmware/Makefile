@@ -5,7 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=dvb-firmware
-PKG_VERSION:=1.0
+PKG_VERSION:=1.5.0
 PKG_RELEASE:=2
 
 include $(INCLUDE_DIR)/package.mk

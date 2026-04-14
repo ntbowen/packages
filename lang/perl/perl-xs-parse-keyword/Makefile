@@ -1,13 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-xs-parse-keyword
-PKG_VERSION:=0.48
+PKG_VERSION:=0.49
 PKG_RELEASE:=1
 
 PKG_SOURCE_NAME:=XS-Parse-Keyword
 PKG_SOURCE_URL:=https://cpan.metacpan.org/authors/id/P/PE/PEVANS
 PKG_SOURCE:=$(PKG_SOURCE_NAME)-$(PKG_VERSION).tar.gz
-PKG_HASH:=857a070ba465ab5b89d4d8d36d92358edd66e5e7b4a91584611d85125ac9a9c7
+PKG_HASH:=76c5ed142abba1f1df2335849681c83d83cc0842fe854af71081d2c411efb0bb
 PKG_BUILD_DIR:=$(BUILD_DIR)/perl/$(PKG_SOURCE_NAME)-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Jens Wagner <jens@wagner2013.de>

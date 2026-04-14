@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-io-html
-PKG_VERSION:=1.001
+PKG_VERSION:=1.004
 PKG_RELEASE:=2
 
 PKG_SOURCE_URL:=https://www.cpan.org/authors/id/C/CJ/CJM
 PKG_SOURCE:=IO-HTML-$(PKG_VERSION).tar.gz
-PKG_HASH:=ea78d2d743794adc028bc9589538eb867174b4e165d7d8b5f63486e6b828e7e0
+PKG_HASH:=c87b2df59463bbf2c39596773dfb5c03bde0f7e1051af339f963f58c1cbd8bf5
 
 PKG_LICENSE:=GPL-1.0-or-later Artistic-1.0-Perl
 PKG_MAINTAINER:=Marcel Denia <naoir@gmx.net>

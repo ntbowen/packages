@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libpqxx
-PKG_VERSION:=7.9.2
+PKG_VERSION:=8.0.1
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

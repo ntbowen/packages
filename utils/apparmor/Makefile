@@ -3,7 +3,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=apparmor
-PKG_VERSION:=3.0.13
+PKG_VERSION:=5.0.0-rc3
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

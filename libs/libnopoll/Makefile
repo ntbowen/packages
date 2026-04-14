@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nopoll
-PKG_VERSION:=0.4.6
+PKG_VERSION:=0.4.9
 PKG_RELEASE:=2
 
 PKG_SOURCE_URL:=https://codeload.github.com/ASPLes/nopoll/tar.gz/$(PKG_VERSION)?

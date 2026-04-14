@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rpcbind
-PKG_VERSION:=1.2.6
+PKG_VERSION:=1.2.8
 PKG_RELEASE:=2
 
 PKG_SOURCE_URL:=@SF/rpcbind
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-PKG_HASH:=5613746489cae5ae23a443bb85c05a11741a5f12c8f55d2bb5e83b9defeee8de
+PKG_HASH:=6e4f1648b374a3f52e85479e35f5aa18abf22ed1f7878c15c0373b110a748d0d
 
 PKG_LICENSE:=BSD-3-Clause
 PKG_CPE_ID:=cpe:/a:rpcbind_project:rpcbind

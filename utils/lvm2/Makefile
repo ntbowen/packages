@@ -9,7 +9,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=LVM2
-PKG_VERSION:=2.03.33
+PKG_VERSION:=2.03.39
 PKG_VERSION_DM:=1.02.207
 PKG_RELEASE:=2
 
@@ -17,7 +17,7 @@ PKG_SOURCE:=$(PKG_NAME).$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://sourceware.org/pub/lvm2 \
                 https://www.mirrorservice.org/sites/sourceware.org/pub/lvm2
 
-PKG_HASH:=be4babd8a986d73279f1e75fbb1d33cb41559b75c2063611781bfeb8c2def139
+PKG_HASH:=23bc9067e28fe0d37b3cc441f2865b9e022ce3c624babe22918b8dd90c031ee8
 PKG_BUILD_DIR:=$(BUILD_DIR)/lvm2-$(BUILD_VARIANT)/$(PKG_NAME).$(PKG_VERSION)
 
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>

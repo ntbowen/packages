@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gnuplot
-PKG_VERSION:=6.0.1
+PKG_VERSION:=6.0.4
 PKG_RELEASE:=1
 PKG_MAINTAINER:=Matteo Cicuttin <datafl4sh@toxicnet.eu>
 PKG_CPE_ID:=cpe:/a:gnuplot:gnuplot
@@ -9,7 +9,7 @@ PKG_CPE_ID:=cpe:/a:gnuplot:gnuplot
 PKG_BUILD_DIR:=$(BUILD_DIR)/gnuplot-$(PKG_VERSION)
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@SF/gnuplot
-PKG_HASH:=e85a660c1a2a1808ff24f7e69981ffcbac66a45c9dcf711b65610b26ea71379a
+PKG_HASH:=4da957a482f7c104d943914550b7626c188966d805d5766c40b05eac25c2e47f
 PKG_CAT:=zcat
 PKG_FIXUP:=autoreconf
 

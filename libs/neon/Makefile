@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=neon
-PKG_VERSION:=0.32.4
+PKG_VERSION:=0.37.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://notroj.github.io/neon
-PKG_HASH:=b1e2120e4ae07df952c4a858731619733115c5f438965de4fab41d6bf7e7a508
+PKG_HASH:=a99b7262525a454d1065cf76dd17240fd808dfc4ef15636990ff83a5d0d9e740
 
 PKG_MAINTAINER:=Federico Di Marco <fededim@gmail.com>
 PKG_LICENSE:=LGPL-2.1-or-later

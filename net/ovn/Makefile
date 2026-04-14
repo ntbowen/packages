@@ -9,7 +9,7 @@ include $(INCLUDE_DIR)/kernel.mk
 include ../openvswitch/openvswitch.mk
 
 PKG_NAME:=ovn
-PKG_VERSION:=22.03.5
+PKG_VERSION:=26.03.0
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

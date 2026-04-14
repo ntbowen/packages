@@ -8,11 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=supervisor
-PKG_VERSION:=4.1.0
+PKG_VERSION:=4.3.0
 PKG_RELEASE:=1
 
 PYPI_NAME:=supervisor
-PKG_HASH:=2dc86fe0476e945e61483d614ceb2cf4f93b95282eb243bdf792621994360383
+PKG_HASH:=aa7261397b39ae202abcfc337b8307c7d2532a9b7ee721f7a87a6f25aa59608d
 
 PKG_MAINTAINER:=[CTCGFW]Project OpenWrt <contact@project-openwrt.eu.org>
 PKG_LICENSE:=MIT

@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=backuppc
-PKG_VERSION:=3.3.2
+PKG_VERSION:=4.4.0
 PKG_RELEASE:=3
 
 PKG_SOURCE:=BackupPC-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@SF/backuppc
-PKG_HASH:=fbade2c8d8039297e826a75d2c39d5ac9a6f66e0c84c0cf8c4cef0bcf64d2152
+PKG_HASH:=69a134b4eab655770f72513dc2ec9e281cc196505c2599b47631a3c393ee751f
 PKG_BUILD_DIR:=$(BUILD_DIR)/BackupPC-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Carsten Wolff <carsten@wolffcarsten.de>

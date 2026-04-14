@@ -8,11 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-awesomeversion
-PKG_VERSION:=23.5.0
+PKG_VERSION:=25.8.0
 PKG_RELEASE:=1
 
 PYPI_NAME:=awesomeversion
-PKG_HASH:=a505558316010d2d10d487226f79c1157204af00fa462fdcf948e347011dd491
+PKG_HASH:=aa7261397b39ae202abcfc337b8307c7d2532a9b7ee721f7a87a6f25aa59608d
 
 PKG_MAINTAINER:=Josef Schlehofer <pepe.schlehofer@gmail.com>
 PKG_LICENSE:=MIT

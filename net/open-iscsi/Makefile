@@ -4,7 +4,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=open-iscsi
-PKG_VERSION:=2.1.10
+PKG_VERSION:=2.1.11
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

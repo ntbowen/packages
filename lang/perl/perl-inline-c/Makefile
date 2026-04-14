@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-inline-c
-PKG_VERSION:=0.81
+PKG_VERSION:=0.82
 PKG_RELEASE:=1
 
 PKG_SOURCE:=Inline-C-$(PKG_VERSION).tar.gz

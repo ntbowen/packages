@@ -1,13 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-xs-parse-sublike
-PKG_VERSION:=0.37
+PKG_VERSION:=0.41
 PKG_RELEASE:=1
 
 PKG_SOURCE_NAME:=XS-Parse-Sublike
 PKG_SOURCE_URL:=https://cpan.metacpan.org/authors/id/P/PE/PEVANS
 PKG_SOURCE:=$(PKG_SOURCE_NAME)-$(PKG_VERSION).tar.gz
-PKG_HASH:=736528c888ea7b6a6191011e5d5a7824ec38a5620507de6ef45e4bc6e1cf0da9
+PKG_HASH:=a10f5e07273b105e5c0b4c6e7e2a6d2d2a68afe9ff4f989c11f38d4bf39cc86d
 PKG_BUILD_DIR:=$(BUILD_DIR)/perl/$(PKG_SOURCE_NAME)-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Jens Wagner <jens@wagner2013.de>

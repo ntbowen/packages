@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luaossl
-PKG_VERSION:=20220711
+PKG_VERSION:=20250929
 PKG_RELEASE:=2
 PKG_MAINTAINER:=Siger Yang <siger.yang@outlook.com>
 

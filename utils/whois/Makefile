@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=whois
-PKG_VERSION:=5.6.4
+PKG_VERSION:=5.6.6
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

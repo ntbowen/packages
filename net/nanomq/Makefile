@@ -5,7 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nanomq
-PKG_VERSION:=0.24.6
+PKG_VERSION:=0.24.11
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

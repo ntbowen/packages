@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libidn2
-PKG_VERSION:=2.3.7
+PKG_VERSION:=2.3.8
 PKG_RELEASE:=1
 
 PKG_SOURCE_URL:=@GNU/libidn
