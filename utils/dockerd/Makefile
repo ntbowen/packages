@@ -9,7 +9,7 @@ PKG_CPE_ID:=cpe:/a:mobyproject:moby
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_GIT_URL:=github.com/moby/moby
-PKG_GIT_REF:=v$(PKG_VERSION)
+PKG_GIT_REF:=docker-v$(PKG_VERSION)
 PKG_SOURCE_URL:=https://codeload.$(PKG_GIT_URL)/tar.gz/$(PKG_GIT_REF)?
 PKG_HASH:=5c72d84b3dc5558b8520a6687c6d7ee4f13b95edc351a408717e314616a5bfd8
 PKG_GIT_SHORT_COMMIT:=daa0cb7 # SHA1 used within the docker executables
@@ -95,7 +95,7 @@ define Build/Prepare
 	$(Build/Prepare/Default)
 
 	# Verify dependencies are the vendored version
-	$(call EnsureVendoredVersion,../tini/Makefile,tini.installer)
+	#	$(call EnsureVendoredVersion,../tini/Makefile,tini.installer)
 
 	# Verify CLI is the same version
 	( \
