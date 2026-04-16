@@ -13,7 +13,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/mstpd/mstpd/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=03d1ff4ca189d54322562cb2891888768af719d2c73ceafa5f1ca96133dffeb2
+PKG_HASH:=37cbc03ab14763a2d477d2230508ab98c2acec43fa869b985c264d44e125c386
 
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE:=GPL-2.0-or-later
