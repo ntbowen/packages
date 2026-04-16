@@ -150,7 +150,7 @@ Subject: [PATCH] add pcre2 support
 +    // so an additional variable is required.
 +    int                     pcre2_err_code;
 +    unsigned char           pcre2_error[128];
-+    int                     pcre2_error_offset;
++    PCRE2_SIZE              pcre2_error_offset;
 +#elif defined(HAVE_PCRE_H)
      const char              *pcre_error;
      int                     pcre_error_offset;
