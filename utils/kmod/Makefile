@@ -27,6 +27,7 @@ PKG_BUILD_PARALLEL:=1
 include $(INCLUDE_DIR)/package.mk
 
 CONFIGURE_ARGS += --with-zlib
+CONFIGURE_ARGS += --disable-manpages
 
 define Package/kmod/Default
   SECTION:=utils
