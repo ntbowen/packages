@@ -1,0 +1,42 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+Subject: [PATCH] HOST-MIB, hr_filesys: fix C90 declaration and const qualifier
+
+On non-AIX/non-getfsstat systems, the #else branch of Get_Next_HR_FileSys
+declares 'const char **cpp' as the first statement, which is valid C99 but
+causes issues with strict C90 compilers when combined with the surrounding
+preprocessor structure. Wrap the #else branch in an explicit block.
+
+Also fix when_dumped() where 'char *cp1' was assigned from a 'const char *'
+parameter, discarding the const qualifier. Split the declaration and mark
+cp1 as const.
+
+Signed-off-by: zagwrt <zagwrt@zagwrt>
+---
+--- a/agent/mibgroup/host/hr_filesys.c	2026-04-16 23:08:53.573367180 +0800
++++ b/agent/mibgroup/host/hr_filesys.c	2026-04-16 23:08:53.579664551 +0800
+@@ -749,6 +749,7 @@
+     }
+     return HRFS_index++;
+ #else
++{
+     const char    **cpp;
+ 
+     if (fp == NULL)
+@@ -780,6 +781,7 @@
+     }
+ 
+     return HRFS_index++;
++}
+ #endif                          /* HAVE_GETFSSTAT */
+ }
+ 
+@@ -871,7 +873,8 @@
+     time_t          dumpdate = 0, tmp;
+     FILE           *dump_fp;
+     char            line[1024];
+-    char           *cp1, *cp2, *cp3;
++    const char     *cp1;
++    char           *cp2, *cp3;
+ 
+     /*
+      * Look for the relevent entries in /etc/dumpdates
