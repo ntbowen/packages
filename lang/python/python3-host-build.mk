@@ -70,6 +70,11 @@ define Py3Host/Install
 
 	$(call Py3Host/Install/Installer,$(PYTHON3_HOST_STAGING_DIR))
 
+	if [ -d "$(PYTHON3_HOST_STAGING_DIR)/usr" ]; then \
+		$(CP) "$(PYTHON3_HOST_STAGING_DIR)/usr/"* "$(PYTHON3_HOST_STAGING_DIR)/"; \
+		rm -rf "$(PYTHON3_HOST_STAGING_DIR)/usr"; \
+	fi
+
 	$(call Py3Host/Uninstall,$(1))
 
 	cd "$(PYTHON3_HOST_STAGING_DIR)" && find ./ > "$(PYTHON3_HOST_STAGING_DIR).files"
@@ -81,15 +86,6 @@ define Py3Host/Install
 	)
 
 	rm -rf "$(PYTHON3_HOST_STAGING_DIR)"
-endef
-
-define Py3Host/Uninstall
-	if [ -f "$(PYTHON3_HOST_STAGING_FILES_LIST)" ]; then \
-		"$(SCRIPT_DIR)/clean-package.sh" \
-			"$(PYTHON3_HOST_STAGING_FILES_LIST)" \
-			"$(1)" ; \
-		rm -f "$(PYTHON3_HOST_STAGING_FILES_LIST)" ; \
-	fi
 endef
 
 ifeq ($(strip $(PYTHON3_HOST_BUILD)),1)
