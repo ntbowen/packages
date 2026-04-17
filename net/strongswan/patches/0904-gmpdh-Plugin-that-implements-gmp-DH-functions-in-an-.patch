@@ -26,12 +26,12 @@ Subject: [PATCH 904/904] gmpdh: Plugin that implements gmp DH functions in an
  ARG_ENABL_SET([curve25519],     [enable Curve25519 Diffie-Hellman plugin.])
  ARG_ENABL_SET([hmac],           [enable HMAC crypto implementation plugin.])
  ARG_DISBL_SET([kdf],            [disable KDF (prf+) implementation plugin.])
-@@ -1579,6 +1580,7 @@ ADD_PLUGIN([pkcs8],                [s ch
- ADD_PLUGIN([af-alg],               [s charon pki scripts medsrv attest nm cmd aikgen])
+@@ -1582,6 +1583,7 @@ ADD_PLUGIN([pkcs8],                [s ch
+ ADD_PLUGIN([af-alg],               [s charon swanctl pki scripts medsrv attest nm cmd aikgen])
  ADD_PLUGIN([fips-prf],             [s charon nm cmd])
- ADD_PLUGIN([gmp],                  [s charon pki scripts manager medsrv attest nm cmd aikgen fuzz])
+ ADD_PLUGIN([gmp],                  [s charon swanctl pki scripts manager medsrv attest nm cmd aikgen fuzz])
 +ADD_PLUGIN([gmpdh],                [s charon pki scripts manager medsrv attest nm cmd aikgen])
- ADD_PLUGIN([curve25519],           [s charon pki scripts nm cmd])
+ ADD_PLUGIN([curve25519],           [s charon swanctl pki scripts nm cmd])
  ADD_PLUGIN([agent],                [s charon nm cmd])
  ADD_PLUGIN([keychain],             [s charon cmd])
 @@ -1718,6 +1720,7 @@ AM_CONDITIONAL(USE_SHA3, test x$sha3 = x
