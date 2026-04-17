@@ -18,7 +18,7 @@
  AS_VAR_IF([php_var], [yes], [$2])
  AC_LANG_POP([C])
  CFLAGS="${old_CFLAGS}"
-@@ -186,13 +186,13 @@ AS_VAR_POPDEF([php_var])
+@@ -186,11 +186,11 @@ AS_VAR_POPDEF([php_var])
  ])
  
  AC_DEFUN([PHP_GD_CHECK_VERSION],[
@@ -27,15 +27,11 @@
 -  PHP_GD_CHECK_FORMAT([Webp], [AC_DEFINE([HAVE_GD_WEBP], [1])])
 -  PHP_GD_CHECK_FORMAT([Jpeg], [AC_DEFINE([HAVE_GD_JPG], [1])])
 -  PHP_GD_CHECK_FORMAT([Xpm],  [AC_DEFINE([HAVE_GD_XPM], [1])])
--  PHP_GD_CHECK_FORMAT([Bmp],  [AC_DEFINE([HAVE_GD_BMP], [1])])
--  PHP_GD_CHECK_FORMAT([Tga],  [AC_DEFINE([HAVE_GD_TGA], [1])])
 +  PHP_GD_CHECK_FORMAT([Png],  [AC_DEFINE([HAVE_GD_PNG], [1])],  [yes])
 +  PHP_GD_CHECK_FORMAT([Avif], [AC_DEFINE([HAVE_GD_AVIF], [1])], [no])
 +  PHP_GD_CHECK_FORMAT([Webp], [AC_DEFINE([HAVE_GD_WEBP], [1])], [yes])
 +  PHP_GD_CHECK_FORMAT([Jpeg], [AC_DEFINE([HAVE_GD_JPG], [1])],  [yes])
 +  PHP_GD_CHECK_FORMAT([Xpm],  [AC_DEFINE([HAVE_GD_XPM], [1])],  [no])
-+  PHP_GD_CHECK_FORMAT([Bmp],  [AC_DEFINE([HAVE_GD_BMP], [1])],  [no])
-+  PHP_GD_CHECK_FORMAT([Tga],  [AC_DEFINE([HAVE_GD_TGA], [1])],  [no])
    PHP_CHECK_LIBRARY([gd], [gdFontCacheShutdown],
      [AC_DEFINE([HAVE_GD_FREETYPE], [1])],
      [],
