@@ -14,7 +14,7 @@ PKG_RELEASE:=4
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/keplerproject/luarocks
 PKG_SOURCE_VERSION:=v$(PKG_VERSION)
-PKG_MIRROR_HASH:=9b2f880e0ff57a0d7e3a9d8d5365c73e6f546891bc39d2c6ef4c3443a8ca4b45
+PKG_MIRROR_HASH:=f1d4fed2a0a6db8929900be7e37f4ccec2bcfaeee5368e4db956cc6f5daa152a
 
 PKG_MAINTAINER:=Amr Hassan <amr.hassan@gmail.com>
 PKG_LICENSE:=MIT
