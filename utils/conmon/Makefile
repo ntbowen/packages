@@ -36,7 +36,7 @@ endef
 
 define Package/conmon/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/libexec/podman/conmon $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/conmon $(1)/usr/bin
 endef
 
 $(eval $(call BuildPackage,conmon))
