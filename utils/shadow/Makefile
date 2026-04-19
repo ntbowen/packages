@@ -22,16 +22,16 @@ PKG_CPE_ID:=cpe:/a:debian:shadow
 
 PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
-PKG_BUILD_DEPENDS:=libxcrypt
+PKG_BUILD_DEPENDS:=libxcrypt libbsd
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/nls.mk
 
 SHADOW_APPLETS := \
-	chage chfn chgpasswd chpasswd chsh expiry faillog gpasswd \
-	groupadd groupdel groupmems groupmod groups grpck grpconv grpunconv \
-	lastlog login logoutd newgidmap newgrp newuidmap newusers nologin \
-	passwd pwck pwconv pwunconv su \
+	chage chfn chgpasswd chpasswd chsh expiry faillog gpasswd getsubids \
+	groupadd groupdel groupmems groupmod grpck grpconv grpunconv \
+	login logoutd newgidmap newgrp newuidmap newusers nologin \
+	passwd pwck pwconv pwunconv sg su \
 	useradd userdel usermod vipw
 
 CONFIGURE_ARGS += \
@@ -42,7 +42,8 @@ CONFIGURE_ARGS += \
 	--without-attr \
 	--without-tcb \
 	--without-nscd \
-	--with-bcrypt
+	--with-bcrypt \
+	--disable-logind
 
 CONFIGURE_VARS += \
 	ac_cv_func_ruserok=no
@@ -101,7 +102,7 @@ Package/shadow-utils/description = $(Package/shadow/description)
 define Package/shadow-common
   $(call Package/shadow/Default)
   TITLE:=Shared definitions for the PLD Linux shadow utilities
-  DEPENDS:=$(ICONV_DEPENDS) $(INTL_DEPENDS)
+  DEPENDS:=$(ICONV_DEPENDS) $(INTL_DEPENDS) +libbsd +libxcrypt-shared
   HIDDEN:=1
 endef
 
