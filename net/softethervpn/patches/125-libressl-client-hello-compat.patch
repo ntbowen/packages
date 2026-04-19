@@ -1,0 +1,14 @@
+--- a/src/Mayaqua/Network.c
++++ b/src/Mayaqua/Network.c
+@@ -13413,6 +13413,12 @@ typedef struct START_SSL_EX2_CLIENT_HELL
+ 	void* CertAndKeyCbParam;
+ } START_SSL_EX2_CLIENT_HELLO_CB_DATA;
+ 
++#ifndef SSL_CLIENT_HELLO_SUCCESS
++#define SSL_CLIENT_HELLO_SUCCESS 1
++#define SSL_CLIENT_HELLO_ERROR   0
++#define SSL_CTX_set_client_hello_cb(ctx, cb, arg) do { } while(0)
++#endif
++
+ int Sni_Callback_ForTlsServerCertSelection(SSL* ssl, int* al, void* arg)
+ {
