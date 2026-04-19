@@ -122,6 +122,24 @@ endef
 
 $(foreach u,$(SHADOW_APPLETS),$(eval $(call GenPlugin,$(u))))
 
+define Package/shadow-getsubids
+  $(call Package/shadow/Default)
+  TITLE:=Utility getsubids from the PLD Linux shadow utilities
+  DEPENDS:=+shadow-common +libsubid
+  HIDDEN:=1
+endef
+
+define Package/libsubid
+  $(call Package/shadow/Default)
+  TITLE:=Subordinate uid/gid management library
+  DEPENDS:=+libbsd +libxcrypt-shared
+endef
+
+define Package/libsubid/install
+	$(INSTALL_DIR) $(1)/lib
+	$(CP) $(PKG_INSTALL_DIR)/lib/libsubid.so* $(1)/lib/
+endef
+
 define Package/shadow-common/conffiles
 /etc/login.defs
 endef
@@ -159,3 +177,4 @@ $(foreach u,$(SHADOW_APPLETS),$(eval $(call BuildPlugin,$(u))))
 $(eval $(call BuildPackage,shadow-utils))
 $(eval $(call BuildPackage,shadow-common))
 $(eval $(call BuildPackage,shadow))
+$(eval $(call BuildPackage,libsubid))
