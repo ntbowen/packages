@@ -32,13 +32,13 @@ define Package/crun/description
   A fast and low-memory footprint OCI Container Runtime fully written in C.
 endef
 
-LIBOCISPEC_COMMIT:=68211ccc41201c45ad276b04c7f67d61e80b1f7a
+LIBOCISPEC_COMMIT:=8b07b619df73a113f7721f1c7ce24f2572b04cea
 
 define Download/libocispec
   PROTO:=git
   URL:=https://github.com/containers/libocispec.git
   SOURCE_VERSION:=$(LIBOCISPEC_COMMIT)
-  MIRROR_HASH:=688d00600dbdf46d4b52acc8e43313b14471026ccff8c3cc5983e2f5dfd15571
+  MIRROR_HASH:=08f8253c35fef1fd887bc1c95de21a7f52b1a4d21c423d426c11a5ba729cfd6b
   FILE:=libocispec-$(LIBOCISPEC_COMMIT).tar.xz
   SUBDIR:=libocispec
 endef
