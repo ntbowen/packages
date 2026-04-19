@@ -27,13 +27,6 @@ define Package/libgpgme
   DEPENDS:=+libassuan +libgpg-error
 endef
 
-define Package/libgpgmepp
-  SECTION:=libs
-  CATEGORY:=Libraries
-  TITLE:=GnuPG Made Easy (GPGME) library (C++)
-  URL:=https://gnupg.org/software/gpgme/index.html
-  DEPENDS:=+libgpgme +libstdcpp
-endef
 
 define Package/libgpgme/description
 GnuPG Made Easy (GPGME) is a library designed to make access to GnuPG
@@ -51,20 +44,16 @@ CONFIGURE_ARGS += \
 	--disable-gpg-test \
 	--disable-gpgsm-test \
 	--disable-g13-test \
-	--enable-languages="cpp"
 
 ifneq ($(CONFIG_USE_MUSL),)
   TARGET_CFLAGS += -D_LARGEFILE64_SOURCE
 endif
 
 define Build/InstallDev
-	$(INSTALL_DIR) $(1)/usr/include/gpgme++
+	$(INSTALL_DIR) $(1)/usr/include
 	$(INSTALL_DATA) \
 		$(PKG_INSTALL_DIR)/usr/include/gpgme.h \
 		$(1)/usr/include/
-	$(INSTALL_DATA) \
-		$(PKG_INSTALL_DIR)/usr/include/gpgme++/*.h \
-		$(1)/usr/include/gpgme++/
 
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) \
@@ -80,15 +69,6 @@ define Build/InstallDev
 	$(INSTALL_DATA) \
 		$(PKG_INSTALL_DIR)/usr/lib/pkgconfig/gpgme.pc \
 		$(1)/usr/lib/pkgconfig
-	$(INSTALL_DATA) \
-		$(PKG_INSTALL_DIR)/usr/lib/pkgconfig/gpgme-glib.pc \
-		$(1)/usr/lib/pkgconfig
-
-	$(INSTALL_DIR) $(1)/usr/lib/cmake/Gpgmepp
-	$(INSTALL_DATA) \
-		$(PKG_INSTALL_DIR)/usr/lib/cmake/Gpgmepp/*.cmake \
-		$(1)/usr/lib/cmake/Gpgmepp
-
 	$(INSTALL_DIR) $(2)/bin $(1)/usr/bin
 	$(INSTALL_BIN) \
 		$(PKG_INSTALL_DIR)/usr/bin/gpgme-config \
@@ -104,10 +84,5 @@ define Package/libgpgme/install
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libgpgme.so.* $(1)/usr/lib/
 endef
 
-define Package/libgpgmepp/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libgpgmepp.so.* $(1)/usr/lib/
-endef
 
 $(eval $(call BuildPackage,libgpgme))
-$(eval $(call BuildPackage,libgpgmepp))
