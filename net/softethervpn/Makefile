@@ -9,21 +9,22 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=softethervpn
-PKG_REALVERSION:=4.38-9760
+PKG_REALVERSION:=4.44-9807
 PKG_VERSION:=$(word 1,$(subst -, ,$(PKG_REALVERSION)))
 PKG_VERREL:=rtm
 PKG_RELEASE:=3
 
-PKG_SOURCE:=softether-src-v$(PKG_REALVERSION)-$(PKG_VERREL).tar.gz
-PKG_SOURCE_URL:=https://github.com/SoftEtherVPN/SoftEtherVPN_Stable/releases/download/v$(PKG_REALVERSION)-$(PKG_VERREL)
-PKG_HASH:=e68128b46171bd9f3f9ca38d10e60e8590a833bfc6488fa014674f9a22541f35
+PKG_SOURCE:=v$(PKG_REALVERSION)-$(PKG_VERREL).tar.gz
+PKG_SOURCE_URL:=https://github.com/SoftEtherVPN/SoftEtherVPN_Stable/archive/refs/tags
+PKG_HASH:=8ccd8959a674bd4b34f9fc5dd9eb60fe0226b0adc0f6f852a07011dcc769ed97
+PKG_SOURCE_SUBDIR:=SoftEtherVPN_Stable-$(PKG_REALVERSION)-$(PKG_VERREL)
 
 PKG_MAINTAINER:=Federico Di Marco <fededim@gmail.com>
 PKG_LICENSE:=GPL-2.0-or-later
 PKG_LICENSE_FILES:=COPYING
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)/v$(PKG_REALVERSION)
-HOST_BUILD_DIR:=$(BUILD_DIR_HOST)/$(PKG_NAME)/v$(PKG_REALVERSION)
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)/$(PKG_SOURCE_SUBDIR)
+HOST_BUILD_DIR:=$(BUILD_DIR_HOST)/$(PKG_NAME)/$(PKG_SOURCE_SUBDIR)
 PKG_BUILD_DEPENDS:=softethervpn/host
 HOST_BUILD_DEPENDS:=readline/host
 
@@ -40,11 +41,20 @@ HOST_MAKE_FLAGS += -C $(HOST_BUILD_DIR)
 HOST_MAKE_FLAGS += \
 	-f src/makefiles/$(if $(CONFIG_HOST_OS_MACOS),macos,linux)_$(if $(shell uname -m | grep 64),64,32)bit.mak
 
+# Convert CRLF to LF before patching (source tarballs use CRLF)
+define Host/Prepare
+	$(if $(strip $(HOST_UNPACK)),$(HOST_UNPACK))
+	[ ! -d ./src/ ] || $(CP) ./src/* $(HOST_BUILD_DIR)
+	find $(HOST_BUILD_DIR)/src -name "*.c" -o -name "*.h" | xargs dos2unix -q 2>/dev/null; true
+	$(Host/Patch)
+endef
+
 # Prevent calling upstream configure
 define Host/Configure
 endef
 
 HOST_CFLAGS += $(if $(CONFIG_HOST_OS_MACOS),-Wno-implicit-function-declaration,)
+HOST_CFLAGS += -std=gnu11
 
 define Host/Compile
 	# Build hamcorebuilder using host compiler and let it generate
