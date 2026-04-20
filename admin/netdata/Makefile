@@ -24,16 +24,19 @@ PKG_BUILD_DIR=$(BUILD_DIR)/$(PKG_NAME)-v$(PKG_VERSION)
 PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
 PKG_BUILD_DEPENDS:=protobuf/host
-PKG_FIXUP:=autoreconf
 PKG_BUILD_FLAGS:=no-mips16 gc-sections
 
+CMAKE_INSTALL:=1
+
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/cmake.mk
 
 define Package/netdata
   SECTION:=admin
   CATEGORY:=Administration
   DEPENDS:=+zlib +libuuid +libuv +libmnl +libjson-c +libopenssl \
-    +libstdcpp +libatomic +protobuf +openssl-util +curl +bash
+    +libstdcpp +libatomic +protobuf +openssl-util +curl +bash +libyaml \
+    +liblz4 +libzstd
   TITLE:=Real-time performance monitoring tool
   URL:=https://www.netdata.cloud/
 endef
@@ -48,27 +51,28 @@ endef
 
 TARGET_CFLAGS := $(filter-out -O%,$(TARGET_CFLAGS)) -O3
 
-CONFIGURE_ARGS += \
-	--with-zlib \
-	--with-math \
-	--disable-x86-sse \
-	--enable-lto \
-	--disable-ebpf \
-	--without-libcap \
-	--disable-dbengine \
-	--disable-compression \
-	--disable-plugin-nfacct \
-	--disable-plugin-freeipmi \
-	--disable-plugin-cups \
-	--disable-plugin-xenstat \
-	--disable-exporting-prometheus-remote-write \
-	--disable-unit-tests \
-	--disable-ml
-
-define Build/Configure
-	$(SED) 's/m4_esyscmd(\[git describe .*\])/$(PKG_VERSION)/' $(PKG_BUILD_DIR)/configure.ac
-	$(Build/Configure/Default)
-endef
+CMAKE_OPTIONS += \
+	-DDEFAULT_FEATURE_STATE=OFF \
+	-DENABLE_ML=OFF \
+	-DENABLE_DBENGINE=OFF \
+	-DENABLE_DASHBOARD=ON \
+	-DENABLE_PLUGIN_GO=OFF \
+	-DENABLE_PLUGIN_PYTHON=ON \
+	-DENABLE_PLUGIN_SCRIPTS=OFF \
+	-DENABLE_PLUGIN_OTEL=OFF \
+	-DENABLE_EXPORTER_PROMETHEUS_REMOTE_WRITE=OFF \
+	-DENABLE_EXPORTER_MONGODB=OFF \
+	-DENABLE_BUNDLED_PROTOBUF=OFF \
+		-DProtobuf_PROTOC_EXECUTABLE=/home/zag/OpenWrt/zagwrt/staging_dir/hostpkg/bin/protoc-25.9.0 \
+	-DENABLE_BUNDLED_JSONC=OFF \
+	-DENABLE_BUNDLED_YAML=OFF \
+	-DENABLE_SENTRY=OFF \
+	-DENABLE_WEBRTC=OFF \
+	-DENABLE_MIMALLOC=OFF \
+	-DENABLE_JEMALLOC=OFF \
+	-DSTATIC_BUILD=OFF \
+	-DUSE_MOLD=OFF \
+	-DBUILD_FOR_PACKAGING=ON
 
 define Package/netdata/conffiles
 /etc/netdata/
@@ -76,27 +80,29 @@ endef
 
 define Package/netdata/install
 	$(INSTALL_DIR) $(1)/etc/netdata/custom-plugins.d
-	$(CP) $(PKG_INSTALL_DIR)/etc/netdata $(1)/etc
+	$(CP) $(PKG_INSTALL_DIR)/usr/etc/netdata $(1)/etc
 	$(CP) ./files/netdata.conf $(1)/etc/netdata
 	touch $(1)/etc/netdata/.opt-out-from-anonymous-statistics
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/netdata $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/usr/lib/netdata $(1)/usr/lib
 	$(CP) $(1)/usr/lib/netdata/conf.d/health_alarm_notify.conf $(1)/etc
-	$(CP) $(1)/usr/lib/netdata/plugins.d/tc-qos-helper.sh $(1)/etc
+	$(INSTALL_DIR) $(1)/usr/libexec
+	$(CP) $(PKG_INSTALL_DIR)/usr/usr/libexec/netdata $(1)/usr/libexec
+	$(CP) $(1)/usr/libexec/netdata/plugins.d/tc-qos-helper.sh $(1)/etc
 	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/netdata $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/netdatacli $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/netdata-claim.sh $(1)/usr/sbin
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/usr/sbin/netdata $(1)/usr/sbin
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/usr/sbin/netdatacli $(1)/usr/sbin
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/usr/sbin/netdata-claim.sh $(1)/usr/sbin
 	$(INSTALL_DIR) $(1)/usr/share/netdata
-	$(CP) $(PKG_INSTALL_DIR)/usr/share/netdata $(1)/usr/share
-	rm $(1)/usr/share/netdata/web/demo*html
-	rm $(1)/usr/share/netdata/web/fonts/*.svg
-	rm $(1)/usr/share/netdata/web/fonts/*.ttf
-	rm $(1)/usr/share/netdata/web/fonts/*.woff
-	rm $(1)/usr/share/netdata/web/images/*.png
-	rm $(1)/usr/share/netdata/web/images/*.gif
-	rm $(1)/usr/share/netdata/web/images/*.ico
-	rm -rf $(1)/usr/share/netdata/web/old
+	$(CP) $(PKG_INSTALL_DIR)/usr/usr/share/netdata $(1)/usr/share
+	-rm $(1)/usr/share/netdata/web/demo*html
+	-rm $(1)/usr/share/netdata/web/fonts/*.svg
+	-rm $(1)/usr/share/netdata/web/fonts/*.ttf
+	-rm $(1)/usr/share/netdata/web/fonts/*.woff
+	-rm $(1)/usr/share/netdata/web/images/*.png
+	-rm $(1)/usr/share/netdata/web/images/*.gif
+	-rm $(1)/usr/share/netdata/web/images/*.ico
+	-rm -rf $(1)/usr/share/netdata/web/old
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/netdata.init $(1)/etc/init.d/netdata
 endef
