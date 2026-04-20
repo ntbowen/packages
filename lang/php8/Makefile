@@ -315,9 +315,9 @@ else
 endif
 
 ifneq ($(CONFIG_PACKAGE_php8-mod-opcache),)
-  CONFIGURE_ARGS+= --enable-opcache=shared
+##  CONFIGURE_ARGS+= --enable-opcache=shared
 else
-  CONFIGURE_ARGS+= --disable-opcache
+##  CONFIGURE_ARGS+= --disable-opcache
 endif
 
 ifneq ($(CONFIG_PACKAGE_php8-mod-openssl)$(CONFIG_PACKAGE_php8-mod-ftp)$(CONFIG_PACKAGE_php8-mod-snmp),)
@@ -655,7 +655,7 @@ $(eval $(call BuildModule,ldap,LDAP,+PACKAGE_php8-mod-ldap:libopenldap +PACKAGE_
 $(eval $(call BuildModule,mbstring,MBString,+PACKAGE_php8-mod-mbstring:oniguruma))
 $(eval $(call BuildModule,mysqli,MySQL Improved Extension,+PACKAGE_php8-mod-mysqli:php8-mod-mysqlnd,30))
 $(eval $(call BuildModule,mysqlnd,MySQL Native Driver,+PACKAGE_php8-mod-openssl:php8-mod-openssl))
-$(eval $(call BuildModule,opcache,OPcache,,,zend))
+##$(eval $(call BuildModule,opcache,OPcache,,,zend))
 $(eval $(call BuildModule,openssl,OpenSSL,+PACKAGE_php8-mod-openssl:libopenssl,15))
 $(eval $(call BuildModule,pcntl,PCNTL))
 $(eval $(call BuildModule,pdo,PHP Data Objects))
