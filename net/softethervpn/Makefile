@@ -42,6 +42,13 @@ HOST_MAKE_FLAGS += \
 	-f src/makefiles/$(if $(CONFIG_HOST_OS_MACOS),macos,linux)_$(if $(shell uname -m | grep 64),64,32)bit.mak
 
 # Convert CRLF to LF before patching (source tarballs use CRLF)
+define Build/Prepare
+	$(PKG_UNPACK)
+	[ ! -d ./src/ ] || $(CP) ./src/* $(PKG_BUILD_DIR)
+	find $(PKG_BUILD_DIR)/src -name "*.c" -o -name "*.h" | xargs dos2unix -q 2>/dev/null; true
+	$(Build/Patch)
+endef
+
 define Host/Prepare
 	$(if $(strip $(HOST_UNPACK)),$(HOST_UNPACK))
 	[ ! -d ./src/ ] || $(CP) ./src/* $(HOST_BUILD_DIR)
