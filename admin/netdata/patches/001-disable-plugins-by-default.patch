@@ -1,5 +1,5 @@
---- a/collectors/charts.d.plugin/charts.d.conf
-+++ b/collectors/charts.d.plugin/charts.d.conf
+--- a/src/collectors/charts.d.plugin/charts.d.conf
++++ b/src/collectors/charts.d.plugin/charts.d.conf
 @@ -30,7 +30,7 @@
  
  # the default enable/disable for all charts.d collectors
@@ -9,14 +9,14 @@
  
  # BY DEFAULT ENABLED MODULES
  # ap=yes
---- a/collectors/python.d.plugin/python.d.conf
-+++ b/collectors/python.d.plugin/python.d.conf
+--- a/src/collectors/python.d.plugin/python.d.conf
++++ b/src/collectors/python.d.plugin/python.d.conf
 @@ -7,7 +7,7 @@
- #
+ ##
  
- # Enable / disable the whole python.d.plugin (all its modules)
+ ## Enable / disable the whole python.d.plugin (all its modules)
 -enabled: yes
 +enabled: no
  
- # ----------------------------------------------------------------------
- # Enable / Disable python.d.plugin modules
+ ## ----------------------------------------------------------------------
+ ## Enable / Disable python.d.plugin modules
