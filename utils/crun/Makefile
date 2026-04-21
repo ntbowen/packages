@@ -6,7 +6,7 @@ PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/containers/crun/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=16f91e5bbcf83b4ffd9b6efcefb2ae3bfbd24d6c90ab72e2a065d1bd63b2b200
+PKG_HASH:=7a00aba04a7b8f5486093a787a64f2b6c42c8d76f0e3273386dd639768a9ad54
 
 PKG_BUILD_DEPENDS:=argp-standalone
 PKG_BUILD_PARALLEL:=1
