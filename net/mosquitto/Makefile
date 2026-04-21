@@ -110,7 +110,7 @@ define Package/libmosquitto/default
     $(Package/mosquitto/default)
     SECTION:=libs
     CATEGORY:=Libraries
-    DEPENDS:=+libpthread +librt +libcares
+    DEPENDS:=+libpthread +librt +libcares +cJSON
     TITLE:= mosquitto - client library
     PROVIDES:=libmosquitto
 endef
@@ -167,7 +167,7 @@ define Package/mosquitto/install/default
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/mosquitto $(1)/usr/sbin
 	$(INSTALL_DIR) $(1)/etc/mosquitto
-	$(INSTALL_CONF) $(PKG_INSTALL_DIR)/usr/etc/mosquitto/mosquitto.conf $(1)/etc/mosquitto
+	$(INSTALL_CONF) $(PKG_INSTALL_DIR)/usr/etc/mosquitto/mosquitto.conf.example $(1)/etc/mosquitto/mosquitto.conf
 	$(CP) ./files/* $(1)/
 endef
 
@@ -225,6 +225,8 @@ endef
 
 # Applies to all...
 CMAKE_OPTIONS += \
+	-DWITH_TESTS=OFF \
+	-DXSLTPROC=OFF \
 	-DDOCUMENTATION=OFF \
 	-DWITH_ADNS=OFF \
 	-DWITH_BUNDLED_DEPS=ON \
@@ -244,10 +246,14 @@ else
 	CMAKE_OPTIONS += -DWITH_WEBSOCKETS=O$(if $(CONFIG_MOSQUITTO_LWS),N,FF)
 endif
 
+define Build/Prepare
+	$(call Build/Prepare/Default)
+	echo 'message(STATUS "Skipping man page generation")' \
+		> $(PKG_BUILD_DIR)/man/CMakeLists.txt
+endef
+
 $(eval $(call BuildPackage,mosquitto-ssl))
 $(eval $(call BuildPackage,mosquitto-nossl))
 $(eval $(call BuildPackage,libmosquitto-ssl))
 $(eval $(call BuildPackage,libmosquitto-nossl))
 $(eval $(call BuildPackage,libmosquittopp))
-$(eval $(call BuildPackage,mosquitto-client-ssl))
-$(eval $(call BuildPackage,mosquitto-client-nossl))
