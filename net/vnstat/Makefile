@@ -19,6 +19,7 @@ PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
 PKG_INSTALL:=1
 
 PKG_BUILD_DEPENDS:=libgd
+
 PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
@@ -32,6 +33,7 @@ endef
 define Package/vnstat
 $(call Package/vnstat/Default)
   TITLE:=Console-based network traffic monitor
+  DEPENDS:=+libsqlite3
 endef
 
 define Package/vnstat/description
@@ -108,3 +110,12 @@ endef
 
 $(eval $(call BuildPackage,vnstat))
 $(eval $(call BuildPackage,vnstati))
+
+define Build/Prepare
+	$(call Build/Prepare/Default)
+	sed -i \
+		's/^;UpdateInterval 20/;UpdateInterval 60/' \
+		's/^;PollInterval 5/;PollInterval 30/' \
+		's/^;SaveInterval 5/;SaveInterval 30/' \
+		$(PKG_BUILD_DIR)/cfg/vnstat.conf
+endef
