@@ -203,7 +203,7 @@ endef
 # This installs files into ./staging_dir/. so that you can cross compile from the host
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
-	$(CP) $(PKG_INSTALL_DIR)/usr/include/*.h $(1)/usr/include
+	$(CP) -r $(PKG_INSTALL_DIR)/usr/include/. $(1)/usr/include
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libmosquitto.so* $(1)/usr/lib/
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libmosquittopp.so* $(1)/usr/lib/
