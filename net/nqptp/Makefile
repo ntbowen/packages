@@ -12,7 +12,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/mikebrady/nqptp/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=1df1d5edd5b713010d6495b3abca4c1cf4ad8fa6029df0abeb9e4de8e0eb707a
+PKG_HASH:=26f65165c3545a6cee0b9846b47ce52a015fcd8ec153fe16997d36f61c88029e
 
 PKG_MAINTAINER:=Ben Klang <bklang@wirehack.net>
 PKG_LICENSE:=GPL-2.0-only
