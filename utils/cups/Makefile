@@ -221,6 +221,14 @@ define Package/libcupsimage/install
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcupsimage.so* $(1)/usr/lib/
 endef
 
+define Build/Install
+	chmod -R u+w $(PKG_BUILD_DIR)
+	yes "" | $(MAKE) -C $(PKG_BUILD_DIR) \
+		$(MAKE_FLAGS) \
+		DESTDIR="$(PKG_INSTALL_DIR)" \
+		install
+endef
+
 define Build/InstallDev
 	$(INSTALL_DIR) $(2)/bin
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/cups-config $(2)/bin/
