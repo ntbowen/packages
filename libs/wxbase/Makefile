@@ -44,17 +44,13 @@ TARGET_CFLAGS += $(FPIC)
 
 CONFIGURE_ARGS += \
 	--disable-backtrace \
-	--disable-compat28 \
 	--disable-compat30 \
 	--disable-debug \
 	--disable-debug_flag \
 	--disable-debug_info \
 	--disable-debug_gdb \
-	--disable-debug_cntxt \
-	--disable-gpe \
 	--disable-gui \
 	--disable-mediactrl \
-	--disable-mem_tracing \
 	--disable-monolithic \
 	--disable-nanox \
 	--disable-no_rtti \
@@ -71,14 +67,12 @@ CONFIGURE_ARGS += \
 	--enable-optimise \
 	--enable-plugins \
 	--enable-shared \
-	--enable-unicode \
 	\
 	--with-expat="sys" \
 	--with-regex="sys" \
 	--with-zlib="sys" \
 	--without-cocoa \
 	--without-dmalloc \
-	--without-gtk-prefix \
 	--without-gtk \
 	--without-libiconv-prefix \
 	--without-libjbig \
@@ -88,7 +82,6 @@ CONFIGURE_ARGS += \
 	--without-libtiff \
 	--without-libxpm \
 	--without-mac \
-	--without-motif \
 	--without-msw \
 	--without-opengl \
 	--without-sdl \
@@ -101,11 +94,11 @@ define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/wx-config $(1)/usr/bin/
 	$(SED) "s,$(PKG_BUILD_DIR),$(STAGING_DIR)/usr,g" $(1)/usr/bin/wx-config
-	$(SED) 's,-I$$$${includedir}/wx-3.2,-I$(STAGING_DIR)/usr/include/wx-3.2,g' $(1)/usr/bin/wx-config
+	$(SED) 's,-I$$$${includedir}/wx-3.3,-I$(STAGING_DIR)/usr/include/wx-3.3,g' $(1)/usr/bin/wx-config
 	$(SED) 's,-I$$$${libdir}/wx/include,-I$(STAGING_DIR)/usr/lib/wx/include,g' $(1)/usr/bin/wx-config
 
 	$(INSTALL_DIR) $(1)/usr/include
-	$(CP) $(PKG_INSTALL_DIR)/usr/include/wx-3.2 $(1)/usr/include/
+	$(CP) $(PKG_INSTALL_DIR)/usr/include/wx-3.3 $(1)/usr/include/
 
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libwx_*.so* $(1)/usr/lib/
