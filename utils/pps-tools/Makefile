@@ -13,7 +13,7 @@ PKG_RELEASE:=2
 
 PKG_SOURCE_URL:=https://codeload.github.com/redlab-i/pps-tools/tar.gz/v$(PKG_VERSION)?
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_HASH:=1a7efd66152e5439b69143f1f380b40ac5decbbbef516b37a017410b8ba7dff4
+PKG_HASH:=89163e29f1a4a0a702bbe25b900fd37d2eb86442329cefee58847e57e1964d7a
 
 PKG_MAINTAINER:=Zoltan HERPAI <wigyori@uid0.hu>
 PKG_LICENSE:=GPL-2.0
