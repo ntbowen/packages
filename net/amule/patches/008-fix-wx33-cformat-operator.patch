@@ -1,0 +1,35 @@
+--- a/src/amule.cpp	2026-04-24 01:12:42.372476245 +0800
++++ b/src/amule.cpp	2026-04-24 01:13:00.660124828 +0800
+@@ -1051,7 +1051,7 @@
+ // Is called when the user runs a new version of aMule
+ void CamuleApp::Trigger_New_version(wxString new_version)
+ {
+-	wxString info = wxT(" --- ") + CFormat(_("This is the first time you run aMule %s")) % new_version + wxT(" ---\n\n");
++	wxString info = wxString(wxT(" --- ")) + wxString(CFormat(_("This is the first time you run aMule %s")) % new_version) + wxT(" ---\n\n");
+ 	if (new_version == wxT("SVN")) {
+ 		info += _("This version is a testing version, updated daily, and\n");
+ 		info += _("we give no warranty it won't break anything, burn your house,\n");
+--- a/src/BaseClient.cpp	2026-04-24 01:12:42.467477368 +0800
++++ b/src/BaseClient.cpp	2026-04-24 01:13:00.660630955 +0800
+@@ -2047,7 +2047,7 @@
+ {
+ 	// build info text and display it
+ 	wxString sRet;
+-	sRet = (CFormat(_("NickName: %s ID: %u")) % GetUserName() % GetUserIDHybrid()) + wxT(" ");
++	sRet = wxString(CFormat(_("NickName: %s ID: %u")) % GetUserName() % GetUserIDHybrid()) + wxT(" ");
+ 	if (m_reqfile) {
+ 		sRet += CFormat(_("Requested: %s\n")) % m_reqfile->GetFileName();
+ 		sRet += CFormat(
+--- a/src/ExternalConn.cpp	2026-04-24 01:12:42.568478562 +0800
++++ b/src/ExternalConn.cpp	2026-04-24 01:13:00.661521198 +0800
+@@ -485,8 +485,8 @@
+ 					% (m_haveNotificationSupport ? wxT("yes") : wxT("no")));
+ 			} else {
+ 				response = new CECPacket(EC_OP_AUTH_FAIL);
+-				response->AddTag(CECTag(EC_TAG_STRING, wxTRANSLATE("Invalid protocol version.")
+-					+ CFormat(wxT("( %#.4x != %#.4x )")) % proto_version % (uint16_t)EC_CURRENT_PROTOCOL_VERSION));
++				response->AddTag(CECTag(EC_TAG_STRING, wxString(wxTRANSLATE("Invalid protocol version."))
++					+ wxString(CFormat(wxT("( %#.4x != %#.4x )")) % proto_version % (uint16_t)EC_CURRENT_PROTOCOL_VERSION)));
+ 			}
+ 		} else {
+ 			response = new CECPacket(EC_OP_AUTH_FAIL);
