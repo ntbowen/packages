@@ -146,7 +146,9 @@ TARGET_CFLAGS += $(if $(CONFIG_OPENSSL_ENGINE),,-DDISABLE_ENGINES)
 
 CONFIGURE_VARS += \
 	CROSS_COMPILE="yes" \
-	ac_cv_func_mallinfo=no
+	ac_cv_func_mallinfo=no \
+	ac_cv_func_readpassphrase=no \
+	ac_cv_header_readpassphrase_h=no \
 
 define Package/tor/install
 	$(INSTALL_DIR) $(1)/usr/sbin
