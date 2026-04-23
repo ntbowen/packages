@@ -97,6 +97,11 @@ define Package/libcupsimage
   TITLE:=Common UNIX Printing System - Image library
 endef
 
+define Build/Prepare
+	$(call Build/Prepare/Default)
+	chmod -R u+w $(PKG_BUILD_DIR)
+endef
+
 CONFIGURE_ARGS+= \
 	--with-cups-user="nobody" \
 	--with-cups-group="nogroup" \
