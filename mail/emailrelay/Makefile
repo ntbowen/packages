@@ -13,7 +13,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-src.tar.gz
 PKG_SOURCE_URL:=@SF/emailrelay/$(PKG_VERSION)
-PKG_HASH:=ff3af8318f357dcd04c9c5d5f09f80117c881b74472baec1f46d7a2bc5bdeb97
+PKG_HASH:=a0bcd88179a6545817b670b1ed6d6aac7c4dae90fabd220ef08d3f6743b69e9c
 
 PKG_MAINTAINER:=Federico Di Marco <fededim@gmail.com>
 PKG_LICENSE:=GPL-3.0-or-later
