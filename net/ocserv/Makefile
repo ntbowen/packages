@@ -12,14 +12,15 @@ PKG_VERSION:=1.4.2
 PKG_RELEASE:=3
 PKG_BUILD_FLAGS:=no-mips16
 
-PKG_BUILD_DIR :=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://www.infradead.org/ocserv/download
 PKG_HASH:=e35d748a5244b10be3a92ad4df95a534c8280c43680eecaf3cb1b20d2a22b1a5
 
 PKG_LICENSE:=GPL-2.0-or-later
 PKG_LICENSE_FILES:=COPYING
-#PKG_FIXUP:=autoreconf
+
+PKG_BUILD_PARALLEL:=1
 
 PKG_CONFIG_DEPENDS:= \
 	CONFIG_OCSERV_PAM \
@@ -27,6 +28,7 @@ PKG_CONFIG_DEPENDS:= \
 	CONFIG_OCSERV_PROTOBUF \
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/meson.mk
 
 define Package/ocserv/config
 	source "$(SOURCE)/Config.in"
@@ -52,42 +54,48 @@ define Package/ocserv/description
  as TLS 1.2, and Datagram TLS to provide the secure VPN service.
 endef
 
-EXTRA_CPPFLAGS+=-I$(STAGING_DIR)/usr/include/readline/
-EXTRA_LDFLAGS+=-lncurses
+MESON_ARGS += \
+	-Dlibnl=disabled \
+	-Dgssapi=disabled \
+	-Dmaxmind=disabled \
+	-Dlz4=disabled \
+	-Dlocal-talloc=true \
+	-Dlocal-llhttp=true \
+	-Dlocal-pcl=true \
+	-Dsystemd=disabled \
+	-Dpager= \
+	-Doidc-auth=disabled \
+	-Dlibwrap=disabled \
+	-Dwith-werror=false
 
-CONFIGURE_VARS += \
-	ac_cv_file__proc_self_exe=yes \
-	ac_cv_prog_IPCALC=/bin/true
-
-CONFIGURE_ARGS+= \
-	--with-pager="" \
-	--with-libreadline-prefix="$(STAGING_DIR)/" \
-	--without-libnl \
-	--without-gssapi \
-	--without-maxmind \
-	--with-libcrypt-prefix="$(STAGING_DIR)/" \
-	--with-libev-prefix="$(STAGING_DIR)/" \
-	--without-lz4 \
-	--with-local-talloc \
-
-ifneq ($(CONFIG_OCSERV_PAM),y)
-CONFIGURE_ARGS += --without-pam
+ifeq ($(CONFIG_OCSERV_PAM),y)
+MESON_ARGS += -Dpam=enabled
+else
+MESON_ARGS += -Dpam=disabled
 endif
 
-ifneq ($(CONFIG_OCSERV_RADIUS),y)
-CONFIGURE_ARGS += --without-radius
+ifeq ($(CONFIG_OCSERV_RADIUS),y)
+MESON_ARGS += -Dradius=enabled
+else
+MESON_ARGS += -Dradius=disabled
 endif
 
-ifneq ($(CONFIG_OCSERV_SECCOMP),y)
-CONFIGURE_ARGS += --disable-seccomp
+ifeq ($(CONFIG_OCSERV_SECCOMP),y)
+MESON_ARGS += -Dseccomp=enabled
+else
+MESON_ARGS += -Dseccomp=disabled
 endif
 
-ifneq ($(CONFIG_OCSERV_PROTOBUF),y)
-CONFIGURE_ARGS += --without-protobuf
+ifeq ($(CONFIG_OCSERV_PROTOBUF),y)
+MESON_ARGS += -Dlocal-protobuf=false
+else
+MESON_ARGS += -Dlocal-protobuf=true
 endif
 
-ifndef CONFIG_OCSERV_LIBOATH
-CONFIGURE_ARGS += --without-liboath
+ifdef CONFIG_OCSERV_LIBOATH
+MESON_ARGS += -Dliboath=enabled
+else
+MESON_ARGS += -Dliboath=disabled
 endif
 
 define Package/ocserv/conffiles
@@ -96,12 +104,13 @@ endef
 
 define Package/ocserv/install
 	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/ocserv $(1)/usr/sbin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/ocserv-worker $(1)/usr/sbin/
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/ocserv $(1)/usr/sbin/
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/ocserv-worker $(1)/usr/sbin/
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/ocserv-fw $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/ocpasswd/ocpasswd $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/occtl/occtl $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/ocpasswd $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/occtl $(1)/usr/bin/
+	$(INSTALL_DIR) $(1)/usr/libexec
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/libexec/ocserv-fw $(1)/usr/libexec/
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/ocserv.init $(1)/etc/init.d/ocserv
 	$(INSTALL_DIR) $(1)/etc/ocserv
