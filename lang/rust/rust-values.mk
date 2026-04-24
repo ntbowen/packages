@@ -106,3 +106,11 @@ CARGO_PKG_CONFIG_VARS= \
 CARGO_PKG_PROFILE:=$(if $(CONFIG_DEBUG),dev,release)
 
 CARGO_RUSTFLAGS+=-Clink-arg=-fuse-ld=$(TARGET_LINKER)
+
+# Export CC/CXX/AR for Rust build scripts (cc crate) so they work even when
+# cargo is invoked indirectly (e.g. via cmake). Without this, cc crate tries
+# to guess the compiler as "{arch}-linux-{abi}-gcc", which fails because
+# OpenWrt toolchain uses "openwrt" as vendor (e.g. x86_64-openwrt-linux-musl-gcc).
+export CC_$(subst -,_,$(RUSTC_TARGET_ARCH)):=$(TARGET_CC_NOCACHE)
+export CXX_$(subst -,_,$(RUSTC_TARGET_ARCH)):=$(TARGET_CXX_NOCACHE)
+export AR_$(subst -,_,$(RUSTC_TARGET_ARCH)):=$(TARGET_AR)
