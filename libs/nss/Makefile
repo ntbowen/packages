@@ -14,7 +14,7 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:= \
     https://download.cdn.mozilla.net/pub/security/$(PKG_NAME)/releases/NSS_$(subst .,_,$(PKG_VERSION))_RTM/src \
     https://archive.mozilla.org/pub/security/$(PKG_NAME)/releases/NSS_$(subst .,_,$(PKG_VERSION))_RTM/src
-PKG_HASH:=33ae72d43b275957252adc8639e84229d3ae692a57b6191b059d9456b8568a68
+PKG_HASH:=de5a655da82a67e502b802ae0b53f3eb02ea53f509c3fc0ab54a892e04493bbf
 
 PKG_MAINTAINER:=Lucian Cristian <lucian.cristian@gmail.com>
 PKG_LICENSE:=MPL-2.0
