@@ -13,7 +13,7 @@ PKG_VERSION:=3.2.6
 PKG_RELEASE:=1
 PKG_SOURCE_URL:=https://codeload.github.com/OpenVPN/easy-rsa/tar.gz/v$(PKG_VERSION)?
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_HASH:=9b01dba67d811cea1b918ed1a0f146dead31beabc85b96abe4b09ffc75129099
+PKG_HASH:=59d1ff336a722e002130dc91668bc333632b5d5481a75826b97bebf435b6328d
 
 # For git snapshots
 #PKG_SOURCE_PROTO:=git
