@@ -6,7 +6,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/fatedier/frp/tar.gz/v${PKG_VERSION}?
-PKG_HASH:=afe1aca9f6e7680a95652e8acf84aef4a74bcefe558b5b91270876066fff3019
+PKG_HASH:=44ed7107bf35e4f68dc0e77cd5805102effa5301528b89ee5ab0ab379088edc6
 
 PKG_MAINTAINER:=
 PKG_LICENSE:=Apache-2.0
