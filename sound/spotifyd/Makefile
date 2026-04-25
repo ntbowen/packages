@@ -22,7 +22,7 @@ define Package/spotifyd
   SECTION:=sound
   CATEGORY:=Sound
   TITLE:=A spotify daemon
-  DEPENDS:=$(RUST_ARCH_DEPENDS) @(!arm||TARGET_bcm53xx||HAS_FPU) @!(i386||mips||mipsel) +alsa-lib +pulseaudio
+  DEPENDS:=$(RUST_ARCH_DEPENDS) @(!arm||TARGET_bcm53xx||HAS_FPU) @!(i386||mips||mipsel) +alsa-lib +libopenssl +libdbus
   URL:=https://spotifyd.rs/
   USERID:=spotifyd:spotifyd
 endef
