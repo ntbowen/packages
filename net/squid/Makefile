@@ -13,7 +13,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/squid-cache/squid/releases/download/SQUID_$(subst .,_,$(PKG_VERSION))
-PKG_HASH:=763b5a78561cedc4e47634fa42b8e6b8d46c87c949a151b4e7ac2396d2f97dea
+PKG_HASH:=f6058907db0150d2f5d228482b5a9e5678920cf368ae0ccbcecceb2ff4c35106
 
 PKG_MAINTAINER:=Marko Ratkaj <markoratkaj@gmail.com>
 PKG_LICENSE:=GPL-2.0-or-later
