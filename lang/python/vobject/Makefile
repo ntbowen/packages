@@ -9,7 +9,7 @@ PKG_RELEASE:=2
 PKG_LICENSE:=Apache-2.0
 
 PYPI_NAME:=$(PKG_NAME)
-PKG_HASH:=aa7261397b39ae202abcfc337b8307c7d2532a9b7ee721f7a87a6f25aa59608d
+PKG_HASH:=ac44e5d7e2079d84c1d52c50a615b9bec4b1ba958608c4c7fe40cbf33247b38e
 
 include ../pypi.mk
 include $(INCLUDE_DIR)/package.mk
