@@ -13,7 +13,7 @@
  # can be used for signalling purposes.
  # If not specified, no pidfile will be written.
  #
--#PidFile "@localstatedir@/run/tinyproxy/tinyproxy.pid"
+-#PidFile "@runstatedir@/tinyproxy/tinyproxy.pid"
 +PidFile "@localstatedir@/tinyproxy.pid"
  
  #
