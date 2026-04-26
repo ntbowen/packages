@@ -12,7 +12,7 @@ PKG_MAINTAINER:=Georgi Valkov <gvalkov@gmail.com>
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/pikvm/ustreamer/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=db00adfa02acfbdf6682ffae8e418b582d623e1971672d5df19858e02e2f3b0e
+PKG_HASH:=56aa683c13163032212c263346f9322e229ae7c786f9b778d7f22ea9c9c6dfa4
 
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=LICENSE
