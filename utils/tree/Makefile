@@ -13,7 +13,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/Old-Man-Programmer/$(PKG_NAME)/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=621ff2b4faf214d7023143f6f9d496117c7c75131927837750b904140aff48a1
+PKG_HASH:=22cf32e84e3eb508d97a9e991c2c3cc006b9dcf4afed201d96311c5c57d08fcf
 
 PKG_MAINTAINER:=Banglang Huang <banglang.huang@foxmail.com>
 PKG_LICENSE:=GPL-2.0-or-later
