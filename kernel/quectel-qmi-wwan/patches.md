@@ -1,0 +1,250 @@
+````markdown
+# quectel-qmi-wwan 1.2.9 编译修复
+
+> 环境：zagwrt · x86_64 · musl · Linux **6.18.21** · 2026-04-26
+
+---
+
+## 一、问题概述
+
+| # | 错误信息 | 根因 |
+|---|---------|------|
+| 1 | `'struct usbnet' has no member named 'bh'` | Linux 6.18 移除 `tasklet_struct bh`，改为 `work_struct bh_work` |
+| 2 | `implicit declaration of function 'tasklet_init'` | 同上，tasklet 相关 API 一并移除 |
+| 3 | `unterminated #if` at line 114 | Python 脚本用行号定位函数结尾，被其他 patch 的行号偏移破坏 |
+| 4 | `implicit declaration of function 'hrtimer_init'` | Linux 6.17 废弃 `hrtimer_init()` + `.function =`，改为 `hrtimer_setup()` |
+
+---
+
+## 二、Patch 文件
+
+**路径**：`feeds/packages/kernel/quectel-qmi-wwan/patches/020-fix-usbnet-bh-api-kernel-6.x.patch`
+
+包含 **4 个 Hunk**：
+
+### Hunk 1 — struct 成员类型替换
+
+```c
+// 旧（Linux < 6.0）
+struct tasklet_struct usbnet_bh;
+
+// 新（Linux >= 6.0）
+struct work_struct    usbnet_bh;
+```
+
+### Hunk 2 — usbnet_bh 函数签名与实现替换
+
+```c
+// 旧
+static void usbnet_bh(unsigned long data) {
+    sQmiWwanQmap *pQmapDev = (sQmiWwanQmap *)data;
+    ...
+}
+
+// 新（Linux >= 6.0）
+static void usbnet_bh(struct work_struct *work) {
+    sQmiWwanQmap *pQmapDev = container_of(work, sQmiWwanQmap, usbnet_bh);
+    schedule_work(&pQmapDev->mpNetDev->bh_work);
+    if (!netif_queue_stopped(pQmapDev->mpNetDev->net)) {
+        qmap_wake_queue(pQmapDev);
+    }
+}
+```
+
+### Hunk 3 — tasklet_init → INIT_WORK
+
+```c
+// 旧
+pQmapDev->usbnet_bh = dev->bh;
+tasklet_init(&dev->bh, usbnet_bh, (unsigned long)dev);
+
+// 新（Linux >= 6.0）
+pQmapDev->usbnet_bh = dev->bh_work;
+INIT_WORK(&dev->bh_work, usbnet_bh);
+```
+
+### Hunk 4 — hrtimer_init → hrtimer_setup
+
+```c
+// 旧（Linux < 6.17）
+hrtimer_init(&priv->agg_hrtimer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
+priv->agg_hrtimer.function = rmnet_usb_tx_agg_timer_cb;
+
+// 新（Linux >= 6.17）
+hrtimer_setup(&priv->agg_hrtimer, rmnet_usb_tx_agg_timer_cb,
+              CLOCK_MONOTONIC, HRTIMER_MODE_REL);
+```
+
+---
+
+## 三、Patch 生成脚本
+
+> **前提**：`/tmp/qmi_wwan_q.c.orig` 必须是**已应用 010/011 patch 之后**从 build_dir 复制的文件。
+
+```bash
+# Step 1: 备份已打过 010/011 patch 的源文件
+cp build_dir/target-x86_64_musl/linux-x86_64/quectel-qmi-wwan-1.2.9/qmi_wwan_q.c \
+   /tmp/qmi_wwan_q.c.orig
+
+# Step 2: 运行生成脚本
+cat > /tmp/make_patched2.py << 'PYEOF'
+src = '/tmp/qmi_wwan_q.c.orig'
+dst = '/tmp/qmi_wwan_q.c.new'
+
+with open(src, 'r') as f:
+    lines = f.readlines()
+
+out = []
+i = 0
+in_old_usbnet_bh = False
+usbnet_bh_brace_depth = 0
+
+while i < len(lines):
+    line = lines[i]
+    stripped = line.rstrip()
+
+    # Hunk 1: struct 成员 tasklet_struct -> work_struct
+    if stripped == '\tstruct tasklet_struct usbnet_bh;':
+        out.append('#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)\n')
+        out.append('\tstruct work_struct\tusbnet_bh;\n')
+        out.append('#else\n')
+        out.append(line)
+        out.append('#endif\n')
+        i += 1
+        continue
+
+    # Hunk 2: usbnet_bh 函数体替换（大括号深度计数定位结尾）
+    if (stripped == '#if defined(QUECTEL_UL_DATA_AGG)' and
+            i + 1 < len(lines) and
+            lines[i+1].rstrip() == 'static void usbnet_bh(unsigned long data) {'):
+        out.append(line)
+        out.append('#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)\n')
+        out.append('static void usbnet_bh(struct work_struct *work) {\n')
+        out.append('\tsQmiWwanQmap *pQmapDev = container_of(work, sQmiWwanQmap, usbnet_bh);\n')
+        out.append('\tschedule_work(&pQmapDev->mpNetDev->bh_work);\n')
+        out.append('\tif (!netif_queue_stopped(pQmapDev->mpNetDev->net)) {\n')
+        out.append('\t\tqmap_wake_queue(pQmapDev);\n')
+        out.append('\t}\n')
+        out.append('}\n')
+        out.append('#else\n')
+        in_old_usbnet_bh = True
+        usbnet_bh_brace_depth = 0
+        i += 1
+        continue
+
+    # 追踪旧函数体，大括号深度归零时插入 #endif
+    if in_old_usbnet_bh:
+        out.append(line)
+        usbnet_bh_brace_depth += line.count('{') - line.count('}')
+        if usbnet_bh_brace_depth <= 0 and stripped == '}':
+            out.append('#endif\n')
+            in_old_usbnet_bh = False
+        i += 1
+        continue
+
+    # Hunk 3: tasklet_init -> INIT_WORK
+    if stripped == '\t\t\t\t\tpQmapDev->usbnet_bh = dev->bh;':
+        out.append('#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)\n')
+        out.append('\t\t\t\t\tpQmapDev->usbnet_bh = dev->bh_work;\n')
+        out.append('\t\t\t\t\tINIT_WORK(&dev->bh_work, usbnet_bh);\n')
+        out.append('#else\n')
+        out.append(line)
+        i += 1
+        if i < len(lines):
+            out.append(lines[i])   # tasklet_init 行
+            i += 1
+        out.append('#endif\n')
+        continue
+
+    # Hunk 4: hrtimer_init -> hrtimer_setup (Linux 6.17+)
+    if stripped == '\thrtimer_init(&priv->agg_hrtimer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);':
+        out.append('#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 17, 0)\n')
+        out.append('\thrtimer_setup(&priv->agg_hrtimer, rmnet_usb_tx_agg_timer_cb,\n')
+        out.append('\t              CLOCK_MONOTONIC, HRTIMER_MODE_REL);\n')
+        out.append('#else\n')
+        out.append(line)
+        i += 1
+        if i < len(lines):
+            out.append(lines[i])   # priv->agg_hrtimer.function = ...
+            i += 1
+        out.append('#endif\n')
+        continue
+
+    out.append(line)
+    i += 1
+
+with open(dst, 'w') as f:
+    f.writelines(out)
+
+print(f'Done. Original: {len(lines)} lines, New: {len(out)} lines')
+PYEOF
+python3 /tmp/make_patched2.py
+
+# Step 3: 生成 patch
+diff -u /tmp/qmi_wwan_q.c.orig /tmp/qmi_wwan_q.c.new \
+  | sed 's|^--- /tmp/qmi_wwan_q.c.orig|--- a/qmi_wwan_q.c|' \
+  | sed 's|^+++ /tmp/qmi_wwan_q.c.new|+++ b/qmi_wwan_q.c|' \
+  > feeds/packages/kernel/quectel-qmi-wwan/patches/020-fix-usbnet-bh-api-kernel-6.x.patch
+```
+
+---
+
+## 四、重新编译
+
+```bash
+rm -rf build_dir/target-x86_64_musl/linux-x86_64/quectel-qmi-wwan-1.2.9/
+
+time make package/feeds/packages/quectel-qmi-wwan/compile \
+  V=s -j$(nproc) 2>&1 | grep -E 'ERROR|error:|Applying|patching|time:'
+```
+
+---
+
+## 五、验证结果
+
+```
+time: package/feeds/packages/quectel-qmi-wwan/compile#1.25#0.45#1.69
+```
+
+无 ERROR，输出：`kmod-usb-net-qmi-wwan-quectel-6.18.21.1.2.9-r2.apk` ✅
+
+---
+
+## 六、经验总结
+
+### ⚠️ 坑1：unterminated #if（行号定位失效）
+
+Python 脚本用行号（如 `i == 911`）定位函数结尾，会因其他 patch 的行号偏移而失效。
+
+**✅ 正确做法**：用**大括号深度计数**精确定位函数结束 `}`：
+
+```python
+usbnet_bh_brace_depth += line.count('{') - line.count('}')
+if usbnet_bh_brace_depth <= 0 and stripped == '}':
+    out.append('#endif\n')
+```
+
+### ⚠️ 坑2：Reversed patch detected
+
+`dry-run` 报 "Reversed" 是因为 build_dir 残留了上次失败时部分应用的 patch。
+
+**✅ 解决**：清理 build_dir 后重新编译：
+
+```bash
+rm -rf build_dir/target-x86_64_musl/linux-x86_64/quectel-qmi-wwan-1.2.9/
+```
+
+### ⚠️ 坑3：orig 文件的基准选择
+
+`/tmp/qmi_wwan_q.c.orig` 必须是**已应用 010/011 patch 之后**的文件（从 build_dir 复制），
+而不是 tarball 解压的原始文件，否则 diff 生成的 patch 会与 OpenWrt patch 应用顺序冲突。
+
+---
+
+## 七、Linux 内核 API 变更速查
+
+| API | 变更版本 | 旧写法 | 新写法 |
+|-----|---------|--------|--------|
+| `usbnet.bh` | Linux 6.18 | `tasklet_struct bh` + `tasklet_init` | `work_struct bh_work` + `INIT_WORK` |
+| `hrtimer` 初始化 | Linux 6.17 | `hrtimer_init()` + `.function =` | `hrtimer_setup()` |
+````
