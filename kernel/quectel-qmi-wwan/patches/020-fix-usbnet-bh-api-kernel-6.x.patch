@@ -1,0 +1,67 @@
+--- a/qmi_wwan_q.c	2026-04-26 16:39:54.595475550 +0800
++++ b/qmi_wwan_q.c	2026-04-26 16:51:27.739449760 +0800
+@@ -184,8 +184,12 @@
+ #if defined(QUECTEL_UL_DATA_AGG)
+ 	struct tx_agg_ctx tx_ctx;
+ 	struct tasklet_struct	txq;
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
++	struct work_struct	usbnet_bh;
++#else
+ 	struct tasklet_struct usbnet_bh;
+ #endif
++#endif
+ 
+ #ifdef QUECTEL_BRIDGE_MODE
+ 	uint bridge_mode;
+@@ -891,6 +895,15 @@
+ #endif
+ 
+ #if defined(QUECTEL_UL_DATA_AGG)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
++static void usbnet_bh(struct work_struct *work) {
++	sQmiWwanQmap *pQmapDev = container_of(work, sQmiWwanQmap, usbnet_bh);
++	schedule_work(&pQmapDev->mpNetDev->bh_work);
++	if (!netif_queue_stopped(pQmapDev->mpNetDev->net)) {
++		qmap_wake_queue(pQmapDev);
++	}
++}
++#else
+ static void usbnet_bh(unsigned long data) {
+ 	sQmiWwanQmap *pQmapDev = (sQmiWwanQmap *)data;
+ 	struct tasklet_struct *t = &pQmapDev->usbnet_bh;
+@@ -909,6 +922,7 @@
+ 		qmap_wake_queue((sQmiWwanQmap *)data);
+ 	}
+ }
++#endif
+ 
+ static void rmnet_usb_tx_wake_queue(unsigned long data) {
+ 	qmap_wake_queue((sQmiWwanQmap *)data);
+@@ -1368,8 +1382,13 @@
+ #endif
+ 	priv->agg_skb = NULL;
+ 	priv->agg_count = 0;
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 17, 0)
++	hrtimer_setup(&priv->agg_hrtimer, rmnet_usb_tx_agg_timer_cb,
++	              CLOCK_MONOTONIC, HRTIMER_MODE_REL);
++#else
+ 	hrtimer_init(&priv->agg_hrtimer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
+ 	priv->agg_hrtimer.function = rmnet_usb_tx_agg_timer_cb;
++#endif
+ 	INIT_WORK(&priv->agg_wq, rmnet_usb_tx_agg_work);
+ 	ktime_get_ts64(&priv->agg_time);
+ 	spin_lock_init(&priv->agg_lock);
+@@ -2266,8 +2285,13 @@
+ 				}
+ 
+ 				if (pQmapDev->use_rmnet_usb && !one_card_mode) {
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
++					pQmapDev->usbnet_bh = dev->bh_work;
++					INIT_WORK(&dev->bh_work, usbnet_bh);
++#else
+ 					pQmapDev->usbnet_bh = dev->bh;
+ 					tasklet_init(&dev->bh, usbnet_bh, (unsigned long)pQmapDev);
++#endif
+ 				}
+ 			}
+ 		}
