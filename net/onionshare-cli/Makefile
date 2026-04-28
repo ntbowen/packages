@@ -13,7 +13,7 @@ PKG_RELEASE:=3
 
 PYPI_NAME:=onionshare-cli
 PYPI_SOURCE_NAME:=onionshare_cli
-PKG_HASH:=aa7261397b39ae202abcfc337b8307c7d2532a9b7ee721f7a87a6f25aa59608d
+PKG_HASH:=077971cd227ff5fcc2080f7ae58aebb1fbfb3217313ab0e89f603e9b97459368
 
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE:=GPL-3.0-or-later
