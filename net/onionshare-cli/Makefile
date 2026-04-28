@@ -19,9 +19,8 @@ PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_LICENSE_FILES:=LICENSE
 
-PKG_BUILD_DEPENDS:=python-setuptools-scm/host
+PKG_BUILD_DEPENDS:=python-poetry-core/host
 
-PYTHON3_PKG_FORCE_DISTUTILS_SETUP:=1
 
 include ../../lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
