@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=zwave-js-ui-bundle
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=11.16.0
+PKG_VERSION:=11.16.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tar.gz

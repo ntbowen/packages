@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-zope-event
-PKG_VERSION:=6.1
+PKG_VERSION:=6.2
 PKG_RELEASE:=1
 
 PYPI_NAME:=zope.event
 PYPI_SOURCE_NAME:=zope_event
-PKG_HASH:=6052a3e0cb8565d3d4ef1a3a7809336ac519bc4fe38398cb8d466db09adef4f0
+PKG_HASH:=32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea
 
 PKG_BUILD_DEPENDS:=python3/host python-setuptools/host
 

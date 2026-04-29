@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-xml-parser
-PKG_VERSION:=2.57
+PKG_VERSION:=2.58
 PKG_RELEASE:=1
 
 PKG_SOURCE_URL:=https://www.cpan.org/authors/id/T/TO/TODDR/
 PKG_SOURCE:=XML-Parser-$(PKG_VERSION).tar.gz
-PKG_HASH:=a846bf77032e953e8344989780fa6a885e2a5226ebcaa93dae1d3df9b184e9cf
+PKG_HASH:=8e0bd510a6095374aff14e4f0cea62c40df5c434ac703850f20ae8edb2c9b100
 
 PKG_MAINTAINER:=Marcel Denia <naoir@gmx.net>
 PKG_LICENSE:=GPL-1.0-or-later Artistic-1.0-Perl

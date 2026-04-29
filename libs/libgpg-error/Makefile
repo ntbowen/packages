@@ -8,14 +8,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libgpg-error
-PKG_VERSION:=1.59
+PKG_VERSION:=1.60
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://mirrors.dotsrc.org/gcrypt/libgpg-error \
 		http://ring.ksc.gr.jp/archives/net/gnupg/libgpg-error \
 		https://www.gnupg.org/ftp/gcrypt/libgpg-error
-PKG_HASH:=a19bc5087fd97026d93cb4b45d51638d1a25202a5e1fbc3905799f424cfa6134
+PKG_HASH:=11b2a738e212f3eab0fe8637bc341d3181ca964e97bb2654de91aab7dae4ce09
 
 PKG_MAINTAINER:=W. Michael Petullo <mike@flyn.org>
 PKG_LICENSE:=LGPL-2.1-or-later

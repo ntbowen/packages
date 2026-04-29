@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=coova-chilli
-PKG_VERSION:=1.8
+PKG_VERSION:=1.9
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/coova/coova-chilli/releases/download/$(PKG_VERSION)
-PKG_HASH:=d49f531ba4017b3126aec84dc5e9bfb813e0ba772a78eded1db519ebc67d369e
+PKG_HASH:=ccdcc5fa92354b3c3c1c9b0c481e186c29a199219cb6f9df4aa200fa384a7aab
 
 PKG_MAINTAINER:=Jaehoon You <teslamint@gmail.com>
 PKG_LICENSE:=GPL-2.0-or-later

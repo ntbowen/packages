@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=atlas-probe
-PKG_VERSION:=4500-centos
+PKG_VERSION:=4720
 PKG_RELEASE:=3
 
 PKG_SOURCE_PROTO:=git

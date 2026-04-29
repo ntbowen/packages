@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ragel
-PKG_VERSION:=6.10
+PKG_VERSION:=7.0.4
 PKG_RELEASE:=1
 
 PKG_SOURCE_URL:=https://www.colm.net/files/ragel/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_HASH:=5f156edb65d20b856d638dd9ee2dfb43285914d9aa2b6ec779dac0270cd56c3f
+PKG_HASH:=84b1493efe967e85070c69e78b04dc55edc5c5718f9d6b77929762cb2abed278
 
 PKG_MAINTAINER:=John Audia <therealgraysky@proton.me>
 PKG_LICENSE:=GPL-2.0-only

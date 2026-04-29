@@ -8,11 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-psycopg2
-PKG_VERSION:=2.9.11
+PKG_VERSION:=2.9.12
 PKG_RELEASE:=1
 
 PYPI_NAME:=psycopg2
-PKG_HASH:=964d31caf728e217c697ff77ea69c2ba0865fa41ec20bb00f0977e62fdcc52e3
+PKG_HASH:=32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea
 
 PKG_MAINTAINER:=Daniel Danzberger <daniel@dd-wrt.com>
 PKG_LICENSE:=LGPL-3.0-or-later

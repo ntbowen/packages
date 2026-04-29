@@ -10,7 +10,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=libcurl-gnutls
 
 PKG_SOURCE_NAME:=curl
-PKG_VERSION:=8.19.0
+PKG_VERSION:=8.20.0
 PKG_RELEASE:=1
 PKG_SOURCE:=$(PKG_SOURCE_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/curl/curl/releases/download/curl-$(subst .,_,$(PKG_VERSION))/ \

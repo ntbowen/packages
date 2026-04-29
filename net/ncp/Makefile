@@ -7,7 +7,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ncp
-PKG_VERSION:=1.2.4
+PKG_VERSION:=2.0.0
 PKG_RELEASE:=1
 
 PKG_LICENSE:=FREE

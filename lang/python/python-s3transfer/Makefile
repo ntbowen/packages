@@ -1,11 +1,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-s3transfer
-PKG_VERSION:=0.16.0
+PKG_VERSION:=0.16.1
 PKG_RELEASE:=1
 
 PYPI_NAME:=s3transfer
-PKG_HASH:=8e990f13268025792229cd52fa10cb7163744bf56e719e0b9cb925ab79abf920
+PKG_HASH:=32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea
 
 PKG_MAINTAINER:=Daniel Danzberger <daniel@dd-wrt.com>
 PKG_LICENSE:=Apache-2.0

@@ -8,11 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-cachetools
-PKG_VERSION:=7.0.5
+PKG_VERSION:=7.0.6
 PKG_RELEASE:=1
 
 PYPI_NAME:=cachetools
-PKG_HASH:=0cd042c24377200c1dcd225f8b7b12b0ca53cc2c961b43757e774ebe190fd990
+PKG_HASH:=32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea
 
 PKG_MAINTAINER:=Josef Schlehofer <pepe.schlehofer@gmail.com>
 PKG_LICENSE:=MIT

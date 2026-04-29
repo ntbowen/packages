@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libpng
-PKG_VERSION:=1.6.57
+PKG_VERSION:=1.6.58
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@SF/libpng
-PKG_HASH:=d10c20d7171569804cae8dfc13ba6dcd0662c41ed39d43d4d429314aafb10a80
+PKG_HASH:=dd11610e078f1be0262e9fb259a961ad9f2d88c20eb95aa2f469022aedd9e9b3
 
 PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
 PKG_LICENSE:=Libpng GPL-2.0-or-later BSD-3-Clause

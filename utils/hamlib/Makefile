@@ -7,12 +7,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=hamlib
-PKG_VERSION:=4.7.0
+PKG_VERSION:=4.7.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@SF/hamlib
-PKG_HASH:=8be886200c8687829ff5c01e26d7abfa1c432d9c05de23798df560b1b86ea211
+PKG_HASH:=ae0f1ebdabfd3f620366dd157c78a67c6e0c47f9441bedd9122b9ffcbd5ebcd7
 
 PKG_MAINTAINER:=Vasilis Tsiligiannis <acinonyx@openwrt.gr>
 PKG_LICENSE:=LGPL-2.1-or-later

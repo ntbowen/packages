@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=fwupd
-PKG_VERSION:=2.1.1
+PKG_VERSION:=2.1.2
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/fwupd/fwupd/releases/download/$(PKG_VERSION)
-PKG_HASH:=0ae697f1f2011571310cef5d96429d8a5d541f73b0025bd2b622c9c7f4fe05b6
+PKG_HASH:=7d8d0762aa4095e8e7211a91550ab5c4db5e4fb4cad48087da522f580a4cc9d9
 
 PKG_MAINTAINER:=Lukas Voegl <lvoegl@tdt.de>
 PKG_LICENSE:=LGPL-2.1-or-later

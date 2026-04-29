@@ -8,11 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-ubus
-PKG_VERSION:=0.1.2
+PKG_VERSION:=0.1.3
 PKG_RELEASE:=2
 
 PYPI_NAME:=ubus
-PKG_HASH:=4dc4ef0fbcc8abb7a2354691475a58ff3eb015f1bab3150750729f7f657dd440
+PKG_HASH:=32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea
 
 PKG_MAINTAINER:=Erik Larsson <who+openwrt@cnackers.org>
 PKG_LICENSE:=LGPL-2.1-or-later
