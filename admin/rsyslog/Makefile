@@ -8,14 +8,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rsyslog
-PKG_VERSION:=8.2602.0
+PKG_VERSION:=8.2604.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:= \
 	https://fossies.org/linux/misc \
 	https://www.rsyslog.com/files/download/rsyslog
-PKG_HASH:=6d6fd0257c95e756765d4d585a833d54dd3a0e5eeb8308b862a81b368a74bb7b
+PKG_HASH:=3c0727964c2b7b26afdcdc5f94561676e279673b3798a84e07ad42ef658f5a6b
 
 PKG_MAINTAINER:=
 PKG_LICENSE:=GPL-3.0-or-later
