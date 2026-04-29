@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luv
-PKG_REAL_VERSION:=1.51.0-1
+PKG_REAL_VERSION:=1.52.1-0
 PKG_VERSION:=$(subst -,.,$(PKG_REAL_VERSION))
 PKG_RELEASE:=1
 
