@@ -71,8 +71,8 @@ TARGET_LDFLAGS += $(if $(CONFIG_USE_GLIBC),-lc -lgcc_eh)
 define EnsureVendoredVersion
 	DEP_VER=$$$$( grep --only-matching --perl-regexp '(?<=PKG_VERSION:=)(.*)' "../$(1)/Makefile" ); \
 	VEN_VER=$$$$( grep --only-matching --perl-regexp '(?<=$(call toupper,$(1))_VERSION=v)(.*)' "$(PKG_BUILD_DIR)/Dockerfile" ); \
-	if [ "$$$${VEN_VER}" != "$$$${DEP_VER}" ]; then \
-		echo "ERROR: $(PKG_NAME) Expected 'PKG_VERSION:=$$$${VEN_VER}' in '$(1)', found 'PKG_VERSION:=$$$${DEP_VER}'"; \
+	if [ "$$$$(printf '%s\n%s' "$$$${VEN_VER}" "$$$${DEP_VER}" | sort -V | tail -1)" != "$$$${DEP_VER}" ]; then \
+		echo "ERROR: $(PKG_NAME) Expected PKG_VERSION >= $$$${VEN_VER} in '$(1)', found 'PKG_VERSION:=$$$${DEP_VER}'"; \
 		exit 1; \
 	fi
 endef
