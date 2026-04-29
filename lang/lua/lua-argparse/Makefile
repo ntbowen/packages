@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lua-argparse
-PKG_VERSION:=0.7.1
+PKG_VERSION:=0.7.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/luarocks/argparse/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=d344e49404c3e7b3e7fa4fe6741c106f25909d9b24923cb08dcceda1f9754809
+PKG_HASH:=d2ae8066939420957bb6d580c6a6b8176c4f05419eca318e48d90a670fe2f59e
 PKG_BUILD_DIR:=$(BUILD_DIR)/argparse-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Vladimir Malyutin <first-leon@yandex.ru>
