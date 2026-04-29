@@ -11,7 +11,7 @@ PKG_VERSION:=26.2
 PKG_RELEASE:=2
 
 PYPI_NAME:=packaging
-PKG_HASH:=32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea
+PKG_HASH:=ff452ff5a3e828ce110190feff1178bb1f2ea2281fa2075aadb987c2fb221661
 
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE:=Apache-2.0 BSD-2-Clause
