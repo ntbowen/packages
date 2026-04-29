@@ -10,7 +10,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).zip
 PKG_SOURCE_URL:=https://github.com/daeuniverse/dae/releases/download/v$(PKG_VERSION)/dae-full-src.zip?
-PKG_HASH:=d933b93fc30cb4e9941cbb1be23557bd6caa2a33af212883505fec435d06fc13
+PKG_HASH:=e2e4207dc110ef21b07d9150272bcedb466ec93b435a6090fea3a946485f2328
 
 PKG_LICENSE:=AGPL-3.0-only
 PKG_LICENSE_FILE:=LICENSE
