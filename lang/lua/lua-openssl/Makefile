@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lua-openssl
-PKG_SOURCE_VERSION:=0.11.0-3
+PKG_SOURCE_VERSION:=0.11.1
 PKG_VERSION:=$(subst -,.,$(PKG_SOURCE_VERSION))
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/zhaozg/lua-openssl.git
-PKG_MIRROR_HASH:=e3c6173321132e2ce69cdedd8638acdc970a3fb1c0c3677d4edd9fe39e84853f
+PKG_MIRROR_HASH:=4e0aeaf5f9928682d5f4ef4be1611949831d778880fc0ce50c618b69ce9855d2
 
 PKG_MAINTAINER:=Amnon Paz <pazamnon@gmail.com>
 PKG_LICENSE:=MIT
