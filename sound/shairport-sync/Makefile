@@ -88,7 +88,6 @@ endef
 
 CONFIGURE_ARGS += \
 	--with-alsa \
-	--with-apple-alac \
 	--with-libdaemon \
 	--with-pipe \
 	--with-mqtt-client \
