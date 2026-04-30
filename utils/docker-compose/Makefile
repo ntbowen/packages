@@ -8,7 +8,7 @@ PKG_LICENSE_FILES:=LICENSE
 
 PKG_SOURCE:=$(PKG_NAME)-v$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/docker/compose/tar.gz/v${PKG_VERSION}?
-PKG_HASH:=9fbd031a82180c82fdfdd823a615c607bdb92cbae035c4481aa073a76749f57b
+PKG_HASH:=19c7219c97390473bb96530153e64fce98d4b05ecf6f73016e564201d99512e7
 
 PKG_MAINTAINER:=Javier Marcet <javier@marcet.info>
 
