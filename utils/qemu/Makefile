@@ -232,9 +232,7 @@ qemu-target-x86_64-softmmu-deps:= \
 	+qemu-firmware-seavgabios
 qemu-target-x86_64-softmmu-extra-files:= \
 	usr/share/qemu/kvmvapic.bin \
-	usr/share/qemu/linuxboot.bin \
 	usr/share/qemu/linuxboot_dma.bin \
-	usr/share/qemu/multiboot.bin \
 	usr/share/qemu/pvh.bin
 
 $(foreach target,$(qemu-target-list), \
