@@ -13,7 +13,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/Yubico/libfido2/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=7d86088ef4a48f9faad4ff6f41343328157849153a8dc94d88f4b5461cb29474
+PKG_HASH:=ace062d14a482ff9325410ff63d06c8b5fe87e79ebc18dda07add2bc0188c77f
 
 PKG_MAINTAINER:=Linos Giannopoulos <linosgian00+openwrt@gmail.com>
 PKG_LICENSE:=BSD-2-Clause
