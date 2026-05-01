@@ -10,7 +10,7 @@ PKG_RELEASE:=5
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/librespeed/speedtest-go/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=a65bbb94868d9ad73f85950264cb18fafb2ba5cf4788ac67981d78b863ca67c4
+PKG_HASH:=ca7c21db3f5dce7f305b09b9e881e90d50980e8b506c161643402f93ac4ba7f2
 
 PKG_MAINTAINER:=Tianling Shen <cnsztl@immortalwrt.org>
 PKG_LICENSE:=LGPL-3.0-only
