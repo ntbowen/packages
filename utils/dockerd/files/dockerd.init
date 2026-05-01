@@ -150,7 +150,7 @@ ucidel() {
 }
 
 process_config() {
-	local alt_config_file data_root log_level iptables ip6tables bip
+	local alt_config_file data_root log_level iptables ip6tables bip firewall_backend
 
 	[ -f /etc/config/dockerd ] || {
 		# Use the daemon default configuration
@@ -173,6 +173,7 @@ process_config() {
 	config_get log_level globals log_level "warn"
 	config_get_bool iptables globals iptables "1"
 	config_get_bool ip6tables globals ip6tables "0"
+	config_get firewall_backend globals firewall_backend ""
 
 	# Don't add these options by default
 	# omission == docker defaults
@@ -195,6 +196,11 @@ process_config() {
 	json_init
 	json_add_string "data-root" "${data_root}"
 	json_add_string "log-level" "${log_level}"
+	if [ -n "${firewall_backend}" ]; then
+		json_add_string "firewall-backend" "${firewall_backend}"
+		# nftables backend manages its own rules; disable legacy iptables
+		[ "${firewall_backend}" = "nftables" ] && iptables=0 && ip6tables=0
+	fi
 	json_add_boolean "iptables" "${iptables}"
 	json_add_boolean "ip6tables" "${ip6tables}"
 	[ -z "${log_driver}" ] || json_add_string "log-driver" "${log_driver}"
@@ -222,7 +228,7 @@ process_config() {
 	[ -z "${storage_driver}" ] || json_add_string "storage-driver" "${storage_driver}"
 	json_dump > "${DOCKERD_CONF}"
 
-	[ "${iptables}" -eq "1" ] && config_foreach iptables_add_blocking_rule firewall
+	[ "${iptables}" -eq "1" ] && [ "${firewall_backend}" != "nftables" ] && config_foreach iptables_add_blocking_rule firewall
 }
 
 start_service() {
