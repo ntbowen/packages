@@ -7,7 +7,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=radicale3
-PKG_VERSION:=3.7.1
+PKG_VERSION:=3.7.2
 PKG_RELEASE:=1
 
 PKG_LICENSE:=GPL-3.0-or-later
@@ -16,7 +16,7 @@ PKG_CPE_ID:=cpe:/a:radicale:radicale
 
 PYPI_NAME:=Radicale
 PYPI_SOURCE_NAME:=radicale
-PKG_HASH:=cabb87ad9f0b6aaa724f0621810c0e0c0421ef04ef2617e988d9da63859cd8ad
+PKG_HASH:=18db05f3d5eee3663db1914590044e5f96ff5cd47b6e7846c6a350806c23dbce
 
 PKG_MAINTAINER:=Daniel F. Dickinson <dfdpublic@wildtechgarden.ca>
 
