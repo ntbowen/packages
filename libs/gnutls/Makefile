@@ -116,6 +116,12 @@ endef
 # the use of configuration increases the non-shared memory used by
 # the library and we don't provide an openwrt-specific configuration
 # anyway.
+# musl does not have glibc-private pthread_rwlockattr_setkind_np;
+# force gnulib cache to avoid AC_RUN_IFELSE cross-compile misdetection
+CONFIGURE_VARS += \
+	gl_cv_func_pthread_rwlock_init=yes \
+	gl_cv_func_pthread_rwlock_good_waitqueue=yes
+
 CONFIGURE_ARGS+= \
 	--enable-shared \
 	--enable-static \
