@@ -41,7 +41,7 @@ define Package/libical/description
  Libical implements RFC2445, RFC2446 and some of RFC2447.
 endef
 
-CMAKE_OPTIONS += -DWITH_CXX_BINDINGS=false -DICAL_BUILD_DOCS=false -DICAL_GLIB=false
+CMAKE_OPTIONS += -DWITH_CXX_BINDINGS=false -DICAL_BUILD_DOCS=false -DICAL_GLIB=false -DLIBICAL_JAVA_BINDINGS=False -DLIBICAL_GOBJECT_INTROSPECTION=False -DLIBICAL_BUILD_EXAMPLES=False -DLIBICAL_GLIB_BUILD_DOCS=False -DLIBICAL_GLIB=False
 
 define Package/libical/install
 	$(INSTALL_DIR) $(1)/usr/lib
