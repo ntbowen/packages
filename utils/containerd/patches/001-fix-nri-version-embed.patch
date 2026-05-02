@@ -1,0 +1,29 @@
+--- a/vendor/github.com/containerd/nri/pkg/version/fallback.go
++++ b/vendor/github.com/containerd/nri/pkg/version/fallback.go
+@@ -16,24 +16,12 @@
+ 
+ package version
+ 
+-import (
+-	"bytes"
+-	"embed"
+-)
+ 
+-var (
+-	//go:embed info
+-	info     embed.FS
+-	fallback *string
+-)
++var fallback *string
+ 
+ func fallbackVersion() string {
+ 	if fallback == nil {
+-		data, _ := info.ReadFile("info/git")
+-		version := string(bytes.TrimSpace(data))
+-		if version == "" {
+-			version = UnknownVersion
+-		}
++		version := UnknownVersion
+ 		fallback = &version
+ 	}
+ 	return *fallback
