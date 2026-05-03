@@ -93,8 +93,6 @@ define Package/tcl/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(CP) $(PKG_INSTALL_DIR)/usr/bin/* $(1)/usr/bin
 
-	$(CP) -a $(PKG_INSTALL_DIR)/usr/lib/tcl8 $(1)/usr/lib/
-	$(CP) -a $(PKG_INSTALL_DIR)/usr/lib/tcl$(TCL_MAJOR_VERSION) $(1)/usr/lib/
 	$(LN) tclsh$(TCL_MAJOR_VERSION) $(1)/usr/bin/tclsh
 endef
 
