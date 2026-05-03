@@ -20,7 +20,7 @@ PKG_BUILD_DEPENDS:=golang/host
 PKG_BUILD_PARALLEL:=1
 PKG_BUILD_FLAGS:=no-mips16
 
-GO_PKG:=github.com/librespeed/speedtest
+GO_PKG:=github.com/librespeed/speedtest-go
 
 include $(INCLUDE_DIR)/package.mk
 include ../../lang/golang/golang-package.mk
@@ -63,7 +63,7 @@ endef
 define Package/librespeed-go/install
 	$(call GoPackage/Package/Install/Bin,$(PKG_INSTALL_DIR))
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/speedtest $(1)/usr/bin/librespeed-go
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/speedtest-go $(1)/usr/bin/librespeed-go
 
 	$(INSTALL_DIR) $(1)/etc/librespeed-go
 	$(CP) $(PKG_BUILD_DIR)/database/mysql/telemetry_mysql.sql $(1)/etc/librespeed-go/
