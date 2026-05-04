@@ -37,7 +37,7 @@ $(call Package/bluez/Default)
   SECTION:=libs
   CATEGORY:=Libraries
   TITLE+= library
-  DEPENDS:=+libpthread +USB_SUPPORT:kmod-bluetooth
+  DEPENDS:=+libpthread +USB_SUPPORT:kmod-bluetooth +libical
 endef
 
 define Package/bluez-utils
@@ -79,6 +79,9 @@ define Package/bluez-daemon/conffiles
 /etc/bluetooth/keys
 /etc/config/bluetooth
 endef
+
+# libical 4.x splits vCard/vCalendar into libicalvcal
+TARGET_LDFLAGS += -licalvcal
 
 CONFIGURE_ARGS += \
 	--enable-static \
