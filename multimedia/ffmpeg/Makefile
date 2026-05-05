@@ -353,7 +353,8 @@ $(call Package/libffmpeg/Default)
     +SOFT_FLOAT:shine \
     +!SOFT_FLOAT:lame-lib \
     +PACKAGE_libx264:libx264 \
-    +!PACKAGE_libx264:fdk-aac
+    +!PACKAGE_libx264:fdk-aac \
+    +libdrm
  VARIANT:=full
  PROVIDES+=libffmpeg-mini libffmpeg-audio-dec
 endef
@@ -668,9 +669,6 @@ endif
 	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/lib{avcodec,avdevice,avformat,avutil}.pc $(1)/usr/lib/pkgconfig/
 ifeq ($(CONFIG_FFMPEG_CUSTOM_SELECT_libx264),y)
-	$(CP) $(PKG_INSTALL_DIR)/usr/include/libpostproc $(1)/usr/include/
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libpostproc.{a,so*} $(1)/usr/lib/
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/libpostproc.pc $(1)/usr/lib/pkgconfig/
 endif
 endef
 
@@ -683,9 +681,6 @@ define Build/InstallDev/full
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib{avcodec,avdevice,avfilter,avformat,avutil,swresample,swscale}.{a,so*} $(1)/usr/lib/
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/lib{avcodec,avdevice,avfilter,avformat,avutil,swresample,swscale}.pc $(1)/usr/lib/pkgconfig/
 ifneq ($(CONFIG_PACKAGE_libx264),)
-	$(CP) $(PKG_INSTALL_DIR)/usr/include/libpostproc $(1)/usr/include/
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libpostproc.{a,so*} $(1)/usr/lib/
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/libpostproc.pc $(1)/usr/lib/pkgconfig/
 endif
 endef
 
@@ -742,7 +737,6 @@ define Package/libffmpeg-custom/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib{avcodec,avdevice,avformat,avutil}.so.* $(1)/usr/lib/
 ifeq ($(CONFIG_FFMPEG_CUSTOM_SELECT_libx264),y)
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libpostproc.so.* $(1)/usr/lib/
 endif
 ifeq ($(CONFIG_FFMPEG_CUSTOM_PROGRAMS),y)
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib{avfilter,swresample}.so.* $(1)/usr/lib/
@@ -759,7 +753,6 @@ define Package/libffmpeg-full/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib{avcodec,avdevice,avfilter,avformat,avutil,swresample,swscale}.so.* $(1)/usr/lib/
 ifneq ($(CONFIG_PACKAGE_libx264),)
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libpostproc.so.* $(1)/usr/lib/
 endif
 endef
 
