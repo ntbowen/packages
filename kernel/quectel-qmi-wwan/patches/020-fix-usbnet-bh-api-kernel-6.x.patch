@@ -4,7 +4,7 @@
  #if defined(QUECTEL_UL_DATA_AGG)
  	struct tx_agg_ctx tx_ctx;
  	struct tasklet_struct	txq;
-+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 18, 0)
 +	struct work_struct	usbnet_bh;
 +#else
  	struct tasklet_struct usbnet_bh;
@@ -17,7 +17,7 @@
  #endif
  
  #if defined(QUECTEL_UL_DATA_AGG)
-+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 18, 0)
 +static void usbnet_bh(struct work_struct *work) {
 +	sQmiWwanQmap *pQmapDev = container_of(work, sQmiWwanQmap, usbnet_bh);
 +	schedule_work(&pQmapDev->mpNetDev->bh_work);
@@ -55,7 +55,7 @@
  				}
  
  				if (pQmapDev->use_rmnet_usb && !one_card_mode) {
-+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 18, 0)
 +					pQmapDev->usbnet_bh = dev->bh_work;
 +					INIT_WORK(&dev->bh_work, usbnet_bh);
 +#else
