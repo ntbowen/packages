@@ -84,6 +84,13 @@ define Build/InstallDev
 		$(1)/usr/lib/pkgconfig
 	$(SED) 's,/usr/include,$$$${prefix}/include,g' $(1)/usr/lib/pkgconfig/tcl.pc
 	$(SED) 's,/usr/lib,$$$${prefix}/lib,g' $(1)/usr/lib/pkgconfig/tcl.pc
+	# 安装私有头文件到 generic/ 子目录，供 expect 等 TEA 扩展使用
+	$(INSTALL_DIR) $(1)/usr/include/generic
+	$(CP) $(PKG_BUILD_DIR)/generic/*.h $(1)/usr/include/generic/ 2>/dev/null || true
+	$(CP) $(PKG_BUILD_DIR)/*.h $(1)/usr/include/generic/ 2>/dev/null || true
+	$(CP) $(PKG_BUILD_DIR)/unix/tclUnixPort.h $(1)/usr/include/generic/ 2>/dev/null || true
+	# 修正 tclConfig.sh：TCL_SRC_DIR 指向 usr/include，使 generic/tclInt.h 可被 TEA 找到
+	$(SED) 's|TCL_SRC_DIR=.*|TCL_SRC_DIR=$(STAGING_DIR)/usr/include|' $(1)/usr/lib/tclConfig.sh
 endef
 
 define Package/tcl/install
