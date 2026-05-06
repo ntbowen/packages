@@ -244,6 +244,121 @@ rm -rf build_dir/target-x86_64_musl/linux-x86_64/quectel-qmi-wwan-1.2.9/
 ## 七、Linux 内核 API 变更速查
 
 | API | 变更版本 | 旧写法 | 新写法 |
+
+
+已保存到 Memo。以下是完整 Markdown：
+
+````markdown
+# quectel-qmi-wwan 1.2.9 编译修复：`bh_work` 版本阈值错误
+
+> 环境：zagwrt · aarch64_generic · musl · Linux 6.12.85 · 2026-05-06
+
+---
+
+## 问题现象
+
+```
+error: 'struct usbnet' has no member named 'bh_work'
+  901 |  schedule_work(&pQmapDev->mpNetDev->bh_work);
+ 2289 |  pQmapDev->usbnet_bh = dev->bh_work;
+ 2290 |  INIT_WORK(&dev->bh_work, usbnet_bh);
+```
+
+---
+
+## 根因
+
+现有 `020` patch 的版本判断阈值**写错**：
+
+```c
+// 错误写法（原 patch）：
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
+    dev->bh_work   // ← Linux 6.12 没有此成员！
+#else
+    dev->bh        // ← Linux 6.12 实际使用的是这个
+#endif
+```
+
+`bh_work` 是 **Linux 6.18** 才引入的，不是 6.0。
+
+| 内核版本 | `struct usbnet` 成员 | 类型 |
+|---|---|---|
+| < 6.18 | `bh` | `tasklet_struct` |
+| ≥ 6.18 | `bh_work` | `work_struct` |
+
+验证：
+```bash
+grep -n 'bh\b\|bh_work\|tasklet' \
+  build_dir/target-aarch64_generic_musl/linux-rockchip_armv8/linux-6.12.85/include/linux/usb/usbnet.h
+# 61:	struct tasklet_struct	bh;
+# → 确认 Linux 6.12 只有 bh，无 bh_work
+```
+
+---
+
+## 修复方案
+
+**Patch 文件**：`feeds/packages/kernel/quectel-qmi-wwan/patches/020-fix-usbnet-bh-api-kernel-6.x.patch`
+
+将 3 处 `KERNEL_VERSION(6, 0, 0)` 改为 `KERNEL_VERSION(6, 18, 0)`，`hrtimer` 相关的 `KERNEL_VERSION(6, 17, 0)` 不动。
+
+```bash
+python3 << 'PYEOF'
+path = 'feeds/packages/kernel/quectel-qmi-wwan/patches/020-fix-usbnet-bh-api-kernel-6.x.patch'
+with open(path, 'r') as f:
+    content = f.read()
+
+old = 'KERNEL_VERSION(6, 0, 0)'
+new = 'KERNEL_VERSION(6, 18, 0)'
+
+count = content.count(old)
+print(f"Found {count} occurrences → replacing all with {new}")
+content_new = content.replace(old, new)
+
+with open(path, 'w') as f:
+    f.write(content_new)
+print("Done")
+PYEOF
+```
+
+验证结果（3x `6,18,0` + 1x `6,17,0`）：
+```
+7:+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 18, 0)   ← struct 成员
+20:+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 18, 0)  ← 函数体
+44:+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 17, 0)  ← hrtimer（不变）
+58:+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 18, 0)  ← bind 处
+```
+
+---
+
+## 重新编译
+
+```bash
+rm -rf build_dir/target-aarch64_generic_musl/linux-rockchip_armv8/quectel-qmi-wwan-1.2.9/
+
+make package/feeds/packages/quectel-qmi-wwan/compile V=s -j$(nproc) 2>&1 | \
+  grep -E 'error:|time:|ERROR' | tail -10
+```
+
+---
+
+## 兼容性矩阵
+
+| 内核版本 | `bh_work` 分支 | `bh` 分支 | hrtimer |
+|---|---|---|---|
+| Linux 6.12 | ❌ 不走 | ✅ 走 `#else` | `hrtimer_init` ✅ |
+| Linux 6.17 | ❌ 不走 | ✅ 走 `#else` | `hrtimer_setup` ✅ |
+| Linux 6.18+ | ✅ 走 `#if` | ❌ 不走 | `hrtimer_setup` ✅ |
+
+---
+
+## 注意事项
+
+- 原 patch 在 x86_64 + Linux 6.18 上验证通过，但阈值 `6, 0, 0` 在 6.0~6.17 之间的内核上会引入不存在的 `bh_work`，导致编译失败
+- 修复后 patch 同时兼容 Linux 6.12（aarch64 rockchip）和 Linux 6.18+（x86_64）
+
+*最后更新：2026-05-06*
+````
 |-----|---------|--------|--------|
 | `usbnet.bh` | Linux 6.18 | `tasklet_struct bh` + `tasklet_init` | `work_struct bh_work` + `INIT_WORK` |
 | `hrtimer` 初始化 | Linux 6.17 | `hrtimer_init()` + `.function =` | `hrtimer_setup()` |
