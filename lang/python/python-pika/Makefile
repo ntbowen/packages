@@ -4,7 +4,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-pika
-PKG_VERSION:=1.3.2
+PKG_VERSION:=1.4.0
 PKG_RELEASE:=1
 
 PYPI_NAME:=pika
