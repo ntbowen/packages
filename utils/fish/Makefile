@@ -5,12 +5,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=fish
-PKG_VERSION:=4.7.0
+PKG_VERSION:=4.7.1
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/fish-shell/fish-shell/releases/download/$(PKG_VERSION)
-PKG_HASH:=8e0f20c770bab4f5b2a24d073b731f632e52bd89bdd0de7d4c7ecd4d2e85ee32
+PKG_HASH:=ce303c80fb61993f2ba4ceeca88e0dd6ad5876c4e064661ad31b715128dc7fe4
 
 PKG_MAINTAINER:=Curtis Jiang <jqqqqqqqqqq@gmail.com>
 PKG_LICENSE:=GPL-2.0-only
