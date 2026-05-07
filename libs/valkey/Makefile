@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=valkey
-PKG_VERSION:=9.0.3
+PKG_VERSION:=9.0.4
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/valkey-io/valkey/archive/refs/tags/$(PKG_VERSION).tar.gz?
-PKG_HASH:=e220f4b0143292ee6ea6d705aa40d45a0c8a77759b3e94c201cb5c25dbdca42f
+PKG_HASH:=8d65e12cc9edb14d117b56fd33300e7b8cde2c087356de3f055d44689667670b
 
 PKG_MAINTAINER:=Matthew Cather <mattbob4@gmail.com>
 PKG_LICENSE:=BSD-3-Clause
