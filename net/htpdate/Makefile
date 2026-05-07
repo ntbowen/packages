@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=htpdate
-PKG_VERSION:=2.0.1
+PKG_VERSION:=2.0.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://www.vervest.org/htp/archive/c/
-PKG_HASH:=88c52fe475308ee95f560fd7cf68c75bc6e9a6abf56be7fed203a7f762fe7ab2
+PKG_HASH:=3f5effa9355db140ef8ace6d17800d48815d1afdcef9d1096510451839dd8de4
 
 PKG_LICENSE:=GPL-2.0-or-later
 PKG_LICENSE_FILES:=
