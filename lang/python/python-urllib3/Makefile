@@ -17,7 +17,7 @@ PKG_LICENSE_FILES:=LICENSE.txt
 PKG_CPE_ID:=cpe:/a:python:urllib3
 
 PYPI_NAME:=urllib3
-PKG_HASH:=1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed
+PKG_HASH:=32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea
 
 PKG_BUILD_DEPENDS:= \
 	python-hatch-vcs/host \
