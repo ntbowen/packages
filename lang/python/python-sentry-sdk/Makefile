@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-sentry-sdk
-PKG_VERSION:=2.59.0
+PKG_VERSION:=2.60.0
 PKG_RELEASE:=1
 
 PYPI_NAME:=sentry-sdk
 PYPI_SOURCE_NAME:=sentry_sdk
-PKG_HASH:=470063405b61f75aedcb34a46ad39cd5cad21ccfb54e91c84175c4c2117c36ba
+PKG_HASH:=bb609c2613b84c272a672e8d472c960297221ee742011bae0d481f77a51e8d79
 
 PKG_MAINTAINER:=Josef Schlehofer <pepe.schlehofer@gmail.com>
 PKG_LICENSE:=MIT
