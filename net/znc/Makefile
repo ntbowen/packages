@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=znc
-PKG_VERSION:=1.10.2-rc1
+PKG_VERSION:=1.10.2
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://znc.in/releases \
 		https://znc.in/releases/archive
-PKG_HASH:=43b96fc1acca9467cf69e475ff55959ed464f714c1843ac1f2bdd9062658ee48
+PKG_HASH:=5b7561f3b100234d58ae4946eac0262ab305d275c094e64ae723e45d07be08ab
 
 PKG_MAINTAINER:=Jonas Gorski <jonas.gorski@gmail.com>
 PKG_LICENSE:=Apache-2.0
