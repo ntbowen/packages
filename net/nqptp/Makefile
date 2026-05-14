@@ -7,12 +7,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nqptp
-PKG_VERSION:=1.2.7
+PKG_VERSION:=1.2.8
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/mikebrady/nqptp/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=97fbcd9bb7bdd4b4a25cff42d2380d3432bd9c1ec53303ac0843fcd78468b090
+PKG_HASH:=3a2882a299c21605f53bb215ce537f9cc7a1e894476f639ab28562c68fd183a9
 
 PKG_MAINTAINER:=Ben Klang <bklang@wirehack.net>
 PKG_LICENSE:=GPL-2.0-only
