@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-idna
-PKG_VERSION:=3.13
+PKG_VERSION:=3.15
 PKG_RELEASE:=1
 
 PYPI_NAME:=idna
