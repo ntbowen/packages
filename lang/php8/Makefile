@@ -16,7 +16,7 @@ PKG_CPE_ID:=cpe:/a:php:php
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://www.php.net/distributions/
-PKG_HASH:=169aaa21c2834b38df8e39169f43bc5bea8d4059a816cfbc59be08fc2bae60cd
+PKG_HASH:=826c600b7c6f956bd335558ca3bdbcab23b22126c1cc8d9348be2280a2204bb7
 
 PKG_BUILD_PARALLEL:=1
 PKG_BUILD_FLAGS:=no-mips16
