@@ -12,7 +12,7 @@ PKG_RELEASE:=1
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=1ac01503a20b4422def37e962feea006b449abf1ca5225c0f7f1bcf572f8cb60
+PKG_HASH:=05b282d06332295c736f0b20c8bdf185325bf1bca682c91ed81154a3c6851cc0
 
 PKG_MAINTAINER:=Tianling Shen <cnsztl@immortalwrt.org>
 PKG_LICENSE:=MIT
