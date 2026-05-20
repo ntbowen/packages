@@ -11,9 +11,10 @@ PKG_NAME:=rtty
 PKG_VERSION:=9.1.0
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL=https://github.com/zhaojh329/rtty/releases/download/v$(PKG_VERSION)
-PKG_HASH:=a98478018ae4c57b4342f520ebd3e3f8c8c88e2a7d3ce871188968cb8827532b
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/zhaojh329/rtty.git
+PKG_SOURCE_VERSION:=v$(PKG_VERSION)
+PKG_MIRROR_HASH:=skip
 
 PKG_MAINTAINER:=Jianhui Zhao <zhaojh329@gmail.com>
 PKG_LICENSE:=MIT
