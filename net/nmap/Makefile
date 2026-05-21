@@ -36,7 +36,7 @@ endef
 
 define Package/nmap
 $(call Package/nmap/default)
-  DEPENDS:=$(NMAP_DEPENDS) $(LUA_DEPENDS)
+  DEPENDS:=$(NMAP_DEPENDS) $(SSL_DEPENDS) $(SSH2_DEPENDS) $(LUA_DEPENDS)
   TITLE:=Network exploration utility and security/port scanner
 endef
 
