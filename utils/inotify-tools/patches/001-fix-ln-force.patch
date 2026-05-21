@@ -1,0 +1,9 @@
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -1,6 +1,6 @@
+ install-exec-hook:
+ 	cd $(DESTDIR)$(bindir) && \
+-	ln -s inotifywait fsnotifywait && \
+-	ln -s inotifywatch fsnotifywatch
++	ln -sf inotifywait fsnotifywait && \
++	ln -sf inotifywatch fsnotifywatch
