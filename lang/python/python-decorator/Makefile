@@ -5,13 +5,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-decorator
-PKG_VERSION:=5.2.1
+PKG_VERSION:=5.3.1
 PKG_RELEASE:=1
 PKG_MAINTAINER:=Josef Schlehofer <pepe.schlehofer@gmail.com> 
 PKG_CPE_ID:=cpe:/a:python:decorator
 
 PYPI_NAME:=decorator
-PKG_HASH:=65f266143752f734b0a7cc83c46f4618af75b8c5911b00ccb61d0ac9b6da0360
+PKG_HASH:=4cfb62b78554a1be9b4c1d773257999f311326821f0b605fac0b096dc18efed7
 
 PKG_BUILD_DEPENDS:=python-setuptools/host
 
