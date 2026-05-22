@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-socketio
-PKG_VERSION:=5.16.1
+PKG_VERSION:=5.16.2
 PKG_RELEASE:=1
 
 PYPI_NAME:=python-socketio
 PYPI_SOURCE_NAME:=python_socketio
-PKG_HASH:=f863f98eacce81ceea2e742f6388e10ca3cdd0764be21d30d5196470edf5ea89
+PKG_HASH:=24c958763657d0b3b528ec3d2c9d1b3a8d84001f5412fc1f0e65bf6da05248f5
 
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE:=MIT
