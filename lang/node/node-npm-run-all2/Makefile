@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=npm-run-all2
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=8.0.4
+PKG_VERSION:=9.0.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=bcd8bd34feaca2e531000f5a28cea70d5a2a25517ef6744e587994b58f0b951b
+PKG_HASH:=ab7ec24fd709074960faf54d171f34bbb3e5bd83348f27da539fcca58dddb0e1
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT
