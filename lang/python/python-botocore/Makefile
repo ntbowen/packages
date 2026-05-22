@@ -1,11 +1,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-botocore
-PKG_VERSION:=1.43.7
+PKG_VERSION:=1.43.13
 PKG_RELEASE:=1
 
 PYPI_NAME:=botocore
-PKG_HASH:=900a1673d7491fcc0e87b0f33e19990d9ae18c19368e0224ef302da323fc9b6d
+PKG_HASH:=32d00e497c2db493296c7fcf928091fdc460dea7a8a887e15dce62b01118f583
 
 PKG_MAINTAINER:=Daniel Danzberger <daniel@dd-wrt.com>
 PKG_LICENSE:=Apache-2.0
