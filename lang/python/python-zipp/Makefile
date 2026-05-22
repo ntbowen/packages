@@ -1,11 +1,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-zipp
-PKG_VERSION:=3.23.1
+PKG_VERSION:=4.1.0
 PKG_RELEASE:=1
 
 PYPI_NAME:=zipp
-PKG_HASH:=aa7261397b39ae202abcfc337b8307c7d2532a9b7ee721f7a87a6f25aa59608d
+PKG_HASH:=6d3f02ec2f6655bef72aaf64fe760cd940c8484604deba78717c9202cd2aa7e7
 
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE:=MIT
