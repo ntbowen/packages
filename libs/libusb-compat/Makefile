@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libusb-compat
-PKG_VERSION:=0.1.8
+PKG_VERSION:=0.1.9
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/libusb/libusb-compat-0.1/releases/download/v$(PKG_VERSION)
-PKG_HASH:=b692dcf674c070c8c0bee3c8230ce4ee5903f926d77dc8b968a4dd1b70f9b05c
+PKG_HASH:=991250aecf97e36ed013dcff8ed40583fdd55fd9c387036d2eb759792fde2989
 
 PKG_MAINTAINER:= Felix Fietkau <nbd@nbd.name>
 PKG_LICENSE:=LGPL-2.1-or-later
