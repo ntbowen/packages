@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=pymysql
-PKG_VERSION:=1.1.3
+PKG_VERSION:=1.2.0
 PKG_RELEASE:=1
 
 PYPI_NAME:=pymysql
