@@ -25,6 +25,22 @@ include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/cmake.mk
 
+define Package/libutf8-range
+  $(call Package/protobuf/Default)
+  TITLE:=UTF-8 range validation libraries (utf8_range + utf8_validity)
+endef
+
+define Package/libutf8-range/description
+This package provides libutf8_range and libutf8_validity shared libraries,
+split out from protobuf 35.0+.
+endef
+
+define Package/libutf8-range/install
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libutf8_range.so* $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libutf8_validity.so* $(1)/usr/lib/
+endef
+
 define Package/protobuf/Default
   SECTION:=libs
   CATEGORY:=Libraries
@@ -40,6 +56,7 @@ endef
 
 define Package/protobuf-lite
   $(call Package/protobuf/Default)
+  DEPENDS+=+libutf8-range
 endef
 
 define Package/protobuf/description/Default
@@ -95,6 +112,8 @@ define Package/protobuf-lite/install
 
 	$(CP) \
 		$(PKG_INSTALL_DIR)/usr/lib/libprotobuf-lite.so* \
+		$(PKG_INSTALL_DIR)/usr/lib/libutf8_range.so* \
+		$(PKG_INSTALL_DIR)/usr/lib/libutf8_validity.so* \
 		$(1)/usr/lib/
 endef
 
@@ -112,5 +131,6 @@ define Package/protobuf/install
 endef
 
 $(eval $(call BuildPackage,protobuf))
+$(eval $(call BuildPackage,libutf8-range))
 $(eval $(call BuildPackage,protobuf-lite))
 $(eval $(call HostBuild))
