@@ -13,7 +13,7 @@ PKG_RELEASE:=1
 
 PYPI_NAME:=python-engineio
 PYPI_SOURCE_NAME:=python_engineio
-PKG_HASH:=3962cad8acbab095603c8c839b448b14990fe42f4d382597f800e62d3b822121
+PKG_HASH:=a7732e99cfb7db6ed1aee31f18d7f73bbae086a92f31dee019bc646155d9684e
 
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE:=MIT
