@@ -13,7 +13,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/libusb/libusb-compat-0.1/releases/download/v$(PKG_VERSION)
-PKG_HASH:=991250aecf97e36ed013dcff8ed40583fdd55fd9c387036d2eb759792fde2989
+PKG_HASH:=179d934676ad3bd172a5a37cf5c6351b8e9d7816feb3029252e79b30a518a3be
 
 PKG_MAINTAINER:= Felix Fietkau <nbd@nbd.name>
 PKG_LICENSE:=LGPL-2.1-or-later
