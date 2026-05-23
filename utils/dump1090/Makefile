@@ -14,7 +14,7 @@ PKG_RELEASE:=1
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_VERSION:=v$(PKG_VERSION)
 PKG_SOURCE_URL:=https://github.com/flightaware/dump1090
-PKG_MIRROR_HASH:=e6fbee5ddf61ca80ccea69efaba277d135b8a1a4c7bb684616d3bd3b00655551
+PKG_MIRROR_HASH:=6845698039a003e17facbb85866442ea3c2549a74dbf4f57bcb679b22c60bc3f
 
 PKG_MAINTAINER:=Álvaro Fernández Rojas <noltari@gmail.com>
 PKG_LICENSE:=GPL-2.0-or-later
