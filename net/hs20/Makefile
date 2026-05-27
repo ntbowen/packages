@@ -128,7 +128,7 @@ define Package/hs20-client/install
 endef
 
 define Package/hs20-server/install
-	$(INSTALL_DIR) $(1)/usr/sbin $(1)/usr/share/hs20/ca $(1)/www/hs20 $(1)/etc/uci-defaults $(1)/etc/hs20/spp $(1)/etc/config $(1)/etc/init.d
+	$(INSTALL_DIR) $(1)/usr/sbin $(1)/usr/share/hs20/ca $(1)/www/hs20 $(1)/etc/uci-defaults $(1)/etc/hs20/spp $(1)/etc/config $(1)/etc/init.d $(1)/etc/nginx/conf.d
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/hostapd/hostapd $(1)/usr/sbin/hostapd-hs20-radius-server
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/hostapd/hlr_auc_gw $(1)/usr/sbin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/hs20/server/hs20_spp_server $(1)/usr/sbin/
@@ -138,6 +138,7 @@ define Package/hs20-server/install
 	$(INSTALL_BIN) ./files/hs20-server.defaults $(1)/etc/uci-defaults/hs20-server
 	$(INSTALL_CONF) ./files/hs20.config $(1)/etc/config/hs20
 	$(INSTALL_BIN) ./files/hs20.init $(1)/etc/init.d/hs20
+	$(INSTALL_DATA) ./files/hs20.locations $(1)/etc/nginx/conf.d/hs20.locations
 endef
 
 define Package/hs20-server/conffiles
