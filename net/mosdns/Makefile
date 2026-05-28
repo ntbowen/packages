@@ -32,7 +32,7 @@ define Package/mosdns
   SUBMENU:=IP Addresses and Names
   TITLE:=A plug-in DNS forwarder/splitter
   URL:=https://github.com/IrineSistiana/mosdns
-  DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle
+  DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle +v2dat +v2ray-geoip +v2ray-geosite
   PROVIDES:=mosdns-neo
 endef
 
@@ -44,7 +44,7 @@ define Package/mosdns/install
 	$(call GoPackage/Package/Install/Bin,$(1))
 
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/scripts/openwrt/mosdns-init-openwrt $(1)/etc/init.d/mosdns
+	$(INSTALL_BIN) ./files/mosdns.init $(1)/etc/init.d/mosdns
 
 	$(INSTALL_DIR) $(1)/etc/mosdns
 	$(INSTALL_DATA) ./files/config.yaml $(1)/etc/mosdns/config.yaml
@@ -57,6 +57,19 @@ define Package/mosdns/postinst
 if [ -z "$${IPKG_INSTROOT}" ]; then
 	/etc/init.d/mosdns stop >/dev/null 2>&1
 	/etc/init.d/mosdns disable >/dev/null 2>&1
+
+	# Unpack v2ray geodata to text format for mosdns v5
+	mkdir -p /etc/mosdns/data
+	if [ -x /usr/bin/v2dat ] && [ -f /usr/share/v2ray/geosite.dat ]; then
+		v2dat unpack geosite -o /etc/mosdns/data \
+			-f cn -f "geolocation-!cn" -f category-ads-all \
+			/usr/share/v2ray/geosite.dat >/dev/null 2>&1
+	fi
+	if [ -x /usr/bin/v2dat ] && [ -f /usr/share/v2ray/geoip.dat ]; then
+		v2dat unpack geoip -o /etc/mosdns/data \
+			-f cn \
+			/usr/share/v2ray/geoip.dat >/dev/null 2>&1
+	fi
 fi
 exit 0
 endef
