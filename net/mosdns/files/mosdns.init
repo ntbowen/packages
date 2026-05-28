@@ -1,0 +1,80 @@
+#!/bin/sh /etc/rc.common
+#
+# Copyright (C) 2020-2022, IrineSistiana
+#
+# This file is part of mosdns.
+#
+# mosdns is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mosdns is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+START=99
+USE_PROCD=1
+
+PROG=/usr/bin/mosdns
+RES_DIR=/etc/mosdns/
+CONF=./config.yaml
+DATA_DIR=/etc/mosdns/data
+
+update_geodata() {
+  local need_update=0
+
+  mkdir -p "$DATA_DIR"
+
+  # Check if data files need updating
+  if [ -x /usr/bin/v2dat ]; then
+    if [ /usr/share/v2ray/geosite.dat -nt "$DATA_DIR/geosite_cn.txt" ] 2>/dev/null; then
+      need_update=1
+    fi
+    if [ /usr/share/v2ray/geoip.dat -nt "$DATA_DIR/geoip_cn.txt" ] 2>/dev/null; then
+      need_update=1
+    fi
+    if [ ! -f "$DATA_DIR/geosite_cn.txt" ] || [ ! -f "$DATA_DIR/geoip_cn.txt" ]; then
+      need_update=1
+    fi
+  fi
+
+  if [ "$need_update" = "1" ]; then
+    if [ -f /usr/share/v2ray/geosite.dat ]; then
+      v2dat unpack geosite -o "$DATA_DIR" \
+        -f cn -f "geolocation-!cn" -f category-ads-all \
+        /usr/share/v2ray/geosite.dat >/dev/null 2>&1
+    fi
+    if [ -f /usr/share/v2ray/geoip.dat ]; then
+      v2dat unpack geoip -o "$DATA_DIR" \
+        -f cn \
+        /usr/share/v2ray/geoip.dat >/dev/null 2>&1
+    fi
+  fi
+}
+
+start_service() {
+  update_geodata
+
+  procd_open_instance
+  procd_set_param command $PROG start -d $RES_DIR -c $CONF
+
+  procd_set_param user root
+  procd_set_param stdout 1
+  procd_set_param stderr 1
+  procd_set_param respawn "${respawn_threshold:-3600}" "${respawn_timeout:-5}" "${respawn_retry:-5}"
+  procd_close_instance
+  echo "mosdns is started!"
+}
+
+reload_service() {
+  stop
+  sleep 2s
+  echo "mosdns is restarted!"
+  start
+}
