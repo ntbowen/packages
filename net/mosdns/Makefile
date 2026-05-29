@@ -44,7 +44,7 @@ define Package/mosdns/install
 	$(call GoPackage/Package/Install/Bin,$(1))
 
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/scripts/openwrt/mosdns-init-openwrt $(1)/etc/init.d/mosdns
+	$(INSTALL_BIN) ./files/mosdns.init $(1)/etc/init.d/mosdns
 
 	$(INSTALL_DIR) $(1)/etc/mosdns
 	$(INSTALL_DATA) ./files/config.yaml $(1)/etc/mosdns/config.yaml
@@ -63,12 +63,12 @@ if [ -z "$${IPKG_INSTROOT}" ]; then
 	if [ -x /usr/bin/v2dat ] && [ -f /usr/share/v2ray/geosite.dat ]; then
 		v2dat unpack geosite -o /etc/mosdns/data \
 			-f cn -f "geolocation-!cn" -f category-ads-all \
-			/usr/share/v2ray/geosite.dat >/dev/null 2>&1
+			/usr/share/v2ray/geosite.dat 2>&1 | logger -t mosdns
 	fi
 	if [ -x /usr/bin/v2dat ] && [ -f /usr/share/v2ray/geoip.dat ]; then
 		v2dat unpack geoip -o /etc/mosdns/data \
 			-f cn \
-			/usr/share/v2ray/geoip.dat >/dev/null 2>&1
+			/usr/share/v2ray/geoip.dat 2>&1 | logger -t mosdns
 	fi
 fi
 exit 0
