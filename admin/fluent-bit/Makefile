@@ -1,16 +1,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=fluent-bit
-PKG_VERSION:=4.2.0
+PKG_VERSION:=5.0.6
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/fluent/fluent-bit.git
 PKG_SOURCE_VERSION=v$(PKG_VERSION)
-PKG_MIRROR_HASH:=cad2d94cf7a720a3910c781f80187e2c399aa8acbfa1046aa7445a4d1495fafd
+PKG_MIRROR_HASH:=bffe424e9010e89f412fbc0bbd054040aa4f447b9f2f20ffd5b42110db9b2fa3
 
 PKG_LICENSE:=Apache-2.0
 PKG_LICENSE_FILES:=LICENSE
+PKG_CPE_ID:=cpe:/a:treasuredata:fluent_bit
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
