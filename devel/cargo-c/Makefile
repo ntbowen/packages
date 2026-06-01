@@ -5,12 +5,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cargo-c
-PKG_VERSION:=0.10.13
+PKG_VERSION:=0.10.22
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/lu-zero/cargo-c/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=57dffba592179c7ca2b0322d28265b6962750eebb3a23b28ad677371cc10c36e
+PKG_HASH:=a7b00539437932f2a17a72b97d9c2142367a2d70ee20f9f1692a8b13c7255332
 
 PKG_MAINTAINER:=Luca Barbato <lu_zero@luminem.org>
 PKG_LICENSE:=MIT
