@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=iotop
-PKG_VERSION:=1.30
+PKG_VERSION:=1.31
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
@@ -10,7 +10,6 @@ PKG_HASH:=862e3d3d0263e4171aa9c5aaed2dd7d76ca746afa58ecbb6eca002717e9fa240
 
 PKG_LICENSE:=GPL-2.0-or-later
 PKG_LICENSE_FILES:=LICENSE
-PKG_CPE_ID=cpe:/a:iotop:iotop
 
 include $(INCLUDE_DIR)/package.mk
 
