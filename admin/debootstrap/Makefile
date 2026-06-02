@@ -10,7 +10,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=debootstrap
 PKG_REAL_VERSION:=1.0.128+nmu2+deb12u1
-PKG_VERSION:=1.0.128.2~deb121
+PKG_VERSION:=1.0.143
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-udeb_$(PKG_REAL_VERSION)_all.udeb
