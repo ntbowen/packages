@@ -9,13 +9,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libgphoto2
-PKG_VERSION:=2.5.33
+PKG_VERSION:=2.5.34
 PKG_RELEASE:=1
 PORT_VERSION:=0.12.2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=@SF/gphoto
-PKG_HASH:=8c744009fbbbce6dbc88462f867e924997d95339248e2f35f0a3b6bf40d6a889
+PKG_HASH:=de8280ec2c09fdf4c265637d121dc8c549ceeedb5e8e5a2be556fc4f8585dad6
 
 PKG_MAINTAINER:=Leonardo Medici <leonardo_medici@me.com>
 PKG_LICENSE:=LGPL-2.1-or-later
