@@ -10,7 +10,7 @@ PKG_VERSION:=2.13.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-PKG_SOURCE_URL:=https://download.open-mpi.org/release/$(PKG_NAME)/v2.12
+PKG_SOURCE_URL:=https://download.open-mpi.org/release/$(PKG_NAME)/v2.13
 PKG_HASH:=563e61d70febb514138af0fac36b97621e01a4aacbca07b86e7bd95b85055ba0
 
 PKG_MAINTAINER:=W. Michael Petullo <mike@flyn.org>
