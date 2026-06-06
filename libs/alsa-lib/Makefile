@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=alsa-lib
-PKG_VERSION:=1.2.15.3
+PKG_VERSION:=1.2.16
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://www.alsa-project.org/files/pub/lib/ \
 		https://distfiles.gentoo.org/distfiles/
-PKG_HASH:=7b079d614d582cade7ab8db2364e65271d0877a37df8757ac4ac0c8970be861e
+PKG_HASH:=122b1e3166d55fe19bcde656535d7a36f2ab10e66c72c6ad2f43f20ffded0a96
 
 PKG_MAINTAINER:=Ted Hess <thess@kitschensync.net>, \
 		Peter Wagner <tripolar@gmx.at>
