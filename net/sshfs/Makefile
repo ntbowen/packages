@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=sshfs
-PKG_VERSION:=3.7.5
+PKG_VERSION:=3.7.6
 PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/libfuse/sshfs/releases/download/$(PKG_NAME)-$(PKG_VERSION)
-PKG_HASH:=0e45db63c2d00919db3174134fa234c6e0682d6fe573c46312d1d53d1d61a8bb
+PKG_HASH:=6a1bcb31450a077e9cb1b7ff158c71de34db697c3c0da6cb362502131e495893
 
 PKG_MAINTAINER:=Zoltan HERPAI <wigyori@uid0.hu>
 PKG_LICENSE:=GPL-2.0-only
