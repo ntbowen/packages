@@ -1,10 +1,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=quickjs
-PKG_VERSION:=2026.06.04
+PKG_VERSION:=2025.09.13
 # The source versioning structure is somewhat bizarre as the file name
 # might differ from the directory name and the version.
-PKG_SRC_VERSION:=2026-06-04
+PKG_SRC_VERSION:=2025-09-13
 PKG_SRC_VERSION_REV:=2
 PKG_RELEASE:=1
 
