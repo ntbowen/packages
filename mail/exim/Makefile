@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=exim
-PKG_VERSION:=4.99.3
+PKG_VERSION:=4.99.4
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://ftp.exim.org/pub/exim/exim4/
-PKG_HASH:=ab58729c57d8ec586ef5acaf75a72b04f3c8a071eb244f4400bc69ef2a39fe39
+PKG_HASH:=87ff38815700dfb1ee4eb7e8dba7916df7a755905354d2d0faa1ae1790c4fd9d
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 
 PKG_LICENSE:=GPL-2.0-or-later
