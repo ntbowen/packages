@@ -10,7 +10,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=byobu
-PKG_VERSION:=6.15
+PKG_VERSION:=5.133
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)_$(PKG_VERSION).orig.tar.gz
@@ -29,7 +29,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/byobu/Default
   SECTION:=utils
   CATEGORY:=Utilities
-  URL:=http://byobu.org/
+  URL:=https://www.byobu.org/
   PKGARCH:=all
 endef
 
