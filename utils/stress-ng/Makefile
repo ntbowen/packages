@@ -10,7 +10,7 @@ PKG_VERSION:=0.21.01
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://codeload.github.com/ColinIanKing/stress-ng/tar.gz/refs/tags/V$(PKG_VERSION)?
+PKG_SOURCE_URL:=https://codeload.github.com/ColinIanKing/stress-ng/tar.gz/V$(PKG_VERSION)?
 PKG_HASH:=4c898d9b1911124f43f1fb6a18a725badbe795f5b628531afd4b631127ad8073
 
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
