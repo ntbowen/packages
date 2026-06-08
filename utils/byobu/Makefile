@@ -10,12 +10,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=byobu
-PKG_VERSION:=5.133
+PKG_VERSION:=7.8
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)_$(PKG_VERSION).orig.tar.gz
-PKG_SOURCE_URL:=https://launchpad.net/byobu/trunk/$(PKG_VERSION)/+download
-PKG_HASH:=4d8ea48f8c059e56f7174df89b04a08c32286bae5a21562c5c6f61be6dab7563
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://codeload.github.com/dustinkirkland/byobu/tar.gz/$(PKG_VERSION)?
+PKG_HASH:=3ec8bfef81818a1c50c278317a536ca1d4564cae89c14a46f1f943bab97e6dba
 
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=COPYING
@@ -36,7 +36,7 @@ endef
 define Package/byobu
 $(call Package/byobu/Default)
   TITLE:=Text-based window manager and terminal multiplexer
-  DEPENDS:=+python3-light +python3-newt
+  DEPENDS:=+python3-light +python3-newt +tmux +screen
 endef
 
 define Package/byobu-utils
