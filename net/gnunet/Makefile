@@ -2,11 +2,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gnunet
 
-PKG_VERSION:=0.26.1
-PKG_RELEASE:=2
+PKG_VERSION:=0.27.0
+PKG_RELEASE:=1
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@GNU/gnunet
-PKG_HASH:=837b7f9253c4acdc8cb90de9ed1cc5bd8986201ba70ec88bf2a06b9c9be771dd
+PKG_HASH:=9dd8feb3f3b8d0993766a49ab618f80bb93017f3bc795b6dda84697397302a07
 
 PKG_LICENSE:=AGPL-3.0
 PKG_LICENSE_FILES:=COPYING
@@ -54,7 +54,7 @@ define Package/gnunet/description
  GNUnet is a peer-to-peer framework focusing on security. The first and
  primary application for GNUnet is anonymous file-sharing.  GNUnet is
  currently developed by a worldwide group of independent free software
- developers.  GNUnet is a GNU package (http://www.gnu.org/).
+ developers.  GNUnet is a GNU package (https://www.gnu.org/).
 
  This is an ALPHA release.  There are known and significant bugs as
  well as many missing features in this release.

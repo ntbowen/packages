@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=homebridge-xiaomi-roborock-vacuum
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=1.0.0-alpha.1
+PKG_VERSION:=1.0.0-beta.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=c4e5af7d1b76d6ded94a73494eec28cc2c0f365b01af0ecf0ff39a8dd1875da1
+PKG_HASH:=faf0e1555d6958bc2e179f788bed0969e2842aa918b3f95e71e2ce4b809053d8
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT

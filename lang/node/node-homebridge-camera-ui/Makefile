@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=homebridge-camera-ui
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=5.0.27
+PKG_VERSION:=5.0.28-beta.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=a2039951b7898b8e38102617c58cdb463e802f43c3b5dfc8562369b0fd60a9a1
+PKG_HASH:=d7937e9c5180426ceeda4b4f5da87f89a60798529866cac987ab0fd8c53799da
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT

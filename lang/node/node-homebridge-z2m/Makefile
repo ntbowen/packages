@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=homebridge-z2m
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=1.11.0
+PKG_VERSION:=1.11.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=3866c14f9bfc7b48f43db9f89da99a11c840795d50e5ab45503f9ccd22d3a4fa
+PKG_HASH:=50d433a2135fdc7dbf86c3704a7431ade26a11f97293f33083963185edb8409d
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=Apache-2.0

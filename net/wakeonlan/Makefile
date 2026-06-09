@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=wakeonlan
-PKG_VERSION:=0.41
+PKG_VERSION:=0.42
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)_$(PKG_VERSION).orig.tar.gz
 PKG_SOURCE_URL:=https://deb.debian.org/debian/pool/main/w/wakeonlan/
-PKG_HASH:=581b1b27a7e810ab72668cce4bd9aa9b3e0cea34b2db24dd1a44c09d63ddda98
+PKG_HASH:=4f533f109f7f4294f6452b73227e2ce4d2aa81091cf6ae1f4fa2f87bad04a031
 
 PKG_MAINTAINER:=Nikil Mehta <nikil.mehta@gmail.com>
 PKG_LICENSE:=Artistic-1.0-Perl

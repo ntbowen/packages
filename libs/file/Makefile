@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=file
-PKG_VERSION:=5.47
+PKG_VERSION:=5.48
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://download.openpkg.org/components/cache/file/ \
 	http://ftp.astron.com/pub/file/
-PKG_HASH:=45672fec165cb4cc1358a2d76b5d57d22876dcb97ab169427ac385cbe1d5597a
+PKG_HASH:=ed14656883b23a364b4057c05595d93252da9bc473d30106519519d0da141283
 
 PKG_MAINTAINER:=Marko Ratkaj <markoratkaj@gmail.com>
 PKG_LICENSE:=BSD-2-Clause

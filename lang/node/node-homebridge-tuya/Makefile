@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=homebridge-tuya
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=3.1.1
+PKG_VERSION:=3.1.2-beta.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=73cda75b05df7d5d8115e685a86c8a4f5bed83d4702dadc46c1072be9d7dbf72
+PKG_HASH:=f667a1732910b5b1ba9fc4914691fd6c090ca950fb2aa8283cccafdf68ddc95a
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT

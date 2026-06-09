@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=freeradius3
-PKG_VERSION:=3.2.8
+PKG_VERSION:=3.2.10
 PKG_VERSION_UNDERSCORE:=$(subst .,_,${PKG_VERSION})
 PKG_RELEASE:=1
 
 PKG_SOURCE:=freeradius-server-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/FreeRADIUS/freeradius-server/releases/download/release_$(PKG_VERSION_UNDERSCORE)/
-PKG_HASH:=3846498103d3faf182abd968a440128cb0c5589330bdcdd58c466ef15d9f9fdf
+PKG_HASH:=3e9f24439ce976c04e4c56441722a3bd18677a61dd17f67bc8863eb4ed36cd4b
 
 PKG_MAINTAINER:=
 PKG_LICENSE:=GPL-2.0
