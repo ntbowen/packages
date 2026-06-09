@@ -12,7 +12,8 @@ PKG_VERSION:=0.9.3
 PKG_RELEASE:=2
 
 PKG_SOURCE:=v$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://codeload.github.com/stevegrubb/libcap-ng/tar.gz/refs/tags
+PKG_SOURCE_URL:=https://codeload.github.com/stevegrubb/libcap-ng/tar.gz/refs/tags/v$(PKG_VERSION)?
+
 PKG_HASH:=fe11ebbb55904763b3532f19069f13ec319042634620180a03bd4653d301563e
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
