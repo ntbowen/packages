@@ -15,7 +15,7 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://codeload.github.com/kenyapcomau/p910nd/tar.gz/refs/tags/$(PKG_VERSION)?
 PKG_LICENSE:=GPLv2
 PKG_LICENSE_FILES:=COPYING
-PKG_HASH:=c64c99762572d7954d7d364694135f9b1db7d7ba943e307d6d251afe59e6e90f
+PKG_HASH:=a1bcc2dd75bad4e00a9de5098dbd970e8380f978fc09292bcfa15852af6a6964
 PKG_MAINTAINER:=Philipp Kerling <pkerling@casix.org>
 
 PKG_INSTALL:=1
