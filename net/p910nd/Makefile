@@ -11,7 +11,7 @@ PKG_NAME:=p910nd
 PKG_VERSION:=0.97
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/kenyapcomau/p910nd/tar.gz/refs/tags/$(PKG_VERSION)?
 PKG_LICENSE:=GPLv2
 PKG_LICENSE_FILES:=COPYING
