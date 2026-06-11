@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lua
-PKG_VERSION:=5.5.0
+PKG_VERSION:=5.4.8
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://www.lua.org/ftp/ \
 	https://www.tecgraf.puc-rio.br/lua/ftp/
-PKG_HASH:=57ccc32bbbd005cab75bcc52444052535af691789dba2b9016d5c50640d68b3d
+PKG_HASH:=4f18ddae154e793e46eeab727c59ef1c0c0c2b744e7b94219710d76f530629ae
 PKG_BUILD_PARALLEL:=1
 
 PKG_MAINTAINER:=Christian Marangi <ansuelsmth@gmail.com>
