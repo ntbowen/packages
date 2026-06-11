@@ -1,0 +1,11 @@
+--- a/src/libcrun/utils.h
++++ b/src/libcrun/utils.h
+@@ -21,6 +21,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <errno.h>
+ #include <argp.h>
++#include <json-c/json.h>
+ #include "error.h"
+ #include <dirent.h>
+ #include <unistd.h>
