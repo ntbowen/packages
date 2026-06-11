@@ -10,7 +10,7 @@ PKG_NAME:=libsoxr
 PKG_VERSION:=0.1.3
 PKG_RELEASE:=3
 
-PKG_SOURCE_URL:=https://github.com/chirlu/soxr/archive/refs/tags/
+PKG_SOURCE_URL:=https://sourceforge.net/projects/soxr/files
 PKG_SOURCE:=soxr-$(PKG_VERSION)-Source.tar.gz
 PKG_HASH:=db6ca1b1e8405c6ef92f8294fc123d910abf0a114003b3f0f13fa57a95fd62d0
 PKG_BUILD_DIR:=$(BUILD_DIR)/soxr-$(PKG_VERSION)
