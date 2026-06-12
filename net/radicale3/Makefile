@@ -16,7 +16,7 @@ PKG_CPE_ID:=cpe:/a:radicale:radicale
 
 PYPI_NAME:=Radicale
 PYPI_SOURCE_NAME:=radicale
-PKG_HASH:=32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea
+PKG_HASH:=3ac1860beec979f5e59ce178a33f21549e95b993c07730f5ec1a9696fe107f3c
 
 PKG_MAINTAINER:=Daniel F. Dickinson <dfdpublic@wildtechgarden.ca>
 
