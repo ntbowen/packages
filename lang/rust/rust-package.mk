@@ -31,7 +31,7 @@ CARGO_PKG_VARS= \
 	CC=$(HOSTCC_NOCACHE) \
 	MAKEFLAGS="$(PKG_JOBS)"
 
-CARGO_PKG_ARGS= --offline
+CARGO_PKG_ARGS=
 
 ifeq ($(strip $(RUST_PKG_LOCKED)),1)
   CARGO_PKG_ARGS+= --locked
