@@ -1,4 +1,4 @@
-# SDPX-License-Identifier: GPL-3.0-only
+# SPDX-License-Identifier: GPL-3.0-only
 #
 # Copyright (C) 2021-2022 ImmortalWrt.org
 
@@ -12,14 +12,11 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/amule-project/amule/tar.gz/$(PKG_VERSION)?
 PKG_HASH:=850a09d1a5ec7d1b8962e4051d51b29355ac3df84a7b0b1209f2d0dd5c62eab4
 
-PKG_CONFIG_DEPEDS:= CONFIG_AMULE_CRYPTOPP_STATIC_LINKING
-
-PKG_FIXUP:=autoreconf
-PKG_BUILD_DEPENDS:=libgd
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/cmake.mk
 
 define Package/amule
   SUBMENU:=P2P
@@ -28,47 +25,20 @@ define Package/amule
   TITLE:=A multi-platform eMule-like ed2k client
   URL:=http://www.amule.org/
   DEPENDS:=+antileech +libpng +libpthread +libncurses +libreadline +libwxbase \
-	+libupnp +libbfd +libcryptopp
+	+libupnp +libbfd +libcryptopp +libzstd
 endef
 
-CONFIGURE_ARGS+= \
-	--disable-nls \
-	--disable-static \
-	--disable-rpath \
-	--disable-ccache \
-	--disable-profile \
-	--disable-monolithic \
-	--enable-amule-daemon \
-	--enable-amulecmd \
-	--enable-webserver \
-	--disable-amule-gui \
-	--disable-cas \
-	--disable-wxcas \
-	--disable-ed2k \
-	--disable-alc \
-	--disable-alcc \
-	--disable-debug \
-	--disable-fileview \
-	--disable-plasmamule \
-	--without-wxdebug \
-	--enable-dlp \
-	--enable-upnp \
-	--enable-optimize \
-	--with-gnu-ld \
-	--with-zlib="$(STAGING_DIR)/usr" \
-	--with-gdlib-prefix="$(STAGING_DIR)/usr" \
-	--with-libpng-prefix="$(STAGING_DIR)/usr" \
-	--with-wx-prefix="$(STAGING_DIR)/usr" \
-	--with-crypto-prefix="$(STAGING_DIR)/usr" \
-	--with-libupnp-prefix="$(STAGING_DIR)/usr" \
-	--without-x
-
-MAKE_FLAGS += HOSTCC="$(HOSTCC)"
-
-define Build/Configure
-	( cd $(PKG_BUILD_DIR); $(SHELL) autogen.sh; )
-	$(call Build/Configure/Default)
-endef
+CMAKE_OPTIONS += \
+	-DBUILD_MONOLITHIC=OFF \
+	-DBUILD_DAEMON=ON \
+	-DBUILD_AMULECMD=ON \
+	-DBUILD_WEBSERVER=ON \
+	-DBUILD_REMOTEGUI=OFF \
+	-DBUILD_CAS=OFF \
+	-DBUILD_WXCAS=OFF \
+	-DENABLE_NLS=OFF \
+	-DENABLE_UPNP=ON \
+	-DENABLE_IP2COUNTRY=OFF
 
 define Package/amule/install
 	$(INSTALL_DIR) $(1)/usr/bin
