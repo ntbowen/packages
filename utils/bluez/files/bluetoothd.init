@@ -1,14 +1,41 @@
 #!/bin/sh /etc/rc.common
 # Copyright (C) 2007 OpenWrt.org
+# Modified for AIC8800 USB Bluetooth adapter
 
-#start after dbus (60)
-START=62
-USE_PROCD=1
+# Start late to ensure USB device is ready
+START=99
+STOP=10
+
 PROG=/usr/bin/bluetoothd
 
-start_service() {
-	ln -snf /etc/bluetooth/keys/ /var/lib/bluetooth
-	procd_open_instance
-	procd_set_param command "$PROG" -n
-	procd_close_instance
+start() {
+	# Create bluetooth keys directory symlink
+	ln -snf /etc/bluetooth/keys/ /var/lib/bluetooth 2>/dev/null
+	
+	# Wait for AIC8800 USB device to initialize
+	sleep 8
+	
+	# Start bluetoothd
+	$PROG &
+	logger "Bluetooth service started (AIC8800 compatible)"
+}
+
+stop() {
+	killall bluetoothd 2>/dev/null
+	logger "Bluetooth service stopped"
+}
+
+restart() {
+	stop
+	start
+}
+
+status() {
+	if pgrep -x bluetoothd > /dev/null; then
+		echo "running"
+		return 0
+	else
+		echo "not running"
+		return 1
+	fi
 }
