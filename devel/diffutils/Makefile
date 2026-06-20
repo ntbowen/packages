@@ -21,9 +21,18 @@ PKG_LICENSE_FILES:=COPYING
 PKG_CPE_ID:=cpe:/a:gnu:diffutils
 
 PKG_BUILD_PARALLEL:=1
-PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
+define Build/Compile
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/lib all
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/src all
+endef
+
+define Build/Install
+	$(MAKE) -C $(PKG_BUILD_DIR)/lib install DESTDIR=$(PKG_INSTALL_DIR)
+	$(MAKE) -C $(PKG_BUILD_DIR)/src install DESTDIR=$(PKG_INSTALL_DIR)
+endef
+
 
 define Package/diffutils
   SECTION:=devel

@@ -1,0 +1,893 @@
+--- a/src/analyze.c	2026-06-21 01:08:05.674599111 +0800
++++ b/src/analyze.c	2026-06-21 01:08:05.674649546 +0800
+@@ -371,7 +371,7 @@
+ static struct change *
+ build_reverse_script (struct file_data const filevec[])
+ {
+-  struct change *script = nullptr;
++  struct change *script = NULL;
+   bool *changed0 = filevec[0].changed;
+   bool *changed1 = filevec[1].changed;
+   lin len0 = filevec[0].buffered_lines;
+@@ -408,7 +408,7 @@
+ static struct change *
+ build_script (struct file_data const filevec[])
+ {
+-  struct change *script = nullptr;
++  struct change *script = NULL;
+   bool *changed0 = filevec[0].changed;
+   bool *changed1 = filevec[1].changed;
+   lin i0 = filevec[0].buffered_lines, i1 = filevec[1].buffered_lines;
+--- a/src/context.c	2026-06-21 01:08:05.675941115 +0800
++++ b/src/context.c	2026-06-21 01:08:05.675991410 +0800
+@@ -199,7 +199,7 @@
+     last1 = curr.file[1].valid_lines - 1;
+ 
+   /* If desired, find the preceding function definition line in file 0.  */
+-  char const *function = nullptr;
++  char const *function = NULL;
+   if (function_regexp.fastmap)
+     function = find_function (curr.file[0].linbuf, first0);
+ 
+@@ -342,7 +342,7 @@
+     last1 = curr.file[1].valid_lines - 1;
+ 
+   /* If desired, find the preceding function definition line in file 0.  */
+-  char const *function = nullptr;
++  char const *function = NULL;
+   if (function_regexp.fastmap)
+     function = find_function (curr.file[0].linbuf, first0);
+ 
+@@ -376,7 +376,7 @@
+ 	  char const *const *line = &curr.file[0].linbuf[i++];
+           if (! (suppress_blank_empty && **line == '\n'))
+             putc (initial_tab ? '\t' : ' ', out);
+-          print_1_line (nullptr, line);
++          print_1_line (NULL, line);
+           j++;
+         }
+       else
+@@ -392,7 +392,7 @@
+               putc ('-', out);
+               if (initial_tab && ! (suppress_blank_empty && **line == '\n'))
+                 putc ('\t', out);
+-              print_1_line_nl (nullptr, line, true);
++              print_1_line_nl (NULL, line, true);
+ 
+               set_color_context (RESET_CONTEXT);
+ 
+@@ -411,7 +411,7 @@
+               putc ('+', out);
+               if (initial_tab && ! (suppress_blank_empty && **line == '\n'))
+                 putc ('\t', out);
+-              print_1_line_nl (nullptr, line, true);
++              print_1_line_nl (NULL, line, true);
+ 
+               set_color_context (RESET_CONTEXT);
+ 
+@@ -471,7 +471,7 @@
+       struct change *next = script->link;
+ 
+       /* Turn this change into a hunk: detach it from the others.  */
+-      script->link = nullptr;
++      script->link = NULL;
+ 
+       /* Determine whether this change is ignorable.  */
+       lin first0, last0, first1, last1;
+@@ -507,7 +507,7 @@
+ 	 to LEN = LINELEN and no machine code is generated.  */
+       regoff_t len = MIN (linelen, TYPE_MAXIMUM (regoff_t));
+ 
+-      if (0 <= re_search (&function_regexp, line, len, 0, len, nullptr))
++      if (0 <= re_search (&function_regexp, line, len, 0, len, NULL))
+         {
+           find_function_last_match = i;
+           return line;
+@@ -518,5 +518,5 @@
+   if (find_function_last_match != LIN_MAX)
+     return linbuf[find_function_last_match];
+ 
+-  return nullptr;
++  return NULL;
+ }
+--- a/src/ifdef.c	2026-06-21 01:08:05.676999075 +0800
++++ b/src/ifdef.c	2026-06-21 01:08:05.677033140 +0800
+@@ -155,8 +155,8 @@
+                 }
+ 
+ 	      bool equal_values = value[0] == value[1];
+-              FILE *thenout = equal_values ? out : nullptr;
+-	      FILE *elseout = equal_values ? nullptr : out;
++              FILE *thenout = equal_values ? out : NULL;
++	      FILE *elseout = equal_values ? NULL : out;
+               f = format_group (thenout, f, ':', groups);
+               if (*f)
+                 {
+@@ -183,7 +183,7 @@
+             continue;
+ 
+           default:
+-            f = do_printf_spec (out, f - 2, nullptr, 0, groups);
++            f = do_printf_spec (out, f - 2, NULL, 0, groups);
+             if (f)
+               continue;
+             /* Fall through. */
+@@ -277,16 +277,16 @@
+                 output_1_line (linbuf[from],
+                                (linbuf[from + 1]
+                                 - (linbuf[from + 1][-1] == '\n')),
+-                               nullptr, nullptr);
++                               NULL, NULL);
+                 continue;
+ 
+               case 'L':
+                 output_1_line (linbuf[from], linbuf[from + 1],
+-			       nullptr, nullptr);
++			       NULL, NULL);
+                 continue;
+ 
+               default:
+-                f = do_printf_spec (out, f - 2, file, from, nullptr);
++                f = do_printf_spec (out, f - 2, file, from, NULL);
+                 if (f)
+                   continue;
+                 c = '%';
+@@ -324,13 +324,13 @@
+     {
+     case 'c':
+       if (c1 != '\'')
+-        return nullptr;
++        return NULL;
+       else
+         {
+           char value;
+           f = scan_char_literal (f, &value);
+           if (!f)
+-            return nullptr;
++            return NULL;
+           if (out)
+             putc (value, out);
+         }
+@@ -343,14 +343,14 @@
+         if (file)
+           {
+             if (c1 != 'n')
+-              return nullptr;
++              return NULL;
+             value = translate_line_number (file, n);
+           }
+         else
+           {
+             value = groups_letter_value (groups, c1);
+             if (value < 0)
+-              return nullptr;
++              return NULL;
+           }
+ 
+         if (out)
+@@ -371,7 +371,7 @@
+       break;
+ 
+     default:
+-      return nullptr;
++      return NULL;
+     }
+ 
+   return f;
+@@ -392,7 +392,7 @@
+     {
+       case 0:
+       case '\'':
+-        return nullptr;
++        return NULL;
+ 
+       case '\\':
+         value = '\0';
+@@ -400,18 +400,18 @@
+           {
+             unsigned int digit = c - '0';
+             if (8 <= digit)
+-              return nullptr;
++              return NULL;
+             value = 8 * value + digit;
+           }
+         ptrdiff_t digits = p - lit - 2;
+         if (! (1 <= digits && digits <= 3))
+-          return nullptr;
++          return NULL;
+         break;
+ 
+       default:
+         value = c;
+         if (*p++ != '\'')
+-          return nullptr;
++          return NULL;
+         break;
+     }
+ 
+--- a/src/sdiff.c	2026-06-21 01:08:05.677761369 +0800
++++ b/src/sdiff.c	2026-06-21 01:08:05.677812786 +0800
+@@ -198,7 +198,7 @@
+   "",
+   N_("    --help                   display this help and exit"),
+   N_("-v, --version                output version information and exit"),
+-  nullptr
++  NULL
+ };
+ 
+ static void
+@@ -517,7 +517,7 @@
+ 
+       case 'v':
+ 	version_etc (stdout, PROGRAM_NAME, PACKAGE_NAME, Version,
+-		     AUTHORS, nullptr);
++		     AUTHORS, NULL);
+ 	check_stdout ();
+ 	return EXIT_SUCCESS;
+ 
+@@ -553,7 +553,7 @@
+ 	break;
+ 
+       default:
+-	try_help (nullptr, nullptr);
++	try_help (NULL, NULL);
+       }
+ 
+   if (argc - optind != 2)
+@@ -573,7 +573,7 @@
+       diffarg ("--");
+       diffarg (argv[optind]);
+       diffarg (argv[optind + 1]);
+-      diffarg (nullptr);
++      diffarg (NULL);
+       execvp (diffargv[0], (char **) diffargv);
+       perror_fatal (squote (0, diffargv[0]));
+     }
+@@ -597,7 +597,7 @@
+       diffarg ("--");
+       diffarg (argv[optind]);
+       diffarg (argv[optind + 1]);
+-      diffarg (nullptr);
++      diffarg (NULL);
+ 
+       trapsigs ();
+ 
+@@ -681,7 +681,7 @@
+         if (tmpname)
+           {
+             unlink (tmpname);
+-            tmpname = nullptr;
++            tmpname = NULL;
+           }
+ 
+         if (! interact_ok)
+@@ -750,7 +750,7 @@
+   for (int i = 0;  i < NUM_SIGS;  i++)
+     {
+ #if HAVE_SIGACTION
+-      sigaction (sigs[i], nullptr, &initial_action[i]);
++      sigaction (sigs[i], NULL, &initial_action[i]);
+ #else
+       initial_action[i] = signal (sigs[i], SIG_IGN);
+ #endif
+@@ -775,7 +775,7 @@
+       if ((! s || sigs[i] == s)  &&  initial_handler (i) != SIG_IGN)
+         {
+ #if HAVE_SIGACTION
+-          sigaction (sigs[i], &initial_action[i], nullptr);
++          sigaction (sigs[i], &initial_action[i], NULL);
+ #else
+           signal (sigs[i], initial_action[i]);
+ #endif
+@@ -1000,7 +1000,7 @@
+ 
+           ignore_SIGINT = true;
+           checksigs ();
+-          char *argv[] = { (char *) editor_program, tmpname, nullptr };
++          char *argv[] = { (char *) editor_program, tmpname, NULL };
+           int wstatus;
+           int werrno = 0;
+ #if ! HAVE_WORKING_FORK
+--- a/src/diff.c	2026-06-21 01:08:05.678605537 +0800
++++ b/src/diff.c	2026-06-21 01:08:05.678682803 +0800
+@@ -245,10 +245,10 @@
+   {"width", 1, 0, 'W'},
+ 
+   /* This is solely for diff3.  Do not document.  */
+-  {"-no-directory", no_argument, nullptr, NO_DIRECTORY_OPTION},
++  {"-no-directory", no_argument, NULL, NO_DIRECTORY_OPTION},
+ 
+   /* This is solely for testing.  Do not document.  */
+-  {"-presume-output-tty", no_argument, nullptr, PRESUME_OUTPUT_TTY_OPTION},
++  {"-presume-output-tty", no_argument, NULL, PRESUME_OUTPUT_TTY_OPTION},
+   {0, 0, 0, 0}
+ };
+ 
+@@ -305,7 +305,7 @@
+   bindtextdomain (PACKAGE, LOCALEDIR);
+   bindtextdomain ("gnulib", GNULIB_LOCALEDIR);
+   textdomain (PACKAGE);
+-  c_stack_action (nullptr);
++  c_stack_action (NULL);
+   function_regexp_list.buf = &function_regexp;
+   ignore_regexp_list.buf = &ignore_regexp;
+   re_set_syntax (RE_SYNTAX_GREP | RE_NO_POSIX_BACKTRACKING);
+@@ -319,11 +319,11 @@
+   bool explicit_context = false;
+   intmax_t width = 0;
+   bool show_c_function = false;
+-  char const *from_file = nullptr;
+-  char const *to_file = nullptr;
++  char const *from_file = NULL;
++  char const *to_file = NULL;
+ 
+   for (int prev = -1, c;
+-       0 <= (c = getopt_long (argc, argv, shortopts, longopts, nullptr));
++       0 <= (c = getopt_long (argc, argv, shortopts, longopts, NULL));
+        prev = c)
+     switch (c)
+       {
+@@ -492,7 +492,7 @@
+ 
+       case 'l':
+ 	if (!pr_program[0])
+-	  try_help ("pagination not supported on this host", nullptr);
++	  try_help ("pagination not supported on this host", NULL);
+ 	paginate = true;
+ #ifdef SIGCHLD
+ 	/* Pagination requires forking and waiting, and
+@@ -559,7 +559,7 @@
+ 
+       case 'v':
+ 	version_etc (stdout, PROGRAM_NAME, PACKAGE_NAME, Version,
+-		     AUTHORS, nullptr);
++		     AUTHORS, NULL);
+ 	check_stdout ();
+ 	return EXIT_SUCCESS;
+ 
+@@ -725,7 +725,7 @@
+ 	break;
+ 
+       default:
+-	try_help (nullptr, nullptr);
++	try_help (NULL, NULL);
+       }
+ 
+   if (colors_style == AUTO)
+@@ -1060,7 +1060,7 @@
+   N_("If --from-file or --to-file is given, there are no restrictions on FILE(s)."),
+   N_("If a FILE is '-', read standard input."),
+   N_("Exit status is 0 if inputs are the same, 1 if different, 2 if trouble."),
+-  nullptr
++  NULL
+ };
+ 
+ static void
+@@ -1102,7 +1102,7 @@
+   if (*var && ! STREQ (*var, value))
+     {
+       error (0, 0, _("conflicting %s option value %s"), option, quote (value));
+-      try_help (nullptr, nullptr);
++      try_help (NULL, NULL);
+     }
+   *var = value;
+ }
+@@ -1114,7 +1114,7 @@
+   if (output_style != style)
+     {
+       if (output_style != OUTPUT_UNSPECIFIED)
+-        try_help ("conflicting output style options", nullptr);
++        try_help ("conflicting output style options", NULL);
+       output_style = style;
+     }
+ }
+@@ -1123,7 +1123,7 @@
+ static void
+ specify_colors_style (char const *value)
+ {
+-  if (value == nullptr || STREQ (value, "auto"))
++  if (value == NULL || STREQ (value, "auto"))
+     colors_style = AUTO;
+   else if (STREQ (value, "always"))
+     colors_style = ALWAYS;
+@@ -1250,7 +1250,7 @@
+       dassert (no_dereference_symlinks);
+ 
+       int status = EXIT_SUCCESS;
+-      char *link_value[2]; link_value[1] = nullptr;
++      char *link_value[2]; link_value[1] = NULL;
+       char linkbuf[2][128];
+ 
+       for (bool f = false; ; f = true)
+@@ -1264,7 +1264,7 @@
+ 				 : "");
+ 	  link_value[f] = careadlinkat (dirarg, namearg,
+ 					linkbuf[f], sizeof linkbuf[f],
+-					nullptr, readlinkat);
++					NULL, readlinkat);
+ 	  if (!link_value[f])
+ 	    {
+ 	      perror_with_name (cmp->file[f].name);
+@@ -1427,17 +1427,17 @@
+ 
+   if (toplevel)
+     {
+-      free0 = nullptr;
+-      free1 = nullptr;
++      free0 = NULL;
++      free1 = NULL;
+       cmp.file[0].name = name0;
+       cmp.file[1].name = name1;
+     }
+   else
+     {
+       cmp.file[0].name = free0
+-        = file_name_concat (parent->file[0].name, name0, nullptr);
++        = file_name_concat (parent->file[0].name, name0, NULL);
+       cmp.file[1].name = free1
+-        = file_name_concat (parent->file[1].name, name1, nullptr);
++        = file_name_concat (parent->file[1].name, name1, NULL);
+     }
+ 
+   int oflags = ((binary ? O_BINARY : 0) | O_CLOEXEC
+--- a/src/diff3.c	2026-06-21 01:08:05.679616639 +0800
++++ b/src/diff3.c	2026-06-21 01:08:05.679691580 +0800
+@@ -235,7 +235,7 @@
+   bindtextdomain (PACKAGE, LOCALEDIR);
+   bindtextdomain ("gnulib", GNULIB_LOCALEDIR);
+   textdomain (PACKAGE);
+-  c_stack_action (nullptr);
++  c_stack_action (NULL);
+   xstdopen ();
+ 
+   /* Parse command line options.  */
+@@ -290,7 +290,7 @@
+ 	break;
+       case 'v':
+ 	version_etc (stdout, PROGRAM_NAME, PACKAGE_NAME, Version,
+-		     AUTHORS, nullptr);
++		     AUTHORS, NULL);
+ 	check_stdout ();
+ 	return EXIT_SUCCESS;
+       case DIFF_PROGRAM_OPTION:
+@@ -307,9 +307,9 @@
+ 	    tag_strings[tag_count++] = optarg;
+ 	    break;
+ 	  }
+-	try_help ("too many file label options", nullptr);
++	try_help ("too many file label options", NULL);
+       default:
+-	try_help (nullptr, nullptr);
++	try_help (NULL, NULL);
+       }
+ 
+   /* -AeExX3 without -m implies ed script.  */
+@@ -321,7 +321,7 @@
+   if (incompat & (incompat - 1)  /* Ensure at most one of -AeExX3.  */
+       || finalwrite & merge /* -i -m would rewrite input file.  */
+       || (tag_count && ! flagging)) /* -L requires one of -AEX.  */
+-    try_help ("incompatible options", nullptr);
++    try_help ("incompatible options", NULL);
+ 
+   if (argc - optind != 3)
+     {
+@@ -447,7 +447,7 @@
+   "",
+   N_("    --help                  display this help and exit"),
+   N_("-v, --version               output version information and exit"),
+-  nullptr
++  NULL
+ };
+ 
+ static void
+@@ -568,7 +568,7 @@
+ 
+   struct diff_block *current[2] = {thread0, thread1};
+ 
+-  struct diff3_block *result = nullptr;
++  struct diff3_block *result = NULL;
+   struct diff3_block **result_end = &result;
+   static struct diff3_block const zero_diff3;
+   struct diff3_block const *last_diff3 = &zero_diff3;
+@@ -577,8 +577,8 @@
+ 
+   while (current[0] || current[1])
+     {
+-      struct diff_block *using[2] = {nullptr, nullptr};
+-      struct diff_block *last_using[2] = {nullptr, nullptr};
++      struct diff_block *using[2] = {NULL, NULL};
++      struct diff_block *last_using[2] = {NULL, NULL};
+ 
+       /* Setup low and high water threads, diffs, and marks.  */
+       int base_water_thread
+@@ -596,7 +596,7 @@
+         = last_using[high_water_thread]
+         = high_water_diff;
+       current[high_water_thread] = high_water_diff->next;
+-      last_using[high_water_thread]->next = nullptr;
++      last_using[high_water_thread]->next = NULL;
+ 
+       /* And mark the other diff */
+       int other_thread = high_water_thread ^ 0x1;
+@@ -619,7 +619,7 @@
+              code assumes that other_diff enters it equal to
+              current[high_water_thread ^ 0x1] */
+           current[other_thread] = current[other_thread]->next;
+-          other_diff->next = nullptr;
++          other_diff->next = NULL;
+ 
+           /* Set the high_water stuff
+              If this comparison is equal, then this is the last pass
+@@ -718,7 +718,7 @@
+                               D_LINEARRAY (result, FILEC) + result_offset,
+                               D_LENARRAY (result, FILEC) + result_offset,
+                               D_NUMLINES (ptr, FC)))
+-          return nullptr;
++          return NULL;
+       }
+ 
+   /* Copy information for file d.  First deal with anything that might be
+@@ -746,7 +746,7 @@
+                                 D_LINEARRAY (result, FILE0 + d) + result_offset,
+                                 D_LENARRAY (result, FILE0 + d) + result_offset,
+                                 D_NUMLINES (ptr, FO)))
+-            return nullptr;
++            return NULL;
+ 
+           /* Catch the lines between here and the next diff */
+           lin linec = D_HIGHLINE (ptr, FC) + 1 - lowc;
+@@ -831,7 +831,7 @@
+   struct diff3_block *result = xmalloc (sizeof *result);
+ 
+   D3_TYPE (result) = DIFF_ERROR;
+-  D_NEXT (result) = nullptr;
++  D_NEXT (result) = NULL;
+ 
+   /* Assign ranges */
+   D_LOWLINE (result, FILE0) = low0;
+@@ -850,8 +850,8 @@
+     }
+   else
+     {
+-      D_LINEARRAY (result, FILE0) = nullptr;
+-      D_LENARRAY (result, FILE0) = nullptr;
++      D_LINEARRAY (result, FILE0) = NULL;
++      D_LENARRAY (result, FILE0) = NULL;
+     }
+ 
+   numlines = D_NUMLINES (result, FILE1);
+@@ -862,8 +862,8 @@
+     }
+   else
+     {
+-      D_LINEARRAY (result, FILE1) = nullptr;
+-      D_LENARRAY (result, FILE1) = nullptr;
++      D_LINEARRAY (result, FILE1) = NULL;
++      D_LENARRAY (result, FILE1) = NULL;
+     }
+ 
+   numlines = D_NUMLINES (result, FILE2);
+@@ -874,8 +874,8 @@
+     }
+   else
+     {
+-      D_LINEARRAY (result, FILE2) = nullptr;
+-      D_LENARRAY (result, FILE2) = nullptr;
++      D_LINEARRAY (result, FILE2) = NULL;
++      D_LENARRAY (result, FILE2) = NULL;
+     }
+ 
+   /* Return */
+@@ -916,8 +916,8 @@
+   while (scan_diff < diff_limit)
+     {
+       struct diff_block *bptr = xmalloc (sizeof *bptr);
+-      bptr->lines[0] = bptr->lines[1] = nullptr;
+-      bptr->lengths[0] = bptr->lengths[1] = nullptr;
++      bptr->lines[0] = bptr->lines[1] = NULL;
++      bptr->lengths[0] = bptr->lengths[1] = NULL;
+ 
+       enum diff_type dt = process_diff_control (&scan_diff, bptr);
+       if (dt == DIFF_ERROR || *scan_diff != '\n')
+@@ -991,7 +991,7 @@
+       block_list_end = &bptr->next;
+     }
+ 
+-  *block_list_end = nullptr;
++  *block_list_end = NULL;
+   return block_list;
+ }
+ 
+@@ -1016,7 +1016,7 @@
+   lin num = 0;
+ 
+   if (! c_isdigit (c))
+-    return nullptr;
++    return NULL;
+ 
+   do
+     {
+@@ -1120,7 +1120,7 @@
+   *ap++ = "--";
+   *ap++ = filea;
+   *ap++ = fileb;
+-  *ap = nullptr;
++  *ap = NULL;
+ 
+ #if HAVE_WORKING_FORK
+ 
+@@ -1644,7 +1644,7 @@
+ static struct diff3_block *
+ reverse_diff3_blocklist (struct diff3_block *diff)
+ {
+-  struct diff3_block *prev = nullptr;
++  struct diff3_block *prev = NULL;
+ 
+   for (struct diff3_block *tmp = diff; tmp; )
+     {
+--- a/src/dir.c	2026-06-21 01:08:05.680578789 +0800
++++ b/src/dir.c	2026-06-21 01:08:05.680606451 +0800
+@@ -77,8 +77,8 @@
+   /* Allocated and used storage for file name data.  */
+   char *data;
+ 
+-  dirdata->names = nullptr;
+-  dirdata->data = nullptr;
++  dirdata->names = NULL;
++  dirdata->data = NULL;
+ 
+   if (dir->desc != NONEXISTENT)
+     {
+@@ -177,7 +177,7 @@
+       names[i] = data;
+       data += strlen (data) + 1;
+     }
+-  names[nnames] = nullptr;
++  names[nnames] = NULL;
+   return true;
+ }
+ 
+@@ -253,7 +253,7 @@
+   int val = EXIT_SUCCESS;
+   for (int i = 0; i < 2; i++)
+     if (! dir_read (cmp->parent->file[i].desc, &cmp->file[i], &dirdata[i],
+-		    cmp->parent == &noparent ? starting_file : nullptr, false))
++		    cmp->parent == &noparent ? starting_file : NULL, false))
+       {
+         perror_with_name (cmp->file[i].name);
+         val = EXIT_TROUBLE;
+@@ -317,8 +317,8 @@
+ 	    = { HAVE_STRUCT_DIRENT_D_TYPE && *n0 ? (*n0)[-1] : DE_UNKNOWN,
+ 		HAVE_STRUCT_DIRENT_D_TYPE && *n1 ? (*n1)[-1] : DE_UNKNOWN };
+ 	  int v1 = compare_files (cmp, detypes,
+-				  0 < nameorder ? nullptr : *n0++,
+-				  nameorder < 0 ? nullptr : *n1++);
++				  0 < nameorder ? NULL : *n0++,
++				  nameorder < 0 ? NULL : *n1++);
+           if (val < v1)
+             val = v1;
+         }
+@@ -353,8 +353,8 @@
+   char const *match = file;
+ 
+   struct dirdata dirdata;
+-  dirdata.names = nullptr;
+-  dirdata.data = nullptr;
++  dirdata.names = NULL;
++  dirdata.data = NULL;
+ 
+   if (ignore_file_name_case && dir_read (AT_FDCWD, dir, &dirdata, file, true))
+     for (char const **p = dirdata.names; *p; p++)
+@@ -369,7 +369,7 @@
+       }
+ 
+   *detype = HAVE_STRUCT_DIRENT_D_TYPE && match != file ? match[-1] : DE_UNKNOWN;
+-  char *val = file_name_concat (dir->name, match, nullptr);
++  char *val = file_name_concat (dir->name, match, NULL);
+   free (dirdata.names);
+   free (dirdata.data);
+   return val;
+--- a/src/util.c	2026-06-21 01:08:05.681980446 +0800
++++ b/src/util.c	2026-06-21 01:08:05.682060536 +0800
+@@ -148,7 +148,7 @@
+ 	  }
+ 
+       *msg_chain_end = new;
+-      new->next = nullptr;
++      new->next = NULL;
+       msg_chain_end = &new->next;
+     }
+   else
+@@ -294,7 +294,7 @@
+       /* Exit or suspend the program.  */
+       if (raise (sig) != 0)
+ 	pfatal_with_name ("raise");
+-      xsigprocmask (SIG_SETMASK, &oldset, nullptr);
++      xsigprocmask (SIG_SETMASK, &oldset, NULL);
+ 
+       /* If execution reaches here, then the program has been
+          continued (after being suspended).  */
+@@ -360,7 +360,7 @@
+   for (int j = 0; j < nsigs; j++)
+     {
+       struct sigaction actj;
+-      if (sigaction (sig[j], nullptr, &actj) == 0 && actj.sa_handler != SIG_IGN)
++      if (sigaction (sig[j], NULL, &actj) == 0 && actj.sa_handler != SIG_IGN)
+ 	xsigaddset (&caught_signals, sig[j]);
+     }
+ 
+@@ -372,7 +372,7 @@
+     if (xsigismember (&caught_signals, sig[j]))
+       {
+ 	act.sa_handler = is_tstp_index (j) ? stophandler : sighandler;
+-	if (sigaction (sig[j], &act, nullptr) != 0)
++	if (sigaction (sig[j], &act, NULL) != 0)
+ 	  pfatal_with_name ("sigaction");
+ 	some_signals_caught = true;
+       }
+@@ -629,7 +629,7 @@
+   {
+     { LEN_STR_PAIR ("\033[") },		/* lc: Left of color sequence */
+     { LEN_STR_PAIR ("m") },		/* rc: Right of color sequence */
+-    { 0, nullptr },			/* ec: End color (replaces lc+rs+rc) */
++    { 0, NULL },			/* ec: End color (replaces lc+rs+rc) */
+     { LEN_STR_PAIR ("0") },		/* rs: Reset to ordinary colors */
+     { LEN_STR_PAIR ("1") },		/* hd: Header */
+     { LEN_STR_PAIR ("32") },		/* ad: Add line */
+@@ -639,7 +639,7 @@
+ 
+ static const char *const indicator_name[] =
+   {
+-    "lc", "rc", "ec", "rs", "hd", "ad", "de", "ln", nullptr
++    "lc", "rc", "ec", "rs", "hd", "ad", "de", "ln", NULL
+   };
+ ARGMATCH_VERIFY (indicator_name, color_indicator);
+ 
+@@ -660,10 +660,10 @@
+      and pacifies Coverity.  The output is no larger than the input.  */
+   char *buf = color_palette;
+   char const *p = buf;
+-  if (p == nullptr || *p == '\0')
++  if (p == NULL || *p == '\0')
+     return;
+   /* Do not process the color palette twice.  */
+-  color_palette = nullptr;
++  color_palette = NULL;
+ 
+   char label[] = "??";		/* Indicator label */
+ 
+@@ -709,7 +709,7 @@
+           state = PS_FAIL;	/* Assume failure...  */
+           if (*(p++) == '=')/* It *should* be...  */
+             {
+-              for (int ind_no = 0; indicator_name[ind_no] != nullptr; ind_no++)
++              for (int ind_no = 0; indicator_name[ind_no] != NULL; ind_no++)
+                 {
+                   if (STREQ (label, indicator_name[ind_no]))
+                     {
+@@ -783,7 +783,7 @@
+   current_name[0] = name0;
+   current_name[1] = name1;
+   currently_recursive = recursive;
+-  outfile = nullptr;
++  outfile = NULL;
+ }
+ 
+ #if HAVE_WORKING_FORK
+@@ -824,7 +824,7 @@
+       if (fflush (stdout) != 0)
+         pfatal_with_name (_("write failed"));
+ 
+-      char const *argv[4] = {pr_program, "-h", name, nullptr };
++      char const *argv[4] = {pr_program, "-h", name, NULL };
+ 
+       /* Make OUTFILE a pipe to a subsidiary 'pr'.  */
+ #if HAVE_WORKING_FORK
+@@ -926,7 +926,7 @@
+ 	       quote (pr_program), status);
+     }
+ 
+-  outfile = nullptr;
++  outfile = NULL;
+ }
+ 
+ /* Find the consecutive changes at the start of the script START.
+@@ -965,7 +965,7 @@
+       /* Disconnect them from the rest of the changes,
+          making them a hunk, and remember the rest for next iteration.  */
+       next = end->link;
+-      end->link = nullptr;
++      end->link = NULL;
+ #ifdef DEBUG
+       debug_script (this);
+ #endif
+@@ -1000,7 +1000,7 @@
+ {
+   char const *base = line[0], *limit = line[1]; /* Help the compiler.  */
+   FILE *out = outfile; /* Help the compiler some more.  */
+-  char const *flag_format = nullptr;
++  char const *flag_format = NULL;
+ 
+   /* If -T was specified, use a Tab between the line-flag and the text.
+      Otherwise use a Space (as Unix diff does).
+@@ -1292,7 +1292,7 @@
+ 	      }
+           if (newline - p != trivial_length
+               && (! ignore_regexp.fastmap
+-                  || (re_search (&ignore_regexp, line, len, 0, len, nullptr)
++                  || (re_search (&ignore_regexp, line, len, 0, len, NULL)
+ 		      < 0)))
+             trivial = false;
+         }
+@@ -1318,7 +1318,7 @@
+ 	      }
+           if (newline - p != trivial_length
+               && (! ignore_regexp.fastmap
+-                  || (re_search (&ignore_regexp, line, len, 0, len, nullptr)
++                  || (re_search (&ignore_regexp, line, len, 0, len, NULL)
+ 		      < 0)))
+             trivial = false;
+         }
+--- a/src/cmp.c	2026-06-21 01:08:05.683144325 +0800
++++ b/src/cmp.c	2026-06-21 01:08:05.683194630 +0800
+@@ -150,7 +150,7 @@
+ specify_comparison_type (enum comparison_type t)
+ {
+   if (comparison_type && comparison_type != t)
+-    try_help ("options -l and -s are incompatible", nullptr);
++    try_help ("options -l and -s are incompatible", NULL);
+   comparison_type = t;
+ }
+ 
+@@ -173,7 +173,7 @@
+   N_("-s, --quiet, --silent      suppress all normal output"),
+   N_("    --help                 display this help and exit"),
+   N_("-v, --version              output version information and exit"),
+-  nullptr
++  NULL
+ };
+ 
+ static void
+@@ -210,13 +210,13 @@
+   bindtextdomain (PACKAGE, LOCALEDIR);
+   bindtextdomain ("gnulib", GNULIB_LOCALEDIR);
+   textdomain (PACKAGE);
+-  c_stack_action (nullptr);
++  c_stack_action (NULL);
+   xstdopen ();
+ 
+   /* Parse command line options.  */
+ 
+   for (int c;
+-       0 <= (c = getopt_long (argc, argv, shortopts, longopts, nullptr)); )
++       0 <= (c = getopt_long (argc, argv, shortopts, longopts, NULL)); )
+     switch (c)
+       {
+       case 'b':
+@@ -239,7 +239,7 @@
+       case 'n':
+         {
+           intmax_t n;
+-	  strtol_error e = xstrtoimax (optarg, nullptr, 0, &n, valid_suffixes);
++	  strtol_error e = xstrtoimax (optarg, NULL, 0, &n, valid_suffixes);
+ 	  if ((e & ~LONGINT_OVERFLOW) != LONGINT_OK || n < 0)
+ 	    try_help ("invalid --bytes value %s", quote (optarg));
+ 	  bytes = MIN (bytes, n);
+@@ -252,7 +252,7 @@
+ 
+       case 'v':
+         version_etc (stdout, PROGRAM_NAME, PACKAGE_NAME, Version,
+-                     AUTHORS, nullptr);
++                     AUTHORS, NULL);
+         check_stdout ();
+         return EXIT_SUCCESS;
+ 
+@@ -262,7 +262,7 @@
+         return EXIT_SUCCESS;
+ 
+       default:
+-        try_help (nullptr, nullptr);
++        try_help (NULL, NULL);
+       }
+ 
+   if (optind == argc)

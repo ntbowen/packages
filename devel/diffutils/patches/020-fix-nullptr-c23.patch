@@ -1,0 +1,38 @@
+--- a/lib/exclude.c	2026-06-21 01:04:29.556034454 +0800
++++ b/lib/exclude.c	2026-06-21 01:04:29.574542133 +0800
+@@ -264,7 +264,7 @@
+       break;
+ 
+     case exclude_hash:
+-      sp->v.table = hash_initialize (0, nullptr,
++      sp->v.table = hash_initialize (0, NULL,
+                                      (options & FNM_CASEFOLD
+                                       ? string_hasher_ci
+                                       : string_hasher),
+@@ -390,7 +390,7 @@
+   int options = opts->options;
+ 
+   return (options & EXCLUDE_REGEX
+-          ? regexec (&opts->v.re, f, 0, nullptr, 0) == 0
++          ? regexec (&opts->v.re, f, 0, NULL, 0) == 0
+           : exclude_fnmatch (opts->v.pattern, f, options));
+ }
+ 
+@@ -463,7 +463,7 @@
+     return false;
+ 
+   bool invert = false;
+-  char *filename = nullptr;
++  char *filename = NULL;
+ 
+   /* Scan through the segments, reporting the status of the first match.
+      The segments are in reverse order, so this reports the status of
+@@ -593,7 +593,7 @@
+                 struct exclude *ex, FILE *fp, int options,
+                 char line_end, void *data)
+ {
+-  char *buf = nullptr;
++  char *buf = NULL;
+   idx_t buf_alloc = 0;
+   idx_t buf_count = 0;
+ 

@@ -1,0 +1,18 @@
+--- a/man/Makefile.in	2026-06-21 01:36:14.735476290 +0800
++++ b/man/Makefile.in	2026-06-21 01:38:39.608932291 +0800
+@@ -2571,14 +2571,7 @@
+ 
+ # Depend on the former to get version number changes.
+ $(dist_man1_MANS): $(SRC_VERSION_C) help2man
+-	$(AM_V_GEN)base=`expr $@ : '\(.*\).1'`				\
+-	  && test -x $(bin_dir)/$$base					\
+-	  && (echo '[NAME]'						\
+-	      && sed 's@/\* *@@; s/-/\\-/;s/^GNU //; q' $S/$$base.c)	\
+-	     | PATH="$(bin_dir)$(PATH_SEPARATOR)$$PATH"			\
+-	       $(srcdir)/help2man -i - -i $(srcdir)/$$base.x		\
+-		 -S '$(PACKAGE) $(VERSION)' $$base > $$base.1-t		\
+-	  && mv $$base.1-t $(srcdir)/$$base.1
++		@true
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
