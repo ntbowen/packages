@@ -28,11 +28,13 @@ endef
 define Package/exfat-mkfs
   $(Package/exfatprogs/Default)
   TITLE:=Utility for creating an exFAT File System
+  DEPENDS:=+libblkid +musl-fts
 endef
 
 define Package/exfat-fsck
   $(Package/exfatprogs/Default)
   TITLE:=Utility for checking/repairing an exFAT File System
+  DEPENDS:=+musl-fts
 endef
 
 CONFIGURE_ARGS += \
