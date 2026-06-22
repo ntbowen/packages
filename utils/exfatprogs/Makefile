@@ -6,7 +6,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/exfatprogs/exfatprogs/releases/download/$(PKG_VERSION)
-PKG_HASH:=a8cbb4a5f002d49bc60c093030b26f5f36d9716e133118bdb0c311d6a3909fdc
+PKG_HASH:=47c7c8ddeccbf50d39b903353f2cb3df79134367a4fd764fe2ce3755ff5877bf
 
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 PKG_LICENSE:=GPL-2.0-only
