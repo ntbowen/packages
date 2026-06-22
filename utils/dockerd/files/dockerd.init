@@ -101,6 +101,19 @@ uciadd() {
 		uci_quiet commit firewall
 	fi
 
+	# Allow containers to reach the internet via the wan zone.
+	# With "iptables 0" / nftables backend, dockerd no longer creates its own
+	# forwarding/NAT rules, so fw4 must permit forwarding from the docker zone
+	# to wan. SNAT is handled by the existing masquerade on the wan zone.
+	if ! uci_quiet get firewall.${zone}_wan; then
+		logger -t "dockerd-init" -p notice "Adding firewall forwarding '${zone}' -> 'wan'"
+		uci_quiet add firewall forwarding
+		uci_quiet rename firewall.@forwarding[-1]="${zone}_wan"
+		uci_quiet set firewall.${zone}_wan.src="${zone}"
+		uci_quiet set firewall.${zone}_wan.dest="wan"
+		uci_quiet commit firewall
+	fi
+
 	reload_config
 }
 
@@ -142,6 +155,11 @@ ucidel() {
 		if ! uci_quiet get firewall.${zone}.network; then
 			logger -t "dockerd-init" -p notice "Deleting firewall zone '${zone}' from firewall config"
 			uci_quiet delete firewall.${zone}
+			# Remove the matching zone -> wan forwarding added by uciadd
+			if uci_quiet get firewall.${zone}_wan; then
+				logger -t "dockerd-init" -p notice "Deleting firewall forwarding '${zone}' -> 'wan'"
+				uci_quiet delete firewall.${zone}_wan
+			fi
 		fi
 		uci_quiet commit firewall
 	fi
