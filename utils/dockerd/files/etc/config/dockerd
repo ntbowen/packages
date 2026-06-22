@@ -1,9 +1,6 @@
 # The following settings require a restart of docker to take full effect, A reload will only have partial or no effect:
 # log_driver
 # bip
-# blocked_interfaces
-# extra_iptables_args
-# device
 
 config globals 'globals'
 #	option alt_config_file '/etc/docker/daemon.json'
@@ -29,18 +26,7 @@ config proxies 'proxies'
 #	option https_proxy 'https://proxy.example.com:3129'
 #	option no_proxy '*.test.example.com,.example.org,127.0.0.0/8'
 
-# Docker doesn't work well out of the box with fw4. This is because Docker relies on a compatibility layer that
-# naively translates iptables rules. For the best compatibility replace the following dependencies:
-# `firewall4` -> `firewall`
-# `iptables-nft` -> `iptables-zz-legacy`
-# `ip6tables-nft` -> `ip6tables-zz-legacy`
-
-# Docker undermines the fw3 rules. By default all external source IPs are allowed to connect to the Docker host.
-# See https://docs.docker.com/network/iptables/ for more details.
-
-# firewall config changes are only additive i.e firewall will need to be restarted first to clear old changes,
-# then docker restarted to load in new changes.
-config firewall 'firewall'
-	option device 'docker0'
-	list blocked_interfaces 'wan'
-#	option extra_iptables_args '--match conntrack ! --ctstate RELATED,ESTABLISHED' # allow outbound connections
+# This package integrates Docker with the nftables firewall backend (firewall_backend 'nftables'
+# forces iptables/ip6tables off). The docker bridge is registered as a firewall zone via 'uciadd'
+# and container outbound access is permitted through a docker -> wan forwarding managed by fw4.
+# Inbound access to published ports is controlled through fw4 / luci-app-dockerman.

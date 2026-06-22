@@ -245,8 +245,6 @@ process_config() {
 	fi
 	[ -z "${storage_driver}" ] || json_add_string "storage-driver" "${storage_driver}"
 	json_dump > "${DOCKERD_CONF}"
-
-	[ "${iptables}" -eq "1" ] && [ "${firewall_backend}" != "nftables" ] && config_foreach iptables_add_blocking_rule firewall
 }
 
 start_service() {
@@ -272,49 +270,6 @@ reload_service() {
 
 service_triggers() {
 	procd_add_reload_trigger 'dockerd'
-}
-
-iptables_add_blocking_rule() {
-	local cfg="${1}"
-
-	local device=""
-	local extra_iptables_args=""
-
-	handle_iptables_rule() {
-		local interface="${1}"
-		local outbound="${2}"
-		local extra_iptables_args="${3}"
-
-		local inbound=""
-
-		. /lib/functions/network.sh
-		network_get_physdev inbound "${interface}"
-
-		[ -z "${inbound}" ] && {
-			logger -t "dockerd-init" -p notice "Unable to get physical device for interface ${interface}"
-			return
-		}
-
-		# Wait for a maximum of 10 second per command, retrying every millisecond
-		local iptables_wait_args="--wait 10 --wait-interval 1000"
-
-		# Ignore errors as it might already be present
-		iptables ${iptables_wait_args} --table filter --new DOCKER-USER 2>/dev/null
-		if ! iptables ${iptables_wait_args} --table filter --check DOCKER-USER --in-interface "${inbound}" --out-interface "${outbound}" ${extra_iptables_args} --jump REJECT 2>/dev/null; then
-			logger -t "dockerd-init" -p notice "Drop traffic from ${inbound} to ${outbound}"
-			iptables ${iptables_wait_args} --table filter --insert DOCKER-USER --in-interface "${inbound}" --out-interface "${outbound}" ${extra_iptables_args} --jump REJECT
-		fi
-	}
-
-	config_get device "${cfg}" device
-
-	[ -z "${device}" ] && {
-		logger -t "dockerd-init" -p notice "No device configured for ${cfg}"
-		return
-	}
-
-	config_get extra_iptables_args "${cfg}" extra_iptables_args
-	config_list_foreach "${cfg}" blocked_interfaces handle_iptables_rule "${device}" "${extra_iptables_args}"
 }
 
 stop_service() {
