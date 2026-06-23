@@ -1,0 +1,11 @@
+--- a/configure	2026-06-23 09:51:12.330102922 +0800
++++ b/configure	2026-06-23 09:51:12.340199311 +0800
+@@ -7750,7 +7750,7 @@
+         glslc=$glslc_probe
+         glslcflags="-V --target-env spirv1.6 --glsl-version 460"
+         glslc_opt_speed=""
+-        glslc_opt_size="-Os"
++        glslc_opt_size=""
+         glslc_opt_none="-Od"
+         glslc_debug="-gVS"
+         GLSLC_DEPFLAGS='--depfile $(@:.spv=.d)'
