@@ -51,7 +51,7 @@ define Package/diffutils/description
 endef
 
 CONFIGURE_VARS += \
-	gl_cv_func_getopt_gnu=yes \
+	gl_cv_func_getopt_gnu=yes gl_cv_func_strcasecmp_works=yes \
 	ac_cv_func_mempcpy=n
 
 define Package/diffutils/install
