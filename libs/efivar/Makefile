@@ -9,9 +9,9 @@ PKG_NAME:=efivar
 PKG_VERSION:=39
 PKG_RELEASE:=4
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-PKG_SOURCE_URL:=https://github.com/rhboot/efivar/releases/download/$(PKG_VERSION)
-PKG_HASH:=f018ed6e49c5f1c16d336d9fd7687ce87023276591921db1e49a314ad6515349
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://codeload.github.com/rhboot/efivar/tar.gz/$(PKG_VERSION)?
+PKG_HASH:=c9edd15f2eeeea63232f3e669a48e992c7be9aff57ee22672ac31f5eca1609a6
 
 PKG_LICENSE:=LGPL-2.1-only
 PKG_LICENSE_FILES:=COPYING
@@ -19,7 +19,6 @@ PKG_MAINTAINER:=Oskari Rauta <oskari.rauta@gmail.com>
 
 PKG_BUILD_FLAGS:=no-mold
 PKG_BUILD_PARALLEL:=1
-PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -41,6 +40,11 @@ MAKE_VARS += \
 	HOST_CFLAGS="$(HOST_CFLAGS)" \
 	HOST_LDFLAGS="$(HOST_LDFLAGS)" \
 	LIBDIR="/usr/lib"
+
+define Build/Compile
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) SUBDIRS=src CROSS_COMPILE=$(TARGET_CROSS)
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) SUBDIRS=src install DESTDIR=$(PKG_INSTALL_DIR) LIBDIR=/usr/lib CROSS_COMPILE=$(TARGET_CROSS)
+endef
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/lib
