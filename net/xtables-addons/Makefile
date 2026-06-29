@@ -9,7 +9,7 @@ include $(INCLUDE_DIR)/kernel.mk
 PKG_NAME:=xtables-addons
 PKG_VERSION:=3.30
 PKG_RELEASE:=3
-PKG_HASH:=e47ea8febe73c12ecab09d2c93578c5dc72d76f17fdf673397758f519cce6828
+PKG_HASH:=d43400322980390180bef05eb6f798af49285987c217b7f1c6332da74920d9a4
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.zst
 PKG_SOURCE_URL:=https://inai.de/files/xtables-addons/
