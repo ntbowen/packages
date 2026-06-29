@@ -11,7 +11,7 @@ PKG_VERSION:=3.30
 PKG_RELEASE:=3
 PKG_HASH:=e47ea8febe73c12ecab09d2c93578c5dc72d76f17fdf673397758f519cce6828
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.zst
 PKG_SOURCE_URL:=https://inai.de/files/xtables-addons/
 PKG_BUILD_DEPENDS:=iptables
 
