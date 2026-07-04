@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nerdctl
-PKG_VERSION:=2.3.1
+PKG_VERSION:=2.3.4
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/containerd/nerdctl/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=f9c66b5a62f3a4967e246f10b06892ef9d08e3b2bfddd2be0b7346c8c47c05b5
+PKG_HASH:=d3262200794152a858247ee95dd3b5366e1fdeda0577908cef2e76cd71c5cc38
 
 PKG_LICENSE:=Apache-2.0
 PKG_LICENSE_FILES:=LICENSE

@@ -9,11 +9,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=qemu
-PKG_VERSION:=10.2.2
+PKG_VERSION:=11.0.1
 PKG_RELEASE:=1
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://download.qemu.org/
-PKG_HASH:=784b296ff29c1417aa72323abcb2d2ea9ab9771724f577dcd785c3b04f21e176
+PKG_HASH:=0d235f5820278d914a3155ec27af8e4258d697ea892895570807d69c0cb8cd64
 PKG_LICENSE:=GPL-2.0-only
 PKG_LICENSE_FILES:=LICENSE tcg/LICENSE
 PKG_MAINTAINER:=Yousong Zhou <yszhou4tech@gmail.com>
@@ -232,9 +232,7 @@ qemu-target-x86_64-softmmu-deps:= \
 	+qemu-firmware-seavgabios
 qemu-target-x86_64-softmmu-extra-files:= \
 	usr/share/qemu/kvmvapic.bin \
-	usr/share/qemu/linuxboot.bin \
 	usr/share/qemu/linuxboot_dma.bin \
-	usr/share/qemu/multiboot.bin \
 	usr/share/qemu/pvh.bin
 
 $(foreach target,$(qemu-target-list), \

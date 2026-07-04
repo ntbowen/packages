@@ -8,7 +8,7 @@
 #   - Exports internal functions for test access
 #   - Uses real shell commands (sed/sort/grep/awk) with mock UCI/UBus
 #
-# Usage: cd source.openwrt.melmac.ca/adblock-fast && bash tests/run_tests.sh [test_file...]
+# Usage: cd source.mossdef.org/adblock-fast && bash tests/run_tests.sh [test_file...]
 
 set -o pipefail
 
@@ -94,6 +94,8 @@ sed \
 	-e "s|run_file: '/dev/shm/adblock-fast'|run_file: '${TESTDIR}/shm/adblock-fast'|" \
 	-e "s|status_file: '/dev/shm/adblock-fast.status.json'|status_file: '${TESTDIR}/shm/adblock-fast.status.json'|" \
 	-e "s|'/var/run/' + pkg.name|'${TESTDIR}/var_run/' + pkg.name|g" \
+	-e "s|'/var/run/' + name|'${TESTDIR}/var_run/' + name|g" \
+	-e "s|'/etc/config/' + name|'${TESTDIR}/etc/' + name|g" \
 	-e "s|'/var/lib/unbound/adb_list.' + pkg.name|'${TESTDIR}/var_run/' + pkg.name + '/adb_list.' + pkg.name|g" \
 	-e "s|'/var/' + pkg.name|'${TESTDIR}/var/' + pkg.name|g" \
 	-e "s|for (let dir in \['/usr/sbin', '/usr/bin', '/sbin', '/bin'\])|for (let dir in ['${stub_dir}', '/usr/sbin', '/usr/bin', '/sbin', '/bin'])|" \

@@ -6,13 +6,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-semanage
-PKG_VERSION:=3.10
+PKG_VERSION:=3.11
 PKG_RELEASE:=1
 
 SRC_NAME:=libsemanage
 PKG_SOURCE:=$(SRC_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/SELinuxProject/selinux/releases/download/$(PKG_VERSION)
-PKG_HASH:=1978894c414769ad77438d26886eaae3fb7bb74578ef2a5ad3130c89cb5cb1fe
+PKG_HASH:=6ac2a91c05243895e69d5ecd182b78e3f90f09f0fed33933f0e026f4ed44cde6
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)/$(SRC_NAME)-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Thomas Petazzoni <thomas.petazzoni@bootlin.com>

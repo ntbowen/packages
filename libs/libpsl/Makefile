@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libpsl
-PKG_VERSION:=0.21.5
+PKG_VERSION:=0.22.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/rockdaboot/libpsl/releases/download/$(PKG_VERSION)
-PKG_HASH:=1dcc9ceae8b128f3c0b3f654decd0e1e891afc6ff81098f227ef260449dae208
+PKG_HASH:=195a135bdd06cf04fc54e205ddf89bfec0feb240e2b0f40cb2a8b5066b4f7434
 
 PKG_MAINTAINER:=W. Michael Petullo <mike@flyn.org>
 PKG_LICENSE:=MIT

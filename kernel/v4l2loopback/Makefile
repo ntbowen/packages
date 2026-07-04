@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=v4l2loopback
-PKG_VERSION:=0.15.3
+PKG_VERSION:=0.15.4
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

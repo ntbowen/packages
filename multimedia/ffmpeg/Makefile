@@ -9,12 +9,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ffmpeg
-PKG_VERSION:=8.1.1
+PKG_VERSION:=8.1.2
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://ffmpeg.org/releases/
-PKG_HASH:=b6863adde98898f42602017462871b5f6333e65aec803fdd7a6308639c52edf3
+PKG_HASH:=464beb5e7bf0c311e68b45ae2f04e9cc2af88851abb4082231742a74d97b524c
 PKG_MAINTAINER:=Ted Hess <thess@kitschensync.net>, \
 		Ian Leonard <antonlacon@gmail.com>
 

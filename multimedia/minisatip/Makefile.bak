@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=minisatip
-PKG_VERSION:=2.0.80
+PKG_VERSION:=2.0.86
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/catalinii/minisatip/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=1996047f91e00c8a2afe91ca45f5d973a9a734bcf9e813a20e0d3df6ee3d5c15
+PKG_HASH:=37161f478d7df1ee3399d8503409daca5e33664291c6cafed7f566ce346799fe
 
 PKG_MAINTAINER:=Daniel Kucera <github@danman.eu>
 PKG_LICENSE:=GPL-2.0-or-later

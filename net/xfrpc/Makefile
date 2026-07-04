@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=xfrpc
-PKG_VERSION:=5.06.909
+PKG_VERSION:=5.09.976
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
