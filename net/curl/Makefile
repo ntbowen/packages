@@ -15,7 +15,7 @@ PKG_RELEASE:=1
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/curl/curl/releases/download/curl-$(subst .,_,$(PKG_VERSION))/ \
 	https://curl.se/download/
-PKG_HASH:=ec753aa6f408a3ca9f0d6d5f7a77417aecd1544db13c03ae5d443612bf367364
+PKG_HASH:=aa1b66a70eace83dc624508745646c08ae561de512ab403adffb93ac87fc72e6
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
