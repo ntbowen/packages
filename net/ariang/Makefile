@@ -6,7 +6,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).zip
 PKG_SOURCE_URL:=https://github.com/mayswind/AriaNg/releases/download/$(PKG_VERSION)
-PKG_HASH:=7f207bf59760a4b888e97915fae87d6a53c93f25f9a94f3248938f4c424c78b7
+PKG_HASH:=e00db79b4cabac70f71c2673a6d454c8a92bfa9aa1f37bb00b01b7505f956805
 UNPACK_CMD=unzip -q -d $(1) $(DL_DIR)/$(PKG_SOURCE)
 
 PKG_MAINTAINER:=Ansuel Smith <ansuelsmth@gmail.com>
