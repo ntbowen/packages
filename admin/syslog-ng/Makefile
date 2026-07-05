@@ -11,7 +11,7 @@ PKG_CPE_ID:=cpe:/a:oneidentity:syslog-ng
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/syslog-ng/syslog-ng/releases/download/$(PKG_NAME)-$(PKG_VERSION)/
-PKG_HASH:=94c88cb6d23d95c82a25366ae5455e6b0854716f27ab8f9288bdc7983188a381
+PKG_HASH:=03a03d19ac203dca53c7ec79a7005c8a850665a95ff4cd0f1e7bb4c497c64d46
 
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
