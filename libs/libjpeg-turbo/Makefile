@@ -6,7 +6,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/$(PKG_VERSION)
-PKG_HASH:=980dd81f425082aa6d7c9e47fef27554ce7a9ffc8e2f6e863b97d263c5c50858
+PKG_HASH:=6f30092cef9fb839779646608f4ee14ae3cbac989c47fa05e841b0841f09878e
 
 PKG_MAINTAINER:=Rosen Penev <rosenp@gmail.com>
 PKG_LICENSE:=BSD-3-Clause IJG zlib
