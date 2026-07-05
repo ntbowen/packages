@@ -6,7 +6,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/containers/netavark/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=d3f5d6b3be3c2d80e8257fb9467e34ff104f299474427979454034dca6dc88cc
+PKG_HASH:=031aeeacc930382e8635d40a885798eff1da164dfcf9024b698f822e5995d9c8
 
 PKG_MAINTAINER:=Oskari Rauta <oskari.rauta@gmail.com>
 PKG_LICENSE:=Apache-2.0
