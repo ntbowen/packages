@@ -73,7 +73,7 @@ define 3proxyLibrary
   define Package/3proxy-lib-$(1)
     $(call Package/3proxy/Default)
     TITLE+= - $(1) library
-    DEPENDS+= 3proxy $(3)
+    DEPENDS+= 3proxy +libopenssl $(3)
   endef
 
   define Package/3proxy-lib-$(1)/description
@@ -102,7 +102,7 @@ define 3proxyModule
   define Package/3proxy-mod-$(1)
     $(call Package/3proxy/Default)
     TITLE+= - $(1) standalone module
-    DEPENDS+= $(2)
+    DEPENDS+= +libopenssl $(2)
   endef
 
   define Package/3proxy-mod-$(1)/description
@@ -133,6 +133,8 @@ MAKE_FLAGS += \
 		$(if $(CONFIG_PACKAGE_3proxy-lib-strings),StringsPlugin) \
 		$(if $(CONFIG_PACKAGE_3proxy-lib-traffic),TrafficPlugin) \
 		$(if $(CONFIG_PACKAGE_3proxy-lib-transparent),TransparentPlugin))" \
+	OPENSSL_CHECK=true \
+	PREFIX="" \
 	-f Makefile.Linux
 
 $(foreach lib,$(3proxyLibs),$(eval $(call BuildPackage,3proxy-lib-$(lib))))
