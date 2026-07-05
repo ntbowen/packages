@@ -195,7 +195,11 @@ HOST_CONFIGURE_VARS += \
 	ac_cv_lib_sqlite3_sqlite3_libversion_number=yes \
 	libsqlite3_cv_is_recent=yes \
 	ac_cv_header_libdevmapper_h=yes \
-	ac_cv_lib_devmapper_dm_task_create=yes
+	ac_cv_lib_devmapper_dm_task_create=yes \
+	LIBNL3_CFLAGS=" " \
+	LIBNL3_LIBS=" " \
+	LIBNLGENL3_CFLAGS=" " \
+	LIBNLGENL3_LIBS=" "
 
 define Host/Compile
 	$(MAKE) -C $(HOST_BUILD_DIR)/tools/rpcgen all
