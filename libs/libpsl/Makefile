@@ -11,7 +11,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/rockdaboot/libpsl/releases/download/$(PKG_VERSION)
-PKG_HASH:=195a135bdd06cf04fc54e205ddf89bfec0feb240e2b0f40cb2a8b5066b4f7434
+PKG_HASH:=c45c3aa17576b99873e05a9b09a44041b065bbfa390e6d474d06fbfaeb9c7722
 
 PKG_MAINTAINER:=W. Michael Petullo <mike@flyn.org>
 PKG_LICENSE:=MIT
