@@ -14,7 +14,7 @@ PKG_BUILD_FLAGS:=no-mips16
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/seccomp/libseccomp/releases/download/v$(PKG_VERSION)/
-PKG_HASH:=f9a13e4c633d319a9240189760ca348caa0837c0ebe2a09b17061da8ceaf60f0
+PKG_HASH:=501f66c667225d53791b97e1d7cf85ab764c297d04881f60f38f451c4b0ee1be
 
 PKG_MAINTAINER:=Nikos Mavrogiannopoulos <nmav@gnutls.org>
 PKG_LICENSE:=LGPL-2.1-or-later
