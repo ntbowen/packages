@@ -12,7 +12,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/zlib-ng/minizip-ng/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=3cc35c2cb925dbe67cc801e3234b31b0f30197812a99377352fa1b551ab3d011
+PKG_HASH:=71af7b9799856d8b03619df3949e9c1be9703f8de0795af71399ba283cb27aac
 
 PKG_MAINTAINER:=David Woodhouse <dwmw2@infradead.org>
 PKG_LICENSE:=Zlib
