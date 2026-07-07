@@ -22,7 +22,7 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/nfs-utils-$(PKG_VERSION)
 PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
 PKG_BUILD_DEPENDS:=$(PKG_NAME)/host libevent2 libnl
-HOST_BUILD_DEPENDS:=libtirpc/host libnl/host
+HOST_BUILD_DEPENDS:=libtirpc/host
 PKG_CONFIG_DEPENDS:=CONFIG_IPV6
 
 include $(INCLUDE_DIR)/host-build.mk
