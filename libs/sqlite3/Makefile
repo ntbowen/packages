@@ -11,7 +11,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-autoconf-$(PKG_SRC_VERSION).tar.gz
 PKG_SOURCE_URL:=https://www.sqlite.org/2026/
-PKG_HASH:=c917d7db16648ec95f714974ace5e5dcf46b7dc70e26600a0a102a3141125db0
+PKG_HASH:=0e9483900e92cd5de8fd48d16bf9200145a61f7fd5be542a5ac81d8a9516eb9c
 
 PKG_CPE_ID:=cpe:/a:sqlite:sqlite
 PKG_LICENSE:=blessing
