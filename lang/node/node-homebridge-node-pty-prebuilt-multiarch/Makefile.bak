@@ -7,14 +7,14 @@ include $(TOPDIR)/rules.mk
 PKG_NPM_SCOPE:=homebridge
 PKG_NPM_NAME:=node-pty-prebuilt-multiarch
 PKG_NAME:=node-$(PKG_NPM_SCOPE)-$(PKG_NPM_NAME)
-PKG_VERSION:=0.13.1
+PKG_VERSION:=0.14.1-beta.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_SCOPE)-$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL_FILE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/@$(PKG_NPM_SCOPE)/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/@$(PKG_NPM_SCOPE)/$(PKG_NPM_NAME)/-/
-PKG_HASH:=64eca10d6f7d799fff3174134b0a45411c5f0a6f7be3ccc592b94593508ed937
+PKG_HASH:=93d2264e25f2838ba27dc9a87f414bee844f3fc53ef24e62865d8290fdb8d4f7
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT

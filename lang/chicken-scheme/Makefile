@@ -5,13 +5,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=chicken-scheme
-PKG_VERSION:=5.4.0
+PKG_VERSION:=6.0.0
 PKG_RELEASE:=1
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/chicken-$(PKG_VERSION)
 PKG_SOURCE:=chicken-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://code.call-cc.org/releases/$(PKG_VERSION)/
-PKG_HASH:=3c5d4aa61c1167bf6d9bf9eaf891da7630ba9f5f3c15bf09515a7039bfcdec5f
+PKG_HASH:=92835552b1b687ad26737e429b5aba36510bf429f8816ec0f6d336c8cb41f443
 PKG_MAINTAINER:=Jeronimo Pellegrini <j_p@aleph0.info>
 
 PKG_LICENSE:=BSD-3-Clause

@@ -8,11 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=pcapplusplus
-PKG_VERSION:=25.05
+PKG_VERSION:=26.07
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-source-linux.tar.gz
-PKG_HASH:=a936aa5b11dcb6d2ad764749d339fc683021bbf8badc1e493e17e61e50a1cbb1
+PKG_HASH:=58efbebde9df37134ca6abffdc585562155b7fc0937ced1fd6569a8c93a22ba6
 PKG_SOURCE_URL:=https://github.com/seladb/PcapPlusPlus/releases/download/v$(PKG_VERSION)/
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/pcapplusplus-$(PKG_VERSION)-source-linux

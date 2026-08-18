@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=camera.ui
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=1.1.17
+PKG_VERSION:=2.0.0-alpha.3
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=786f3d95be9037e27c435068e5d03b7380e274f094ae10c6a0359250c3f958ca
+PKG_HASH:=dd716459ded54340587f64205605a30b8cafdbc25caf54f429c83b8edf642f28
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT

@@ -5,7 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=OpenBLAS
-PKG_VERSION:=0.3.33
+PKG_VERSION:=0.3.34
 PKG_RELEASE:=1
 
 PKG_SOURCE:=OpenBLAS-$(PKG_VERSION).tar.gz

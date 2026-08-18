@@ -7,7 +7,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=v4l2rtspserver
-PKG_VERSION:=0.3.12
+PKG_VERSION:=0.3.13
 PKG_RELEASE:=1
 
 #cannot use codeload as this uses submodules

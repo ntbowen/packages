@@ -6,7 +6,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=php
-PKG_VERSION:=8.5.8
+PKG_VERSION:=8.5.9
 PKG_RELEASE:=4
 
 PKG_MAINTAINER:=Michael Heimpold <mhei@heimpold.de>

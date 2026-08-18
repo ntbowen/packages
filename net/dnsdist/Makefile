@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=dnsdist
-PKG_VERSION:=2.1.0
+PKG_VERSION:=2.1.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://downloads.powerdns.com/releases/
-PKG_HASH:=8714b7ca065b2d7ae5da980bc81a94d2baaa725a9b3c2c23b3a0fadb7c6a8335
+PKG_HASH:=bdb6cdbf56c4c2448b112f74c94c15b0b2764703faeebe7dc5ad56b4b5a9a576
 
 PKG_MAINTAINER:=Peter van Dijk <peter.van.dijk@powerdns.com>, Remi Gacogne <remi.gacogne@powerdns.com>
 PKG_LICENSE:=GPL-2.0-only

@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=dhcpcd
-PKG_VERSION:=10.3.2
+PKG_VERSION:=10.5.2
 PKG_RELEASE:=2
 
 PKG_SOURCE_URL:=https://github.com/NetworkConfiguration/dhcpcd/releases/download/v$(PKG_VERSION)/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_HASH:=b6aa46932074906a9badef1bfe142b8aff9d041c2689e1ef8b74c12e9fd942bd
+PKG_HASH:=6040a01c69a17dc166d350f6dacf8444ab1e1945481bc84ff50d7ca74364b78d
 
 PKG_LICENSE:=BSD-2-Clause
 PKG_LICENSE_FILES:=LICENSE

@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lua-copas
-PKG_VERSION:=4.11.0
+PKG_VERSION:=4.12.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=copas-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/keplerproject/copas/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=4676141569f2a18ef835a579580c42a4b9a6a0b804f0eb89b2188bd64a4a9c47
+PKG_HASH:=5374811d50548e2eb1982c0591a55c79c95d78633c17fd211bef13206087e95b
 PKG_BUILD_DIR:=$(BUILD_DIR)/copas-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Dirk Chang <dirk@kooiot.com>

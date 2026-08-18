@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libugpio
-PKG_VERSION:=0.0.7
+PKG_VERSION:=0.0.8
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/mhei/libugpio/releases/download/v$(PKG_VERSION)
-PKG_HASH:=4e0ae6f9cd3d670eb5ba9595a24696a034fda3c7c1900aa9d2cae5a4cd9dab64
+PKG_HASH:=d69fa71b5f51a9296b5e4f95f03c0f191b056a7aac565db951c420e2276bbf94
 
 PKG_LICENSE:=LGPL-2.1-or-later
 PKG_LICENSE_FILES:=COPYING.LESSER

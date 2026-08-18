@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=miniupnpd
-PKG_VERSION:=2.3.10
+PKG_VERSION:=2.3.11
 PKG_RELEASE:=2
 
 PKG_SOURCE_URL:=https://github.com/miniupnp/miniupnp/releases/download/miniupnpd_$(subst .,_,$(PKG_VERSION))
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_HASH:=f9c34ed3632fb60cd248dd5897bd98479a103a75688b056ca2f069e68ab32987
+PKG_HASH:=25521370ec33b8c075ca7b073cda2a98a2d449e6c09b10acbe5a9d038bca1017
 
 PKG_MAINTAINER:=
 PKG_LICENSE:=BSD-3-Clause

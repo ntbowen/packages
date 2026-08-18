@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=argon2
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=0.44.0
+PKG_VERSION:=1.0.0-alpha.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=f1e3f7b6621ca468d33b5be8a844c260d7de502e7205be0b298a01e8473e226e
+PKG_HASH:=1241cae4b837ab67dd3c15aae0b95fa0d4e3bfc940405dfb8b9a2f791403bb2b
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT

@@ -5,7 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=v4l2camera
-PKG_VERSION:=0.2.1
+PKG_VERSION:=0.3.2
 PKG_RELEASE:=2
 
 PKG_SOURCE_PROTO:=git

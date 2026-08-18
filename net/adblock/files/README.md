@@ -2,11 +2,41 @@
 
 # DNS based ad/abuse domain blocking
 
+## Table of Contents
+* [Description](#description)
+* [Quick Start](#quick-start)
+* [Main Features](#main-features)
+* [Prerequisites](#prerequisites)
+* [Installation & Usage](#installation-and-usage)
+* [Adblock CLI interface](#adblock-cli-interface)
+* [Adblock Config Options](#adblock-config-options)
+* [Examples](#examples)
+* [Best practice and tweaks](#best-practice-and-tweaks)
+* [Troubleshooting & debug options](#troubleshooting-and-debug-options)
+* [Support](#support)
+* [Removal](#removal)
+* [Donations](#donations)
+
 <a id="description"></a>
 ## Description
 A lot of people already use adblocker plugins within their desktop browsers, but what if you are using your (smart) phone, tablet, watch or any other (wlan) gadget!? Getting rid of annoying ads, trackers and other abuse sites (like facebook) is simple: block them with your router.
 
 When the DNS server on your router receives DNS requests, you will sort out queries that ask for the resource records of ad servers and return a simple `NXDOMAIN`. This is nothing but **N**on-e**X**istent Internet or Intranet domain name, if a domain name cannot be resolved using the DNS server, a condition called the `NXDOMAIN` occurred.
+
+<a id="quick-start"></a>
+## Quick Start
+For a typical setup these few steps are enough to get adblock up and running — see the sections below for details:
+1. Install the LuCI companion package: `apk update && apk add luci-app-adblock` (this pulls in the `adblock` backend as a dependency).
+2. Enable the adblock system service under `System → Startup`, then open LuCI under `Services → Adblock`, tick `Enabled` and (recommended) set a `Startup Trigger Interface` to your WAN interface (avoid IPv6/wan6).
+3. Keep the small, pre-selected default feed selection to start with (e.g. `adguard`, `adguard_tracking` and `certpl`, ≈280K domains).
+4. Start and verify the service:
+
+```sh
+/etc/init.d/adblock start
+/etc/init.d/adblock status
+```
+
+**Please note:** don't blindly enable (too) many feeds at once — on low memory devices this will sooner or later lead to OOM conditions.
 
 <a id="main-features"></a>
 ## Main Features
@@ -139,6 +169,8 @@ Available commands:
 	info            Dump procd service info
 ```
 
+The `report` sub-command accepts an output mode: `cli` (default, human-readable table printed to the console), `json` (machine-readable output, incl. GeoIP map data when `adb_map=1`), `mail` (send the report via `msmtp`) and `gen` (regenerate the report data files in the background, used by the LuCI frontend).
+
 <a id="adblock-config-options"></a>
 ## Adblock Config Options
 * Usually the auto pre-configured adblock setup works quite well and no manual overrides are needed
@@ -148,7 +180,7 @@ Available commands:
 | adb_enabled          | 1, enabled                         | set to 0 to disable the adblock service                                                            |
 | adb_feedfile         | /etc/adblock/adblock.feeds         | full path to the used adblock feed file                                                            |
 | adb_dns              | -, auto-detected                   | `dnsmasq`, `unbound`, `named`, `kresd`, `smartdns` or `raw`                                        |
-| adb_cores            | -, auto-detected                   | limit the cpu cores used by adblock to save RAM                                                    |
+| adb_cores            | -, auto-detected                   | limit the cpu cores used by adblock; only auto-detection is memory-capped                          |
 | adb_fetchcmd         | -, auto-detected                   | `uclient-fetch`, `wget` or `curl`                                                                  |
 | adb_fetchparm        | -, auto-detected                   | manually override the config options for the selected download utility                             |
 | adb_fetchretry       | 5                                  | number of download attempts in case of an error (not supported by uclient-fetch)                   |
@@ -168,6 +200,7 @@ Available commands:
 | adb_reportdir        | /tmp/adblock-report                | path for DNS related report files                                                                  |
 | adb_repiface         | -, auto-detected                   | name of the reporting interface or `any` used by tcpdump                                           |
 | adb_repport          | 53                                 | list of reporting port(s) used by tcpdump                                                          |
+| adb_repfilter        | -, not set                         | additional tcpdump filter expression, logically ANDed to the internal reporting port filter        |
 | adb_repchunkcnt      | 5                                  | report chunk count used by tcpdump                                                                 |
 | adb_repchunksize     | 1                                  | report chunk size used by tcpdump in MB                                                            |
 | adb_represolve       | 0, disabled                        | resolve reporting IP addresses using reverse DNS (PTR) lookups                                     |
@@ -264,11 +297,45 @@ root@blackhole:~# /etc/init.d/adblock status
 ## Best practice and tweaks
 
 **Recommendation for low memory systems**  
-adblock keeps all working data in RAM to avoid unnecessary flash wear. On devices with only 128–256 MB RAM, you can reduce memory pressure with the following optimizations:
+adblock keeps all working data in RAM to avoid unnecessary flash wear. The number of parallel processing jobs and the sort buffer size are automatically scaled to the available memory, so on constrained devices adblock already throttles itself during feed processing. On devices with only 128–256 MB RAM, you can further reduce memory pressure with the following optimizations:
+* Limit CPU parallelism: the auto-detected core count is capped to the available memory; set `adb_cores=1` to force single-threaded processing with minimal peak memory. A manually set value is always used as-is — it is never lowered, so raising it on a constrained device is at your own risk
 * Use external storage: Set adb_basedir, adb_backupdir and adb_reportdir to a USB drive or SSD to offload temporary and persistent data
-* Limit CPU parallelism: Set adb_cores=1 to reduce peak memory usage during feed processing
 * Enable blocklist shifting: Activate adb_dnsshift to store the generated blocklist on external storage and keep only a symlink in RAM
 * Use firewall‑based DNS redirection: Route DNS queries via nftables to external filtered DNS resolvers and keep only a minimal local blocklist active
+* Use compressed swap: install the `zram-swap` package so the kernel can page out cold memory into compressed RAM under pressure (see below)
+
+**Use compressed swap (zram-swap) on low memory devices**  
+The simplest way to survive the memory peak during feed processing is to give the kernel a compressed swap device and let it page out cold memory under pressure. The `zram-swap` package sets this up automatically at boot — no scripting, no changes to adblock, and adblock benefits transparently. Because the swap lives in compressed RAM rather than on flash, this incurs no flash wear.
+
+```sh
+apk add zram-swap
+```
+Size the swap device relative to your physical RAM — a sensible rule of thumb is half to one times the installed RAM. Note that the compressed pages occupy RAM themselves, so do not oversize it on very small devices:
+
+| Installed RAM | Suggested `zram_size_mb` |
+| :------------ | :----------------------- |
+| 128 MB        | 64–128                   |
+| 256 MB        | 128–256                  |
+| 512 MB        | 256–512                  |
+| 1 GB and more | 512                      |
+
+The device size is configured in `/etc/config/system` via LuCI (System -> ZRam Settings) or via CLI:
+
+```sh
+uci set system.@system[0].zram_size_mb='128'
+uci commit system
+/etc/init.d/zram restart
+```
+
+A running zram device cannot be resized in place, so the `restart` is required for a changed size to take effect.  
+To make the kernel reclaim into zram more eagerly during the short processing peak, raise the swappiness and persist it across reboots, e.g.:
+
+```sh
+echo 'vm.swappiness=100' >> /etc/sysctl.conf
+sysctl -p
+```
+
+Leave `adb_basedir` and `adb_backupdir` at their defaults. On very small devices (128 MB) compressed swap helps, but heavy swapping costs CPU — if RAM is truly marginal, the more honest fix is to activate fewer feeds.
 
 **Sensible choice of blocklists**  
 The following feeds are just my personal recommendation as an initial setup:
@@ -279,6 +346,7 @@ Please note: don`t just blindly activate too many feeds at once, sooner or later
 
 **DNS reporting, enable the GeoIP Map**  
 adblock includes a powerful reporting tool on the DNS Report tab which shows the latest DNS statistics generated by tcpdump. To get the latest statistics always press the "Refresh" button.
+
 In addition to a tabular overview adblock reporting includes a GeoIP map in a modal popup window/iframe that shows the geolocation of your own uplink addresses (in green) and the locations of blocked domains in red. To enable the GeoIP Map set the following option in "Advanced Report Settings" config tab: set `adb_map` to `1` to include the external components listed below and activate the GeoIP map.
 
 To make this work, adblock uses the following external components:
@@ -286,6 +354,29 @@ To make this work, adblock uses the following external components:
 * [OpenStreetMap](https://www.openstreetmap.org/) provides the map data under an open-source license
 * [CARTO basemap styles](https://github.com/CartoDB/basemap-styles) based on [OpenMapTiles](https://openmaptiles.org/schema)
 * The free and quite fast [IP Geolocation API](https://ip-api.com/) to resolve the required IP/geolocation information (max. 45 blocked Domains per request)
+
+**DNS reporting, limit the tcpdump capture**  
+`adb_repfilter` takes a regular tcpdump/BPF expression which is logically ANDed to the internal reporting port filter. It narrows the capture for every `adb_repiface` setting, not just for `any`, e.g. to skip a single noisy client or to limit the report to certain network segments.
+
+The most common use case is a capture with `adb_repiface` set to `any`, where tcpdump also picks up DNS traffic on outbound interfaces, e.g. requests that originate from the router itself and are routed through a VPN client interface. Those packets are captured correctly, but they are redundant, they clutter the report and they consume the limited pcap ring buffer configured via `adb_repchunkcnt` and `adb_repchunksize`. Some examples:
+
+| Expression                                         | Purpose                                                             |
+| :------------------------------------------------- | :------------------------------------------------------------------ |
+| `not net 10.0.0.0/24`                              | skip a VPN transfer network                                         |
+| `not (net 10.0.0.0/24 or net fd00:dead:beef::/64)` | skip a VPN transfer network, IPv4 and IPv6                          |
+| `net 192.168.1.0/24 or net 192.168.2.0/24`         | limit the capture to selected LAN segments                          |
+| `not host 192.168.1.10`                            | skip a single noisy client                                          |
+| `not (host 192.168.1.10 or host 192.168.1.11)`     | skip several clients                                                |
+| `not host 9.9.9.9`                                 | skip the forwarding between the router and its upstream resolver    |
+| `ip`                                               | capture IPv4 only                                                   |
+
+Please note:
+* the expression must not drop one direction of a DNS transaction. A report line is only emitted once the answer to a pending query has been seen, so filters like `inbound`, `src net ...` or `dst port 53` compile fine but result in an empty report
+* `net 10.0.0.1` is not a subnet, without a prefix length libpcap assumes /32 and the expression becomes equivalent to `host 10.0.0.1`
+* `not host A or not host B` does not skip both hosts, it only skips the traffic between A and B. Use `not (host A or host B)` instead
+* address, network and port primitives work with every interface, but the `vlan` and `ether` primitives require an ethernet based capture. They are rejected with `adb_repiface` set to `any` (linux cooked mode) as well as on tunnel or ppp interfaces like `wg0` or `pppoe-wan`
+* the expression can only narrow the capture, additional ports have to be added via `adb_repport`
+* a too narrow expression still compiles and tcpdump starts normally, it just yields an empty report. Keep that in mind when `adb_repiface` is changed while a filter is set, the active filter is part of the runtime status
 
 **External adblock test**  
 In addition to the built‑in DNS reporting and GeoIP map, adblock users can verify the effectiveness of their configuration with an external test page. The [Adblock Test](https://adblock.turtlecute.org/) provides a simple way to check whether your current adblock setup is working as expected. It loads a series of test elements (ads, trackers, and other resources) and reports whether they are successfully blocked by your configuration.
@@ -386,8 +477,11 @@ Example 3
 ```
 
 **Change/add adblock feeds**  
-The adblock blocklist feeds are stored in an external JSON file `/etc/adblock/adblock.feeds`. All custom changes should be stored in an external JSON file `/etc/adblock/adblock.custom.feeds` (empty by default). It's recommended to use the LuCI based Custom Feed Editor to make changes to this file.
-A valid JSON source object contains the following information, e.g.:
+The adblock default blocklist feeds are stored in an external JSON file `/etc/adblock/adblock.feeds`. This file is shipped with the package and is **overwritten on every package update**, so never edit it directly. All of your custom changes belong in the separate JSON file `/etc/adblock/adblock.custom.feeds` (empty by default), which is preserved across updates. It's recommended to use the LuCI based Custom Feed Editor (`Custom Feed Editor` tab), which validates the JSON for you.
+
+**Please note:** if `/etc/adblock/adblock.custom.feeds` exists and is non-empty, it is loaded **instead of** the shipped `adblock.feeds` — it replaces the feed set, it does not merge with it. A custom feed file must therefore contain *every* feed you want active, not just your additions. The Custom Feed Editor handles this for you by working on a full copy.
+
+A feed is a single JSON object, keyed by a unique feed name (no spaces, no special characters). Example:
 
 ```json
 	[...]
@@ -400,22 +494,47 @@ A valid JSON source object contains the following information, e.g.:
 	[...]
 ```
 
-Add a unique feed name (no spaces, no special chars) and make the required changes: adapt at least the URL, check/change the rule, the size and the description for a new feed.
-The rule consist of max. 4 individual, space separated parameters:
-1. type: always `feed` (required)
-2. prefix: an optional search term (a string literal, no regex) to identify valid domain list entries, e.g. `0.0.0.0`
-3. column: the domain column within the feed file, e.g. `2` (required)
-4. separator: an optional field separator, default is the character class `[[:space:]]`
+The object supports the following fields:
 
-**Enable debug mode**  
+| Field | Required | Description                                                                                               |
+| :---- | :------: | :-------------------------------------------------------------------------------------------------------- |
+| url   | yes      | download URL of the domain list (for category feeds: the base URL, see below)                             |
+| rule  | yes      | the parsing ruleset, max. 4 space separated parameters (see below)                                        |
+| size  | yes      | size hint shown in LuCI: `S`, `M`, `L`, `XL`, `XXL` or `VAR` (see the feed table legend in Main Features) |
+| descr | yes      | a short human-readable description shown in LuCI and the feed table                                       |
+
+**The `rule` field**  
+The rule consists of max. 4 individual, space separated parameters:
+1. **type**: always `feed` (required). adblock only supports the `feed` type for external sources; any source whose rule does not start with `feed` is skipped.
+2. **prefix**: an optional search term (a literal string, not a regex) that a line must contain to be treated as a valid entry. Use it to pick the relevant rows of a hosts-style file, e.g. `0.0.0.0`. Omit it for a plain list with one bare domain per line.
+3. **column**: the 1-based column that holds the domain within a matching line, e.g. `2` for a `0.0.0.0 example.com` hosts file or `1` for a bare list (required). When no prefix is used, give the column directly, e.g. `feed 1`.
+4. **separator**: an optional field separator; default is the whitespace character class `[[:space:]]+`. Pass a literal character such as `,` for comma-separated sources.
+
+Examples:
+* `feed 1` — plain list, one domain per line, domain in column 1
+* `feed 0.0.0.0 2` — hosts-style file, keep only `0.0.0.0` lines, domain in column 2
+* `feed 1 ,` — comma-separated source, domain in the first field
+
+**Category-based feeds (size `VAR`)**  
+The feeds marked `VAR` in the feed table (`1hosts`, `hagezi`, `ipfire_dbl`, `stevenblack`, `utcapitole`) are built-in feeds that require an additional category selection via the dedicated options `adb_hst_feed`, `adb_hag_feed`, `adb_ipf_feed`, `adb_stb_feed` and `adb_utc_feed` (or the LuCI feed configuration). For these, the `url` is a **base URL** to which the selected category is appended at download time. This category mechanism is wired to those specific feed names in the backend, so it cannot be reused for arbitrary new feeds — a custom feed you add yourself should point `url` at a single, complete list URL.
+
+After editing `/etc/adblock/adblock.custom.feeds`, reload adblock (`/etc/init.d/adblock reload`) and check the `Log View` tab (or `logread -e adblock-`). With `adb_debug` enabled, a malformed JSON object or a wrong column/separator typically shows up there as a feed that produces zero domains.
+
+<a id="troubleshooting-and-debug-options"></a>
+## Troubleshooting & debug options
 Adblock provides an optional debug mode that writes diagnostic information to the system log and captures internal error output in a dedicated error logfile - by default located in the adblock base directory as `/tmp/adb_error.log`. The log file is automatically cleared at the beginning of each run. Under normal conditions, all error messages are discarded to keep regular runs clean and silent. To enable debug mode, set the option `adb_debug` to `1`. When enabled, the script produces significantly more log output to assist with troubleshooting.
 
+Whenever you encounter adblock related processing problems, please enable debug logging, restart adblock and check the `Log View` tab in LuCI (or the syslog via `logread -e adblock-`).
+
+<a id="support"></a>
 ## Support
 Please join the adblock discussion in this [forum thread](https://forum.openwrt.org/t/adblock-support-thread/507) or contact me by mail <dev@brenken.org>
 
+<a id="removal"></a>
 ## Removal
 Stop all adblock related services with _/etc/init.d/adblock stop_ and remove the adblock package if necessary.
 
+<a id="donations"></a>
 ## Donations
 You like this project - is there a way to donate? Generally speaking "No" - I have a well-paying full-time job and my OpenWrt projects are just a hobby of mine in my spare time.
 

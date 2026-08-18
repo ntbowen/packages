@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=netbird
-PKG_VERSION:=0.72.2
+PKG_VERSION:=0.74.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/netbirdio/netbird/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=9e3d4d10061032cd2a7b08d9c589020ef99c682c112f0afdad1615d02de6b968
+PKG_HASH:=8d5904ef0aa5aa6cb9cb1479fa257bbe1b4755327393fa9c153b115477ec25cb
 
 PKG_MAINTAINER:=Wesley Gimenes <wehagy@proton.me>
 PKG_LICENSE:=BSD-3-Clause

@@ -10,12 +10,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=byobu
-PKG_VERSION:=7.12
+PKG_VERSION:=7.18
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/dustinkirkland/byobu/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=59d9aec160f13c7782821bab750fc8444f5fc87b3f0cbefcd4956cdaf2136be2
+PKG_HASH:=ba8613021de40ec81a26d8cf200e34c547f0de5db9f96ae20a6d28c9881af9e3
 
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=COPYING

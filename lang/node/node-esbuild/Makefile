@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=esbuild
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=0.28.1
+PKG_VERSION:=0.28.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=eb8ef756f8299d16d5c8b35678606d715ba29923f500db7b37c181310eed40a5
+PKG_HASH:=e045f94c235c7adc50e77ba2a579c7bec41b496b6b47c3a7845f7c1e19959a88
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT

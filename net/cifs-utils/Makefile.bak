@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cifs-utils
-PKG_VERSION:=7.5
+PKG_VERSION:=7.6
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://download.samba.org/pub/linux-cifs/cifs-utils/
-PKG_HASH:=7face85e3d2d5eb5e7adbd181adee6759097f135b10d6fb30be8e070af7e7054
+PKG_HASH:=7db875ff2868e5fa4e445ada0bd23ea70b9161b96188c7e276321e061ed51dd6
 
 PKG_MAINTAINER:=
 PKG_LICENSE:=GPL-3.0-or-later

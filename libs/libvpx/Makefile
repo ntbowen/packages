@@ -9,7 +9,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libvpx
-PKG_VERSION:=1.17.0-rc1
+PKG_VERSION:=1.17.0-rc2
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

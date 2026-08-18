@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nsd
-PKG_VERSION:=4.14.2
+PKG_VERSION:=4.14.3
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://www.nlnetlabs.nl/downloads/nsd
-PKG_HASH:=2bff57349841844d7560e76d7bd70b6bd6f4c462cdaa6d57b8e83d1e14dd22d6
+PKG_HASH:=9629ad64d9c1b019bbe22296d5148d7ae65f588ce265a6424750740f052bb12b
 
 PKG_MAINTAINER:=Vasilis Tsiligiannis <acinonyx@openwrt.gr>
 PKG_LICENSE:=BSD-3-Clause

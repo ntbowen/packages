@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=exfatprogs
-PKG_VERSION:=1.4.2
+PKG_VERSION:=1.4.3
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/exfatprogs/exfatprogs/releases/download/$(PKG_VERSION)
-PKG_HASH:=47c7c8ddeccbf50d39b903353f2cb3df79134367a4fd764fe2ce3755ff5877bf
+PKG_HASH:=d745a0e7f97e1c36fad97148062ba4c496724e212d6075ff3129355d9054e218
 
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 PKG_LICENSE:=GPL-2.0-only

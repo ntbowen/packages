@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=fluidsynth
-PKG_VERSION:=2.5.6
+PKG_VERSION:=2.6.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/FluidSynth/fluidsynth/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=0825f024c9cf7a18073739b83612d46542ecbfb349ae9147a1e9f08e2d524407
+PKG_HASH:=6d17570ea2086dd6fbcac995465773a6f316e689089b7fb7ba0b34c2ec6f680d
 
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 PKG_LICENSE:=LGPL-2.1

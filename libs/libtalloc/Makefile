@@ -6,7 +6,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=talloc
-PKG_VERSION:=2.4.4
+PKG_VERSION:=2.5.0
 MAJOR_VERSION:=2
 PKG_RELEASE:=1
 

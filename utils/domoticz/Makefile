@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=domoticz
-PKG_VERSION:=2026.2
+PKG_VERSION:=2026.3
 PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/domoticz/domoticz/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=252ec8166c08e1952c0ffdfd7ead8ed769d7df82c89c559e9358a9260ceadd5e
+PKG_HASH:=10053191b4f6becdf244d2a416b9e655c91d357b51dd8280832c6e36f7d5d5c7
 
 PKG_MAINTAINER:=David Woodhouse <dwmw2@infradead.org>
 PKG_LICENSE:=GPL-3.0

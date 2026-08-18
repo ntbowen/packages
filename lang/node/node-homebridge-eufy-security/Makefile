@@ -7,13 +7,13 @@ include $(TOPDIR)/rules.mk
 PKG_NPM_SCOPE:=homebridge-plugins
 PKG_NPM_NAME:=homebridge-eufy-security
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=4.6.2-beta.6
+PKG_VERSION:=4.7.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/@$(PKG_NPM_SCOPE)/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/@$(PKG_NPM_SCOPE)/$(PKG_NPM_NAME)/-/
-PKG_HASH:=c6d2a2a2f73ba68fcffa5dc9052c48cc19ea7b4f6f4588c96f0bdb06d42567ec
+PKG_HASH:=47d1abee8c6ec679c5eb67d66304b721eebef9a62f657b3b16b49fc4f985384d
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=Apache-2.0

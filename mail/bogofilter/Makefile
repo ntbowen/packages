@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=bogofilter
-PKG_VERSION:=1.3.0_rc1
+PKG_VERSION:=1.3.0.rc2
 # Drop and replace all uses below with PKG_VERSION upon final 1.3.0 release:
 PKG_VERSION2:=1.3.0.rc1
 PKG_RELEASE:=1

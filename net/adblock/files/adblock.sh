@@ -72,10 +72,12 @@ adb_geoparm=""
 adb_geourl="http://ip-api.com/json"
 adb_repiface=""
 adb_repport="53"
+adb_repfilter=""
 adb_repchunkcnt="5"
 adb_repchunksize="1"
 adb_represolve="0"
 adb_lookupdomain="localhost"
+adb_srtmem="8"
 adb_action="${1}"
 adb_packages=""
 adb_cnt=""
@@ -102,10 +104,24 @@ f_cmd() {
 	fi
 }
 
+# determine available system memory (MemAvailable) in MB
+# mode "float" returns MiB with two decimals, default is integer MiB
+#
+f_mem() {
+	local mem mode="${1}"
+
+	if [ "${mode}" = "float" ]; then
+		mem="$("${adb_awkcmd}" '/^MemAvailable/{printf "%.2f", $2/1024}' "/proc/meminfo" 2>>"${adb_errorlog}")"
+	else
+		mem="$("${adb_awkcmd}" '/^MemAvailable/{printf "%s", int($2/1024)}' "/proc/meminfo" 2>>"${adb_errorlog}")"
+	fi
+	printf '%s' "${mem:-"0"}"
+}
+
 # load adblock environment
 #
 f_load() {
-	local cnt bg_pid port filter tcpdump_filter cpu
+	local cnt bg_pid port filter tcpdump_filter free_mem mem_cores
 
 	# load adblock config and set debug log file
 	#
@@ -125,13 +141,22 @@ f_load() {
 		"${adb_jsoncmd}" -ql1 -e '@.model' -e '@.release.target' -e '@.release.distribution' -e '@.release.version' -e '@.release.revision' |
 		"${adb_awkcmd}" 'BEGIN{RS="";FS="\n"}{printf "%s, %s, %s %s (%s)",$1,$2,$3,$4,$5}')"
 
-	# detect cpu cores for parallel processing
+	# detect cpu cores and available memory for memory-aware parallel processing
+	# 'mem_cores' is only calculated for auto-detected cores, a manually set 'adb_cores' is never capped
 	#
+	free_mem="$(f_mem)"
 	if [ -z "${adb_cores}" ]; then
-		cpu="$("${adb_grepcmd}" -cm16 '^processor' /proc/cpuinfo 2>>"${adb_errorlog}")"
-		[ "${cpu}" = "0" ] && cpu="1"
-		adb_cores="${cpu}"
+		adb_cores="$("${adb_grepcmd}" -cm16 '^processor' /proc/cpuinfo 2>>"${adb_errorlog}")"
+		mem_cores="$((${free_mem} / 48))"
+		[ "${mem_cores}" -lt "1" ] && mem_cores="1"
 	fi
+	case "${adb_cores}" in "" | 0 | *[!0-9]*) adb_cores="1" ;; esac
+	[ -n "${mem_cores}" ] && [ "${mem_cores}" -lt "${adb_cores}" ] && adb_cores="${mem_cores}"
+
+	# allocate at least 8 MiB of memory per core for sorting
+	#
+	adb_srtmem="$((${free_mem} / 2 / ${adb_cores}))"
+	[ "${adb_srtmem}" -lt "8" ] && adb_srtmem="8"
 
 	# load dns backend and fetch utility
 	#
@@ -176,6 +201,7 @@ f_load() {
 				filter="${filter}(udp port ${port}) or (tcp port ${port})"
 			done
 			tcpdump_filter="(${filter}) and greater 28"
+			[ -n "${adb_repfilter}" ] && tcpdump_filter="${tcpdump_filter} and (${adb_repfilter})"
 			if [ -n "${adb_repiface}" ] && [ -d "${adb_reportdir}" ]; then
 				(
 					"${adb_dumpcmd}" --immediate-mode -nn -p -s0 -i "${adb_repiface}" \
@@ -185,7 +211,11 @@ f_load() {
 				)
 				sleep 1
 				bg_pid="$("${adb_pgrepcmd}" -nf "${adb_reportdir}/adb_report.pcap")"
-				f_log "info" "tcpdump background process started for interface: ${adb_repiface}, port: ${adb_repport}, dir: ${adb_reportdir}, pid: ${bg_pid}"
+				if [ -n "${bg_pid}" ]; then
+					f_log "info" "tcpdump background process started for interface: ${adb_repiface}, port: ${adb_repport}, filter: ${adb_repfilter:-"-"}, dir: ${adb_reportdir}, pid: ${bg_pid}"
+				else
+					f_log "info" "tcpdump background process could not be started, please check the reporting filter: ${adb_repfilter:-"-"}"
+				fi
 			else
 				f_log "info" "please set the reporting interface 'adb_repiface' and reporting directory 'adb_reportdir' manually"
 			fi
@@ -323,7 +353,7 @@ f_chkdom() {
 f_dns() {
 	local dns dns_list dns_section dns_info free_mem dir
 
-	free_mem="$("${adb_awkcmd}" '/^MemAvailable/{printf "%s",int($2/1000)}' "/proc/meminfo" 2>>"${adb_errorlog}")"
+	free_mem="$(f_mem)"
 	if [ "${adb_action}" = "boot" ] && [ -z "${adb_trigger}" ]; then
 		sleep ${adb_triggerdelay:-"5"}
 	fi
@@ -615,7 +645,7 @@ f_temp() {
 		adb_tmpdir="$(mktemp -p "${adb_basedir}" -d)"
 		adb_tmpload="$(mktemp -p "${adb_tmpdir}" -tu)"
 		adb_tmpfile="$(mktemp -p "${adb_tmpdir}" -tu)"
-		adb_srtopts="--temporary-directory=${adb_tmpdir} --compress-program=gzip --parallel=${adb_cores}"
+		adb_srtopts="--temporary-directory=${adb_tmpdir} --compress-program=gzip --parallel=${adb_cores} --buffer-size=${adb_srtmem:-"8"}M"
 	else
 		f_log "err" "the base directory '${adb_basedir}' does not exist/is not mounted yet, please create the directory or raise the 'adb_triggerdelay' to defer the adblock start"
 	fi
@@ -854,13 +884,19 @@ f_etag() {
 			# fetch http headers and extract http code and etag/last-modified header
 			#
 			http_head="$("${adb_fetchcmd}" ${adb_etagparm} "${feed_url}${feed_suffix}" 2>&1)"
-			http_code="$(printf '%s' "${http_head}" | "${adb_awkcmd}" 'tolower($0)~/^[[:space:]]*http\/[0-9.]+ /{printf "%s",$2}')"
-			etag_id="$(printf '%s' "${http_head}" | "${adb_awkcmd}" 'tolower($0)~/^[[:space:]]*etag: /{gsub(/[\r"]/,"");printf "%s",$2}')"
+			http_code="$(printf '%s' "${http_head}" | "${adb_awkcmd}" 'tolower($0)~/^[[:space:]]*http\/[0123\.]+ /{code=$2} END{printf "%s",code}')"
+			etag_id="$(printf '%s' "${http_head}" | "${adb_awkcmd}" 'tolower($0)~/^[[:space:]]*etag: /{gsub(/[\r"]/,"");id=$2} END{printf "%s",id}')"
 
 			# if etag header is not present, try to use last-modified header as fallback for change detection
 			#
 			if [ -z "${etag_id}" ]; then
-				etag_id="$(printf '%s' "${http_head}" | "${adb_awkcmd}" 'tolower($0)~/^[[:space:]]*last-modified: /{gsub(/[Ll]ast-[Mm]odified:|[[:space:]]|,|:/,"");printf "%s\n",$1}')"
+				etag_id="$(printf '%s' "${http_head}" | "${adb_awkcmd}" 'tolower($0)~/^[[:space:]]*last-modified: /{gsub(/[Ll]ast-[Mm]odified:|[[:space:]]|,|:/,"");lm=$1} END{printf "%s",lm}')"
+			fi
+
+			# if last-modified is also missing, fall back to a positive content-length as change indicator
+			#
+			if [ -z "${etag_id}" ]; then
+				etag_id="$(printf '%s' "${http_head}" | "${adb_awkcmd}" 'tolower($0)~/^[[:space:]]*content-length: /{gsub(/\r/,"");cl=$2} END{if(cl+0>0)printf "%s",cl}')"
 			fi
 		fi
 
@@ -887,7 +923,15 @@ f_etag() {
 
 		# compare http code, etag count and etag id; update etag file and return code accordingly
 		#
-		if [ "${feed_rm}" = "0" ] && [ "${http_code}" = "200" ] && [ "${etag_cnt}" = "${feed_cnt}" ] && [ -n "${etag_id}" ] && [ "${etag_match}" = "0" ]; then
+		if [ "${feed_rm}" = "sweep" ]; then
+
+			# drop entries for feeds no longer in the active feed list (${feed})
+			#
+			"${adb_awkcmd}" -v feeds=" ${feed} " 'index(feeds, " " $1 " ")' \
+				"${adb_backupdir}/adblock.etag" >"${adb_backupdir}/adblock.etag.new" 2>>"${adb_errorlog}" &&
+				"${adb_mvcmd}" -f "${adb_backupdir}/adblock.etag.new" "${adb_backupdir}/adblock.etag"
+			out_rc="${?}"
+		elif [ "${feed_rm}" = "0" ] && [ "${http_code}" = "200" ] && [ "${etag_cnt}" = "${feed_cnt}" ] && [ -n "${etag_id}" ] && [ "${etag_match}" = "0" ]; then
 			out_rc="0"
 		elif [ -n "${etag_id}" ] || [ "${feed_rm}" = "1" ]; then
 
@@ -902,8 +946,8 @@ f_etag() {
 				BEGIN { p = f " " s }
 				index($0, p) != 1' \
 					"${adb_backupdir}/adblock.etag" >"${adb_backupdir}/adblock.etag.new"
-			fi
-			"${adb_mvcmd}" -f "${adb_backupdir}/adblock.etag.new" "${adb_backupdir}/adblock.etag"
+			fi &&
+				"${adb_mvcmd}" -f "${adb_backupdir}/adblock.etag.new" "${adb_backupdir}/adblock.etag"
 			[ "${feed_rm}" = "0" ] && printf '%s\t%s\n' "${feed} ${feed_suffix}" "${etag_id}" >>"${adb_backupdir}/adblock.etag"
 			out_rc="2"
 		fi
@@ -1175,6 +1219,8 @@ f_list() {
 					"${adb_zcatcmd}" "${adb_backupdir}/safesearch.${src_name}.gz" >"${adb_tmpdir}/tmp.load.safesearch.${src_name}"
 				fi
 			fi
+			[ -s "${adb_tmpdir}/tmp.load.safesearch.${src_name}" ] &&
+				safe_domains="$(f_chkdom google 1 <"${adb_tmpdir}/tmp.load.safesearch.${src_name}")"
 			;;
 		"bing")
 			safe_cname="strict.bing.com"
@@ -1322,9 +1368,11 @@ f_list() {
 	"final")
 		src_name=""
 		file_name="${adb_finaldir}/${adb_dnsfile}"
+		[ -s "${adb_tmpdir}/tmp.add.allowlist" ] &&
+			"${adb_sortcmd}" ${adb_srtopts} -u "${adb_tmpdir}/tmp.add.allowlist" -o "${adb_tmpdir}/tmp.add.allowlist"
 		{
 			[ -n "${adb_dnsheader}" ] && printf '%b' "${adb_dnsheader}"
-			[ -s "${adb_tmpdir}/tmp.add.allowlist" ] && "${adb_sortcmd}" ${adb_srtopts} -u "${adb_tmpdir}/tmp.add.allowlist"
+			[ -s "${adb_tmpdir}/tmp.add.allowlist" ] && "${adb_catcmd}" "${adb_tmpdir}/tmp.add.allowlist"
 			[ "${adb_safesearch}" = "1" ] && "${adb_catcmd}" "${adb_tmpdir}/tmp.safesearch."* 2>>"${adb_errorlog}"
 			if [ "${adb_dnsdeny}" = "1" ]; then
 				f_dnsdeny "${adb_tmpdir}/${adb_dnsfile}"
@@ -1451,18 +1499,15 @@ f_switch() {
 			if "${adb_nftcmd}" flush chain inet adblock dns-bridge 2>>"${adb_errorlog}"; then
 				switch="nft"
 			fi
-			f_count "final" "${adb_finaldir}/${adb_dnsfile}"
 
 		# resume via local DNS
 		#
 		else
 			if [ "${adb_dnsshift}" = "0" ] && [ -f "${adb_backupdir}/${adb_dnsfile}" ]; then
 				"${adb_mvcmd}" -f "${adb_backupdir}/${adb_dnsfile}" "${adb_finaldir}/${adb_dnsfile}"
-				f_count "final" "${adb_finaldir}/${adb_dnsfile}"
 				switch="dns"
 			elif [ "${adb_dnsshift}" = "1" ] && [ ! -L "${adb_dnsdir}/${adb_dnsfile}" ]; then
 				"${adb_lncmd}" -fs "${adb_finaldir}/${adb_dnsfile}" "${adb_dnsdir}/${adb_dnsfile}"
-				f_count "final" "${adb_finaldir}/${adb_dnsfile}"
 				switch="dns"
 			fi
 		fi
@@ -1478,7 +1523,6 @@ f_switch() {
 		f_jsnup "${mode}"
 		f_log "info" "${mode} adblock service via local DNS"
 	else
-		f_count "final" "${adb_finaldir}/${adb_dnsfile}"
 		f_jsnup "${status}"
 	fi
 	f_rmtemp
@@ -1631,7 +1675,7 @@ f_search() {
 #
 f_jsnup() {
 	local s_shift s_custom s_unfiltered s_filtered s_remote s_bridge s_force s_flush s_tld s_search s_report s_mail
-	local s_jail s_debug pid pids object feeds end_time runtime dns dns_ver free_mem custom_feed="0" status="${1:-"enabled"}"
+	local s_jail s_debug pid pids object feeds end_time runtime backup_cnt dns dns_ver free_mem custom_feed="0" status="${1:-"enabled"}"
 	local vm_mem dns_mem="0" duration jail="0" nft_unfiltered="0" nft_filtered="0" nft_remote="0" nft_bridge="0" nft_force="0"
 
 	# get DNS memory usage and version
@@ -1660,7 +1704,7 @@ f_jsnup() {
 		dns_ver="$(printf '%s' "${adb_packages}" | "${adb_jsoncmd}" -ql1 -e "@.packages[\"${dns:-"${adb_dns}"}\"]")"
 		dns_mem="$("${adb_awkcmd}" -v mem="${dns_mem}" 'BEGIN{printf "%.2f", mem/1024}' 2>>"${adb_errorlog}")"
 	fi
-	free_mem="$("${adb_awkcmd}" '/^MemAvailable/{printf "%.2f", $2/1024}' "/proc/meminfo" 2>>"${adb_errorlog}")"
+	free_mem="$(f_mem float)"
 
 	# check for custom feed and nft rules
 	#
@@ -1696,7 +1740,7 @@ f_jsnup() {
 			end_time="${end_time%.*}"
 			duration="$(((end_time - adb_starttime) / 60))m $(((end_time - adb_starttime) % 60))s"
 		fi
-		runtime="mode: ${adb_action}, date / time: $(date "+%d/%m/%Y %H:%M:%S"), duration: ${duration:-"-"}, memory: ${free_mem:-0} MB available"
+		runtime="mode: ${adb_action}, date / time: $(date "+%Y-%m-%d %H:%M:%S"), duration: ${duration:-"-"}, memory: ${free_mem:-0} MB available"
 		;;
 	"resume")
 		status="enabled"
@@ -1714,7 +1758,10 @@ f_jsnup() {
 	#
 	json_init
 	if json_load_file "${adb_rtfile}" >/dev/null 2>&1; then
+		json_get_var backup_cnt "backup_cnt"
+		[ "${1}" = "resume" ] && adb_cnt="${backup_cnt:-"0"}"
 		[ -z "${adb_cnt}" ] && json_get_var adb_cnt "blocked_domains"
+		[ "${status}" = "enabled" ] && backup_cnt="${adb_cnt}"
 		[ -z "${runtime}" ] && json_get_var runtime "last_run"
 		if [ "${status}" = "enabled" ]; then
 			if [ "${adb_jail}" = "1" ] && [ -n "${adb_dnsstop}" ]; then
@@ -1753,6 +1800,7 @@ f_jsnup() {
 	json_add_string "frontend_ver" "${adb_fver}"
 	json_add_string "backend_ver" "${adb_bver}"
 	json_add_string "blocked_domains" "${adb_cnt:-"0"}"
+	json_add_string "backup_cnt" "${backup_cnt:-"0"}"
 	json_add_array "active_feeds"
 	for object in ${feeds:-"-"}; do
 		json_add_string "${object}" "${object}"
@@ -2068,6 +2116,10 @@ f_main() {
 		done <"${rm_file}"
 	done
 
+	# drop orphaned etag entries for feeds no longer in the active feed list
+	#
+	[ "${adb_action}" = "reload" ] && f_etag "${adb_feed}" "" "" "" "sweep"
+
 	# tld compression and dns restart
 	#
 	if f_list merge && [ -s "${adb_tmpdir}/${adb_dnsfile}" ]; then
@@ -2198,7 +2250,7 @@ f_report() {
 			start="$("${adb_awkcmd}" 'END{printf "%s_%s",$1,$2}' "${report_srt}")"
 			end="$("${adb_awkcmd}" 'NR==1{printf "%s_%s",$1,$2}' "${report_srt}")"
 			total="$(f_count tld "${report_srt}" "var")"
-			blocked="$("${adb_awkcmd}" '{if($7=="NX")cnt++}END{printf "%s",cnt}' "${report_srt}")"
+			blocked="$("${adb_awkcmd}" '{if($7=="NX")cnt++}END{printf "%s",cnt+0}' "${report_srt}")"
 			percent="$("${adb_awkcmd}" -v t="${total}" -v b="${blocked}" 'BEGIN{ if(t>0) printf "%.2f%s",b/t*100,"%"; else printf "0.00%%"}')"
 			{
 				printf '%s\n' "{ "
@@ -2305,7 +2357,7 @@ f_report() {
 
 			# build json request list
 			#
-			search="${search//[!a-zA-Z0-9._-]/}"
+			search="${search//[!a-zA-Z0-9._:-]/}"
 			case "${res_count}" in
 			'' | *[!0-9]*)
 				res_count="50"
@@ -2350,10 +2402,8 @@ f_report() {
 			cnt="1"
 			network_find_wan iface_v4 && network_get_ipaddr ip_v4 "${iface_v4}"
 			network_find_wan6 iface_v6 && network_get_ipaddr6 ip_v6 "${iface_v6}"
-			if [ -n "${ip_v4}" ] || [ -n "${ip_v6}" ]; then
-				f_fetch
-				printf '%s' ",[{}" >"${map_jsn}"
-			fi
+			f_fetch
+			printf '%s' ",[{}" >"${map_jsn}"
 			for ip in ${ip_v4} ${ip_v6}; do
 				(
 					"${adb_fetchcmd}" ${adb_geoparm} "${adb_geourl}/${ip}" 2>>"${adb_errorlog}" |
@@ -2363,7 +2413,7 @@ f_report() {
 				cnt="$((cnt + 1))"
 			done
 			wait
-			if [ -s "${map_jsn}" ] && [ "${cnt}" -lt "45" ]; then
+			if [ "${cnt}" -lt "45" ]; then
 				map_seen=""
 				json_init
 				if json_load_file "${report_jsn}" >/dev/null 2>&1; then

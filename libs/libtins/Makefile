@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libtins
-PKG_VERSION:=4.5
+PKG_VERSION:=4.6
 PKG_RELEASE:=2
 
 PKG_SOURCE_PROTO:=git

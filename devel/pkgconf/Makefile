@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=pkgconf
-PKG_VERSION:=2.9.98
+PKG_VERSION:=3.0.5
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://distfiles.dereferenced.org/pkgconf
-PKG_HASH:=6ab5ce0daeaade02d0c8b9683b0ee3975a57a47b847acdee73f56d3b7bc98b99
+PKG_HASH:=3acd3a8a3cce65a8d620321855d92fb602e026cbe8e13ee36bdec58483b59ace
 
 PKG_MAINTAINER:=Rosen Penev <rosenp@gmail.com>
 PKG_LICENSE:=MIT

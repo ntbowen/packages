@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=fluent-bit
-PKG_VERSION:=5.0.9
+PKG_VERSION:=5.1.1
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

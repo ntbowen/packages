@@ -5,7 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lf
-PKG_VERSION:=41
+PKG_VERSION:=42
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

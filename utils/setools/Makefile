@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=setools
-PKG_VERSION:=4.7.0
+PKG_VERSION:=4.7.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/SELinuxProject/setools/releases/download/$(PKG_VERSION)
-PKG_HASH:=589fb463b90a717661cb5b84b8965a7f923fbdca33869847599d68ec50202340
+PKG_HASH:=13a39cdccae7fc8454c41e5bf619514d84d7113ffcdcd0cf6ea7ef867a74937e
 
 PKG_BUILD_DEPENDS:=python-cython/host # Cython>=0.29.14
 
