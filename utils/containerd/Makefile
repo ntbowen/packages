@@ -9,7 +9,7 @@ PKG_CPE_ID:=cpe:/a:linuxfoundation:containerd
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/containerd/containerd/tar.gz/v${PKG_VERSION}?
-PKG_HASH:=d3262200794152a858247ee95dd3b5366e1fdeda0577908cef2e76cd71c5cc38
+PKG_HASH:=175bbf57d637c987fa742f846b43b1b8ba2c61af6a9eaec619c625e4a8a19b69
 
 PKG_MAINTAINER:=Gerard Ryan <G.M0N3Y.2503@gmail.com>
 
