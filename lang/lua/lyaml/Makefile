@@ -47,7 +47,7 @@ define Build/Compile
 	LDFLAGS="$(TARGET_LDFLAGS)" \
 	CC="$(TARGET_CC)" LD="$(TARGET_CC)" \
 	$(if $(CONFIG_HOST_OS_MACOS),PATH=$(FAKEUNAME_PATH):$(TARGET_PATH_PKG)) \
-	luarocks make --pack-binary-rock lyaml-$(PKG_VERSION)-1.rockspec \
+	luarocks make --pack-binary-rock lyaml-$(PKG_VERSION)-2.rockspec \
 		LUA_LIBDIR=$(STAGING_DIR)/usr/lib/lua \
 		YAML_DIR=$(STAGING_DIR)/usr \
 		LUA_INCDIR=$(STAGING_DIR)/usr/include \
