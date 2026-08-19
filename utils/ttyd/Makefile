@@ -23,6 +23,8 @@ PKG_CPE_ID:=cpe:/a:ttyd_project:ttyd
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
+CMAKE_OPTIONS += -DLWS_OPENSSL_ENABLED=OFF
+
 define Package/ttyd
 	SECTION:=utils
 	CATEGORY:=Utilities
