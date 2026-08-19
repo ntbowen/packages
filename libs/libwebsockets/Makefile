@@ -27,9 +27,10 @@ CMAKE_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
+CMAKE_BINARY_SUBDIR:=build
 
 CMAKE_OPTIONS += -DLWS_IPV6=$(if $(CONFIG_IPV6),ON,OFF)
-CMAKE_OPTIONS += -DISABLE_WERROR=ON
+CMAKE_OPTIONS += -DDISABLE_WERROR=ON
 CMAKE_OPTIONS += -DCMAKE_BUILD_TYPE=Release
 CMAKE_OPTIONS += -DLWS_WITH_EXTERNAL_POLL=ON
 CMAKE_OPTIONS += -DLWS_WITH_ULOOP=ON
@@ -70,7 +71,7 @@ endef
 define Package/libwebsockets-full
 	$(call Package/libwebsockets/Default)
 	TITLE += (Full - OpenSSL, libuv, plugins, CGI)
-	DEPENDS += +libopenssl +libuv
+	DEPENDS += +libgnutls +libuv
 	VARIANT:=full
 	PROVIDES:=libwebsockets libwebsockets-openssl
 endef
@@ -109,6 +110,12 @@ define Package/libwebsockets-full/install
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libwebsockets-evlib_uv.so* $(1)/usr/lib
 endef
 
+define Build/Prepare
+	$(call Build/Prepare/Default)
+	rm -rf $(PKG_BUILD_DIR)/plugins/protocol_client_loopback_test
+endef
+
 $(eval $(call BuildPackage,libwebsockets-openssl))
 $(eval $(call BuildPackage,libwebsockets-mbedtls))
 $(eval $(call BuildPackage,libwebsockets-full))
+
