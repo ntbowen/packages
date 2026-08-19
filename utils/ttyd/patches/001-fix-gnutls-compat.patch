@@ -1,0 +1,40 @@
+--- a/src/http.c	2026-08-19 14:33:23.826674359 +0800
++++ b/src/http.c	2026-08-19 14:33:23.828828740 +0800
+@@ -215,7 +215,7 @@
+ 
+     case LWS_CALLBACK_HTTP_FILE_COMPLETION:
+       goto try_to_reuse;
+-#if (defined(LWS_OPENSSL_SUPPORT) || defined(LWS_WITH_TLS)) && !defined(LWS_WITH_MBEDTLS)
++#if (defined(LWS_OPENSSL_SUPPORT) || defined(LWS_WITH_TLS)) && !defined(LWS_WITH_MBEDTLS) && !defined(LWS_WITH_GNUTLS)
+     case LWS_CALLBACK_OPENSSL_PERFORM_CLIENT_CERT_VERIFICATION:
+       if (!len || (SSL_get_verify_result((SSL *)in) != X509_V_OK)) {
+         int err = X509_STORE_CTX_get_error((X509_STORE_CTX *)user);
+--- a/src/server.c	2026-08-19 14:33:23.826746415 +0800
++++ b/src/server.c	2026-08-19 14:33:23.840549307 +0800
+@@ -119,7 +119,7 @@
+ #ifdef LWS_WITH_IPV6
+           "    -6, --ipv6              Enable IPv6 support\n"
+ #endif
+-#if defined(LWS_OPENSSL_SUPPORT) || defined(LWS_WITH_TLS)
++#if (defined(LWS_OPENSSL_SUPPORT) || defined(LWS_WITH_TLS)) && !defined(LWS_WITH_GNUTLS)
+           "    -S, --ssl               Enable SSL\n"
+           "    -C, --ssl-cert          SSL certificate file path\n"
+           "    -K, --ssl-key           SSL key file path\n"
+@@ -466,7 +466,7 @@
+       case '6':
+         info.options &= ~(LWS_SERVER_OPTION_DISABLE_IPV6);
+         break;
+-#if defined(LWS_OPENSSL_SUPPORT) || defined(LWS_WITH_TLS)
++#if (defined(LWS_OPENSSL_SUPPORT) || defined(LWS_WITH_TLS)) && !defined(LWS_WITH_GNUTLS)
+       case 'S':
+         ssl = true;
+         break;
+@@ -549,7 +549,7 @@
+     }
+   }
+ 
+-#if defined(LWS_OPENSSL_SUPPORT) || defined(LWS_WITH_TLS)
++#if (defined(LWS_OPENSSL_SUPPORT) || defined(LWS_WITH_TLS)) && !defined(LWS_WITH_GNUTLS)
+   if (ssl) {
+     info.ssl_cert_filepath = cert_path;
+     info.ssl_private_key_filepath = key_path;
