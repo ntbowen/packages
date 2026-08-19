@@ -1,0 +1,11 @@
+--- a/src/main.rs	2026-08-19 15:21:49.283861615 +0800
++++ b/src/main.rs	2026-08-19 15:21:49.285919815 +0800
+@@ -34,7 +34,7 @@
+ 
+ fn main() {
+     // Close all fds we inherited from our parent process, we only need stdio.
+-    let _ = unsafe { libc::close_range(3, libc::c_uint::MAX, 0) };
++    let _ = unsafe { libc::syscall(libc::SYS_close_range, 3u32, u32::MAX, 0u32) };
+ 
+     let formatter = Formatter3164 {
+         facility: Facility::LOG_USER,
