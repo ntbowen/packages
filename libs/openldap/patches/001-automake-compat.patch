@@ -184,17 +184,6 @@
  SRCS	= search.c config.c init.c
  OBJS	= search.lo config.lo init.lo
  
---- a/servers/slapd/back-perl/Makefile.in
-+++ b/servers/slapd/back-perl/Makefile.in
-@@ -14,6 +14,8 @@
- ## top-level directory of the distribution or, alternatively, at
- ## <http://www.OpenLDAP.org/license.html>.
- 
-+SHELL = @SHELL@
-+
- SRCS	= init.c search.c close.c config.c bind.c compare.c \
- 		modify.c add.c modrdn.c delete.c
- OBJS	= init.lo search.lo close.lo config.lo bind.lo compare.lo \
 --- a/servers/slapd/back-relay/Makefile.in
 +++ b/servers/slapd/back-relay/Makefile.in
 @@ -13,6 +13,8 @@
@@ -217,17 +206,6 @@
  SRCS	= init.c config.c opensock.c search.c bind.c unbind.c add.c \
  		delete.c modify.c modrdn.c compare.c result.c extended.c
  OBJS	= init.lo config.lo opensock.lo search.lo bind.lo unbind.lo add.lo \
---- a/servers/slapd/back-sql/Makefile.in
-+++ b/servers/slapd/back-sql/Makefile.in
-@@ -13,6 +13,8 @@
- ## top-level directory of the distribution or, alternatively, at
- ## <http://www.OpenLDAP.org/license.html>.
- 
-+SHELL = @SHELL@
-+
- SRCS	= init.c config.c search.c bind.c compare.c operational.c \
- 		entry-id.c schema-map.c sql-wrap.c modify.c util.c \
- 		add.c delete.c modrdn.c api.c
 --- a/servers/slapd/back-wt/Makefile.in
 +++ b/servers/slapd/back-wt/Makefile.in
 @@ -13,6 +13,8 @@
