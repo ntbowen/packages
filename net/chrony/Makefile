@@ -8,10 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=chrony
-PKG_VERSION:=4.9-pre1
+PKG_VERSION:=4.9_pre1
 PKG_RELEASE:=3
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE:=$(PKG_NAME)-4.9-pre1.tar.gz
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-normal/$(PKG_NAME)-4.9-pre1
 PKG_SOURCE_URL:=https://chrony-project.org/releases/
 PKG_HASH:=14580613b2d3c0412aa8b73f74a5b5726bf42463ed7d917ca6235e93f43b5751
 
