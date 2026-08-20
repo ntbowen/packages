@@ -156,7 +156,6 @@ CONFIGURE_ARGS += \
 			--enable-depend \
 			$(if $(CONFIG_arc),--disable-spinlocks)
 
-HOST_CFLAGS += -std=gnu99
 
 # Need a native zic and pg_config for build
 define Host/Compile
