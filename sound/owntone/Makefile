@@ -14,7 +14,7 @@ PKG_RELEASE:=1
 # Release
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/owntone/owntone-server/releases/download/$(PKG_VERSION)/
-PKG_HASH:=b6677812d3535b9aab2889234ecff4b059d33723e94b3fb54e4e01a67a7bdabf
+PKG_HASH:=aa0cbfc5651aa65776a8bd2112c9e0a904b2185c837900d3f6494b9ec6e8c547
 
 PKG_FIXUP:=autoreconf
 PKG_BUILD_FLAGS:=no-mips16
