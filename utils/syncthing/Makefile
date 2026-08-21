@@ -6,7 +6,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=syncthing-source-v$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/syncthing/syncthing/releases/download/v$(PKG_VERSION)
-PKG_HASH:=177792c697f61fc25f02d8fc8923dfc57ebb35753bd92c8d32a73d553446d117
+PKG_HASH:=f34bc1b3219e02ac1eca0b1446f582af8fe13f789da5f8c679ba9cac0396bf81
 
 PKG_BUILD_DIR=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)/$(PKG_NAME)
 
