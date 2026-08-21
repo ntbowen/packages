@@ -101,6 +101,7 @@ MAKE_FLAGS+= \
     USE_SYSTEMD_WATCHDOG=false \
     USE_SECCOMP=false\
     USE_XFRM_INTERFACE_IFLA_HEADER=false \
+	USE_XFRM_HEADER_COPY=true \
     PREFIX="/usr" \
     RUNDIR="/var/run/pluto" \
     NSSDIR="/etc/ipsec.d" \
