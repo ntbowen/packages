@@ -6,7 +6,7 @@ PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/arvidn/libtorrent/releases/download/v$(PKG_VERSION)/
-PKG_HASH:=25976b972457dafbde3d0c606c1801a3acbc33603338f4f6d06bf4c2555178e4
+PKG_HASH:=0f163516ecef2e3331500266751de3098835a3c3ae0c2290448046c632bc0e93
 
 PKG_MAINTAINER:=David Yang <mmyangfl@gmail.com>
 PKG_LICENSE:=BSD-3-Clause
