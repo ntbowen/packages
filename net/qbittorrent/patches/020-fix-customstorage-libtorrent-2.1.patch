@@ -1,0 +1,16 @@
+--- a/src/base/bittorrent/customstorage.cpp
++++ b/src/base/bittorrent/customstorage.cpp
+@@ -65,11 +65,11 @@
+ {
+     lt::storage_holder storageHolder = m_nativeDiskIO->new_torrent(storageParams, torrent);
+ 
+-    const Path savePath {storageParams.path};
++    const Path savePath {std::string(storageParams.path)};
+     m_storageData[storageHolder] =
+     {
+         savePath,
+-        storageParams.mapped_files ? *storageParams.mapped_files : storageParams.files,
++        storageParams.files,
+         storageParams.priorities
+     };
+ 
