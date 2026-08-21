@@ -13,7 +13,7 @@ PKG_RELEASE:=2
 
 PKG_SOURCE_URL:=https://github.com/miniupnp/miniupnp/releases/download/miniupnpd_$(subst .,_,$(PKG_VERSION))
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_HASH:=25521370ec33b8c075ca7b073cda2a98a2d449e6c09b10acbe5a9d038bca1017
+PKG_HASH:=91994b127da735b2c97f19992e34420648c0e8c4ace8a4bcb0596e7685c48678
 
 PKG_MAINTAINER:=
 PKG_LICENSE:=BSD-3-Clause
