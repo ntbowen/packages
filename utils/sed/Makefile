@@ -31,6 +31,7 @@ define Package/sed
   TITLE:=sed stream editor utility - full version
   URL:=https://www.gnu.org/software/sed/
   ALTERNATIVES:=300:/bin/sed:/usr/libexec/sed-gnu
+  DEPENDS:=+libattr
 endef
 
 define Package/sed/description
