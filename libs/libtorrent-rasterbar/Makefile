@@ -56,6 +56,9 @@ endef
 
 ifneq ($(CONFIG_PACKAGE_python3-libtorrent),)
 CMAKE_OPTIONS += \
+	-DCMAKE_BUILD_TYPE=Release \
+	-Ddeprecated-functions=OFF \
+	-DTORRENT_ABI_VERSION=3 \
 	-Dpython-bindings=ON \
 	-Dpython-egg-info=ON
 endif
