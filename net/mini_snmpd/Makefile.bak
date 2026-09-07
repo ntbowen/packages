@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mini_snmpd
-PKG_VERSION:=1.6
+PKG_VERSION:=2.0
 PKG_RELEASE:=5
 PKG_MAINTAINER:=Marcin Jurkowski <marcin1j@gmail.com>
 PKG_LICENSE:=GPL-2.0
@@ -18,7 +18,7 @@ PKG_CPE_ID:=cpe:/a:minisnmpd_project:minisnmpd
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/troglobit/mini-snmpd
 PKG_SOURCE_SUBDIR:=mini-snmpd-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=45765e39d52469fd2b5ec5cfb78e042f437c0df4
+PKG_SOURCE_VERSION:=9c32b105dffce7c0527d0117884ca1f22cac4287
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/mini-snmpd-$(PKG_VERSION)
 PKG_MIRROR_HASH:=580eb4bc45a86d9827df505813ec0cf47ba836261d27e8e4b5ca5e0e1581c255
 

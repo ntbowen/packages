@@ -8,30 +8,30 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=shadow
-PKG_VERSION:=4.19.4
-PKG_RELEASE:=3
+PKG_VERSION:=4.20.2
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/shadow-maint/shadow/releases/download/$(PKG_VERSION)
-PKG_HASH:=ce57a313e315a0a7cb04a8f50cc20753e994e487bbe9b78a2a824ca75cb486c0
+PKG_HASH:=b89f432b75ae55a2d852b446d0365484795fdf533ab97d550e325fa15594a224
 
-PKG_MAINTAINER:=
+PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE:=BSD-3-Clause
 PKG_LICENSE_FILES:=COPYING
 PKG_CPE_ID:=cpe:/a:debian:shadow
 
 PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
-PKG_BUILD_DEPENDS:=libxcrypt libbsd
+PKG_BUILD_DEPENDS:=libxcrypt
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/nls.mk
 
 SHADOW_APPLETS := \
-	chage chfn chgpasswd chpasswd chsh expiry faillog gpasswd getsubids \
-	groupadd groupdel groupmems groupmod grpck grpconv grpunconv \
-	login logoutd newgidmap newgrp newuidmap newusers nologin \
-	passwd pwck pwconv pwunconv sg su \
+	chage chfn chgpasswd chpasswd chsh faillog gpasswd \
+	groupadd groupdel groupmod grpck grpconv grpunconv \
+	login newgrp newgidmap newuidmap newusers nologin \
+	passwd pwck pwconv pwunconv su \
 	useradd userdel usermod vipw
 
 CONFIGURE_ARGS += \
@@ -42,8 +42,13 @@ CONFIGURE_ARGS += \
 	--without-attr \
 	--without-tcb \
 	--without-nscd \
-	--with-bcrypt \
-	--disable-logind
+	--without-sssd \
+	--without-libbsd \
+	--disable-logind \
+	--enable-subordinate-ids \
+	--disable-shared \
+	--enable-static \
+	--with-bcrypt
 
 CONFIGURE_VARS += \
 	ac_cv_func_ruserok=no
@@ -102,7 +107,7 @@ Package/shadow-utils/description = $(Package/shadow/description)
 define Package/shadow-common
   $(call Package/shadow/Default)
   TITLE:=Shared definitions for the PLD Linux shadow utilities
-  DEPENDS:=$(ICONV_DEPENDS) $(INTL_DEPENDS) +libbsd +libxcrypt-shared
+  DEPENDS:=$(ICONV_DEPENDS) $(INTL_DEPENDS)
   HIDDEN:=1
 endef
 
@@ -122,24 +127,6 @@ endef
 
 $(foreach u,$(SHADOW_APPLETS),$(eval $(call GenPlugin,$(u))))
 
-define Package/shadow-getsubids
-  $(call Package/shadow/Default)
-  TITLE:=Utility getsubids from the PLD Linux shadow utilities
-  DEPENDS:=+shadow-common +libsubid
-  HIDDEN:=1
-endef
-
-define Package/libsubid
-  $(call Package/shadow/Default)
-  TITLE:=Subordinate uid/gid management library
-  DEPENDS:=+libbsd +libxcrypt-shared
-endef
-
-define Package/libsubid/install
-	$(INSTALL_DIR) $(1)/lib
-	$(CP) $(PKG_INSTALL_DIR)/lib/libsubid.so* $(1)/lib/
-endef
-
 define Package/shadow-common/conffiles
 /etc/login.defs
 endef
@@ -151,7 +138,7 @@ define Package/shadow-common/install
 	$(INSTALL_DIR) $(1)/etc
 	$(INSTALL_CONF) $(PKG_INSTALL_DIR)/etc/login.defs $(1)/etc/
 	$(SED) 's,SU_NAME,#SU_NAME,g' $(1)/etc/login.defs
-	$(SED) 's,#ENCRYPT_METHOD DES,ENCRYPT_METHOD BCRYPT,g' $(1)/etc/login.defs
+	$(SED) 's,#ENCRYPT_METHOD SHA512,ENCRYPT_METHOD BCRYPT,g' $(1)/etc/login.defs
 endef
 
 define Package/shadow-utils/install
@@ -177,4 +164,3 @@ $(foreach u,$(SHADOW_APPLETS),$(eval $(call BuildPlugin,$(u))))
 $(eval $(call BuildPackage,shadow-utils))
 $(eval $(call BuildPackage,shadow-common))
 $(eval $(call BuildPackage,shadow))
-$(eval $(call BuildPackage,libsubid))

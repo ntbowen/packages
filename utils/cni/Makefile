@@ -1,14 +1,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cni
-PKG_VERSION:=1.3.0
+PKG_VERSION:=1.3.1
 PKG_RELEASE:=1
 PKG_LICENSE:=Apache-2.0
 PKG_LICENSE_FILES:=LICENSE
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/containernetworking/$(PKG_NAME)/archive/v$(PKG_VERSION)
-PKG_HASH:=aca115624f471218656e9b0cb04b768e1ac6af05b84e79264bad5ee9230798cf
+PKG_HASH:=98903a1993617c8692bc35cdbd1ed9577f1ea044fa476b0f378566ba8e52e56c
 
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>, Paul Spooren <mail@aparcar.org>, Oskari Rauta <oskari.rauta@gmail.com>
 

@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-authen-sasl
-PKG_VERSION:=2.2000
+PKG_VERSION:=2.2100
 PKG_RELEASE:=2
 
 PKG_SOURCE_NAME:=Authen-SASL
 PKG_SOURCE_URL:=https://www.cpan.org/authors/id/G/GB/GBARR/
 PKG_SOURCE:=$(PKG_SOURCE_NAME)-$(PKG_VERSION).tar.gz
-PKG_HASH:=6614fa7518f094f853741b63c73f3627168c5d3aca89b1d02b1016dc32854e09
+PKG_HASH:=4f0f100aeed34b52977a94b7df973e7f0b8f92d167b09f2b249bab81e8590e57
 
 PKG_LICENSE:=GPL-1.0-or-later Artistic-1.0-Perl
 PKG_MAINTAINER:=Philip Prindeville <philipp@redfish-solutions.com>

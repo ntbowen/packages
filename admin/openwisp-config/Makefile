@@ -5,7 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openwisp-config
-PKG_VERSION:=1.2.1
+PKG_VERSION:=1.3.0
 PKG_RELEASE:=1
 
 PKG_MAINTAINER:=Federico Capoano <f.capoano@openwisp.io>

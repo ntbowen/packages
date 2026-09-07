@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=prometheus-statsd-exporter
-PKG_VERSION:=0.30.0
+PKG_VERSION:=0.31.0
 PKG_RELEASE:=2
 
 PKG_SOURCE:=statsd_exporter-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/prometheus/statsd_exporter/tar.gz/v${PKG_VERSION}?
-PKG_HASH:=75079d4d33c3110b3dc775e65f7f3c3542cd42303bf4b2433452782a7e3d1e74
+PKG_HASH:=67e52e2b33e4159298c21202e74564bff5f92b4fedc35f1bd280e2dd268a1dba
 PKG_BUILD_DIR:=$(BUILD_DIR)/statsd_exporter-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Andre Heider <a.heider@gmail.com>

@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libcap-ng
-PKG_VERSION:=0.9.3
+PKG_VERSION:=0.9.5
 PKG_RELEASE:=2
 
 PKG_SOURCE:=v$(PKG_VERSION).tar.gz

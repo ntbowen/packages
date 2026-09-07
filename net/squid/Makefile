@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=squid
-PKG_VERSION:=7.6
+PKG_VERSION:=7.7
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/squid-cache/squid/releases/download/SQUID_$(subst .,_,$(PKG_VERSION))
-PKG_HASH:=852178fdc37c5b0786a934fc990c7d2fffc82acf19b2284be209b96431d25992
+PKG_HASH:=f227d3cb7bee61b443dc904407e58b09249d6617330b1953d09e4369662cd665
 
 PKG_MAINTAINER:=Marko Ratkaj <markoratkaj@gmail.com>
 PKG_LICENSE:=GPL-2.0-or-later

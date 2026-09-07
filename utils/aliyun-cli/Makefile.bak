@@ -3,7 +3,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=aliyun-cli
-PKG_VERSION:=3.4.4
+PKG_VERSION:=3.4.11
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

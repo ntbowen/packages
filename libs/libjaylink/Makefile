@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libjaylink
-PKG_VERSION:=0.4.0
+PKG_VERSION:=0.5.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://gitlab.zapb.de/libjaylink/libjaylink/-/archive/$(PKG_VERSION)
-PKG_HASH:=5557d623934a4bbc053c11f9a181375d7abeb76af910696d9e3d9b1de3bf6987
+PKG_HASH:=235b12d161b29d813026704f335536a6a916646ea2058302e4ca45ca2cd81325
 
 PKG_MAINTAINER:=Paul Fertser <fercerpav@gmail.com>
 PKG_LICENSE:=GPL-2.0+

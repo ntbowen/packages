@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=srt
-PKG_VERSION:=1.5.5
+PKG_VERSION:=1.5.6
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/haivision/srt/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=d0a8b600fe1b4eaaf6277530e3cfc8f15b8ce4035f16af4a5eb5d4b123640cdd
+PKG_HASH:=920a4c05a9b32862d38f60a70bc0972f29352fd55ba2393fa6bf49b14bcba222
 PKG_MAINTAINER:=Koen Vandeputte <koen.vandeputte@citymesh.com>
 
 PKG_LICENSE:=MPL-2.0
