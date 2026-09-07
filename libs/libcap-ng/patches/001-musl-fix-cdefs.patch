@@ -1,0 +1,12 @@
+--- a/utils/gcc-attributes.h
++++ b/utils/gcc-attributes.h
+@@ -4,7 +4,9 @@
+ #ifndef GCC_ATTRIBUTES_H
+ #define GCC_ATTRIBUTES_H
+ 
++#ifdef __GLIBC__
+ #include <sys/cdefs.h>
++#endif
+ 
+ /* These macros originate in sys/cdefs.h. Stub them when unavailable. */
+ #ifndef __returns_nonnull
