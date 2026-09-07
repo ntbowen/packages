@@ -73,7 +73,7 @@ define 3proxyLibrary
   define Package/3proxy-lib-$(1)
     $(call Package/3proxy/Default)
     TITLE+= - $(1) library
-    DEPENDS+= 3proxy +libopenssl $(3)
+    DEPENDS+= 3proxy +libwolfssl $(3)
   endef
 
   define Package/3proxy-lib-$(1)/description
@@ -88,7 +88,7 @@ define 3proxyLibrary
 endef
 $(eval $(call 3proxyLibrary,pam,pamauth,+libpam,))
 $(eval $(call 3proxyLibrary,pcre,PCREPlugin,,This filtering plugin can be used to create matching and replace rules with regular expressions for client's request, client and servers header and client and server data.))
-$(eval $(call 3proxyLibrary,ssl,SSLPlugin,+libopenssl,This plugin can be used to decrypt and manupulate SSL/TLS traffic.))
+$(eval $(call 3proxyLibrary,ssl,SSLPlugin,+libwolfssl,This plugin can be used to decrypt and manupulate SSL/TLS traffic.))
 $(eval $(call 3proxyLibrary,strings,StringsPlugin,,Allows to change replies of HTTP proxy server.))
 $(eval $(call 3proxyLibrary,traffic,TrafficPlugin,,This plugin attempts to correct 3proxy computations to approximate network or link level traffic by using either fixed coefficients by port number or attempting to predict number and sizes of network packets.))
 $(eval $(call 3proxyLibrary,transparent,TransparentPlugin,,This plugin can be used to implement 3proxy transparently for client for any TCP-based protocols.))
@@ -102,7 +102,7 @@ define 3proxyModule
   define Package/3proxy-mod-$(1)
     $(call Package/3proxy/Default)
     TITLE+= - $(1) standalone module
-    DEPENDS+= +libopenssl $(2)
+    DEPENDS+= +libwolfssl $(2)
   endef
 
   define Package/3proxy-mod-$(1)/description
