@@ -11,12 +11,12 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
-                https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
+                https://registry.npmjs.org/$\(PKG_NPM_NAME\)/-/
 PKG_HASH:=08a3d2d539b377a6b7ea2469b612672255ca71c30a62698530582cb9d35c268f
 
 PKG_MAINTAINER:=Tianling Shen <cnsztl@immortalwrt.org>
 PKG_LICENSE:=MIT
-PKG_LICENSE_FILES:=LICENSE
+PKG_LICENSE_FILES:=THIRD-PARTY-NOTICES.md
 
 HOST_BUILD_DEPENDS:=node/host
 HOST_BUILD_PARALLEL:=1
@@ -66,18 +66,13 @@ endef
 
 define Package/node-pnpm/install
 	$(INSTALL_DIR) $(1)/usr/lib/node/$(PKG_NPM_NAME)
-	$(CP) $(PKG_BUILD_DIR)/{package.json,LICENSE} \
-		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
-	$(CP) $(PKG_BUILD_DIR)/README.md \
+	$(CP) $(PKG_BUILD_DIR)/{package.json,THIRD-PARTY-NOTICES.md,README.md} \
 		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
 	$(CP) $(PKG_BUILD_DIR)/bin \
 		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
-	$(INSTALL_DIR) $(1)/usr/lib/node/$(PKG_NPM_NAME)/dist
-	$(CP) $(PKG_BUILD_DIR)/dist/{pnpm.mjs,worker.js} \
-		$(1)/usr/lib/node/$(PKG_NPM_NAME)/dist/
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(LN) ../lib/node/$(PKG_NPM_NAME)/bin/pnpm.cjs $(1)/usr/bin/pnpm
-	$(LN) ../lib/node/$(PKG_NPM_NAME)/bin/pnpx.cjs $(1)/usr/bin/pnpx
+	$(LN) ../lib/node/$(PKG_NPM_NAME)/bin/pnpm.mjs $(1)/usr/bin/pnpm
+	$(LN) ../lib/node/$(PKG_NPM_NAME)/bin/pnpx.mjs $(1)/usr/bin/pnpx
 	$(INSTALL_DIR) $(1)/usr/lib/node_modules
 	$(LN) ../node/$(PKG_NPM_NAME) $(1)/usr/lib/node_modules/$(PKG_NPM_NAME)
 endef
@@ -101,18 +96,13 @@ endef
 
 define Host/Install
 	$(INSTALL_DIR) $(1)/lib/node_modules/$(PKG_NPM_NAME)
-	$(CP) $(HOST_BUILD_DIR)/{package.json,LICENSE} \
-		$(1)/lib/node_modules/$(PKG_NPM_NAME)/
-	$(CP) $(HOST_BUILD_DIR)/README.md \
+	$(CP) $(HOST_BUILD_DIR)/{package.json,THIRD-PARTY-NOTICES.md,README.md} \
 		$(1)/lib/node_modules/$(PKG_NPM_NAME)/
 	$(CP) $(HOST_BUILD_DIR)/bin \
 		$(1)/lib/node_modules/$(PKG_NPM_NAME)/
-	$(INSTALL_DIR) $(1)/lib/node_modules/$(PKG_NPM_NAME)/dist
-	$(CP) $(HOST_BUILD_DIR)/dist/{pnpm.mjs,worker.js} \
-		$(1)/lib/node_modules/$(PKG_NPM_NAME)/dist/
 	$(INSTALL_DIR) $(1)/bin
-	$(LN) ../lib/node_modules/$(PKG_NPM_NAME)/bin/pnpm.cjs $(1)/bin/pnpm
-	$(LN) ../lib/node_modules/$(PKG_NPM_NAME)/bin/pnpx.cjs $(1)/bin/pnpx
+	$(LN) ../lib/node_modules/$(PKG_NPM_NAME)/bin/pnpm.mjs $(1)/bin/pnpm
+	$(LN) ../lib/node_modules/$(PKG_NPM_NAME)/bin/pnpx.mjs $(1)/bin/pnpx
 endef
 
 $(eval $(call HostBuild))
