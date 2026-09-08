@@ -115,7 +115,7 @@ define GenPlugin
   define Package/shadow-$(1)
     $(call Package/shadow/Default)
     TITLE:=Utility $(1) from the PLD Linux shadow utilities
-    DEPENDS:=+shadow-common
+    DEPENDS:=+shadow-common +libxcrypt-shared
     HIDDEN:=1
   endef
 
