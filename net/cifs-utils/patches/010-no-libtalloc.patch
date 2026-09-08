@@ -1,11 +1,41 @@
---- a/data_blob.h
-+++ b/data_blob.h
-@@ -23,7 +23,7 @@
- #ifndef _SAMBA_DATABLOB_H_
- #define _SAMBA_DATABLOB_H_
+--- a/configure.ac
++++ b/configure.ac
+@@ -134,9 +134,5 @@ AC_CHECK_HEADERS([sys/fsuid.h])
+ AC_CHECK_FUNC(setfsuid, , [AC_MSG_ERROR([System does not support setfsuid()])])
  
--#include <talloc.h>
-+//#include <talloc.h>
- #include <stdint.h>
+-# libtalloc
+-AC_CHECK_HEADERS([talloc.h], ,[AC_MSG_ERROR([talloc.h not found, consider installing libtalloc-devel.])])
+-AC_CHECK_LIB(talloc, talloc_init, ,[AC_MSG_ERROR([talloc.h not found, consider installing libtalloc-devel.])])
+-
+ # FIXME: add test(s) to autodisable these flags when compiler/linker don't support it
+ if test $enable_pie != "no"; then
+ 	PIE_CFLAGS="-fpie -pie"
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -28,7 +28,7 @@ bin_SCRIPTS =
+ sbin_PROGRAMS =
  
- /* used to hold an arbitrary blob of data */
+-resolve_hosts_SOURCES = data_blob.c asn1.c cldap_ping.c resolve_host.c
+-resolve_hosts_LDADD = -ltalloc -lresolv
++resolve_hosts_SOURCES = resolve_host.c
++resolve_hosts_LDADD = -lresolv
+ 
+ if CONFIG_CIFSUPCALL
+ sbin_PROGRAMS += cifs.upcall
+--- a/resolve_host.c
++++ b/resolve_host.c
+@@ -113,6 +113,7 @@ int resolve_host(const char *host, char
+ 	}
+ 
+ 
++#if 0
+ 	// Is this a DFS domain where we need to do a cldap ping to find the closest node?
+ 	if (count_v4 > 1 || count_v6 > 1) {
+ 		int res;
+@@ -299,5 +300,6 @@ int resolve_host(const char *host, char
+ 		}
+ 	}
++#endif
+ 
+ resolve_host_out:
+ 	freeaddrinfo(addrlist);
