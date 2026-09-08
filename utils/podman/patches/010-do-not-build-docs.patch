@@ -9,12 +9,12 @@
  
  .PHONY: binaries
  ifeq ($(GOOS),freebsd)
-@@ -868,7 +868,7 @@ rpm-install: package  ## Install rpm pac
+@@ -885,7 +885,7 @@ rpm-install: package  ## Install rpm pac
  	/usr/bin/podman info  # will catch a broken conmon
  
  .PHONY: install
--install: install.bin install.remote install.man install.systemd  ## Install binaries to system locations
-+install: install.bin install.remote install.systemd  ## Install binaries to system locations
+-install: install.bin install.remote install.man install.systemd  ## Install all binaries, man pages, and systemd units
++install: install.bin install.remote install.systemd  ## Install all binaries, man pages, and systemd units
  
  .PHONY: install.remote
  install.remote:
