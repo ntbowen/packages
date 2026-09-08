@@ -13,7 +13,7 @@ PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/protocolbuffers/protobuf/releases/download/v$(PKG_VERSION)
-PKG_HASH:=7a7baff8207a57f3fe5c233d432a09eba67bdfb55a3145839d0817cae8e807a4
+PKG_HASH:=dc74fa582f559cbd31614ddfefb4868f43c919d7184bde514bb47f90c6025eb8
 
 PKG_MAINTAINER:=
 PKG_LICENSE:=BSD-3-Clause
