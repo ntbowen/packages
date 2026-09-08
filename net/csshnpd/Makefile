@@ -9,7 +9,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-c$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/atsign-foundation/noports/releases/download/c$(PKG_VERSION)
-PKG_HASH:=b305dc21a4f7c114e4472d94b3309891d1a7fd360336ffd3758e9a7f5f263c8e
+PKG_HASH:=dc90a7d19562d4e4d3a8dc49911a9b2649484214923f71170aed42fe6a7d47ec
 
 PKG_MAINTAINER:=Chris Swan <chris@atsign.com>
 PKG_LICENSE:=BSD-3-Clause
