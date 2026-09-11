@@ -72,7 +72,7 @@ endef
 define Package/libwebsockets-full
 	$(call Package/libwebsockets/Default)
 	TITLE += (Full - OpenSSL, libuv, plugins, CGI)
-	DEPENDS += +libgnutls +libuv
+	DEPENDS += +libopenssl +libuv
 	VARIANT:=full
 	PROVIDES:=libwebsockets libwebsockets-openssl
 endef
