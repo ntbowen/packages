@@ -395,7 +395,6 @@ CONFIGURE_ARGS +=			\
 	--disable-fuse			\
 	--disable-gcrypt		\
 	--disable-download		\
-	--disable-glusterfs		\
 	--disable-gnutls		\
 	--disable-guest-agent-msi	\
 	--disable-libiscsi		\
