@@ -9,7 +9,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=bind
-PKG_VERSION:=9.21.25
+PKG_VERSION:=9.21.26
 PKG_RELEASE:=1
 USERID:=bind=57:bind=57
 
@@ -22,7 +22,7 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:= \
 	https://www.mirrorservice.org/sites/ftp.isc.org/isc/bind9/$(PKG_VERSION) \
 	https://ftp.isc.org/isc/bind9/$(PKG_VERSION)
-PKG_HASH:=8e01712ba7f59515be41981d27e8ec6c9b5d196fc681f8d14a163deea686d7b8
+PKG_HASH:=bec622d80eeaa5a97b3cebc2afb6545c888e6e5fca98f63b04fd958d26463d7b
 
 PKG_INSTALL:=1
 PKG_BUILD_FLAGS:=no-mips16

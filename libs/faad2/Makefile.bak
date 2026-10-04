@@ -6,7 +6,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=faad2
-PKG_VERSION:=2.11.2
+PKG_VERSION:=2.11.3
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

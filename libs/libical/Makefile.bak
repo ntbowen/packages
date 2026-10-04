@@ -8,11 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libical
-PKG_VERSION:=4.0.3
+PKG_VERSION:=4.0.5
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_HASH:=86f29029d0ec9fa30c9001de16c0859a3816ae154ff5b097392b014e21a3d254
+PKG_HASH:=cc09a3ac41d60e6144e644bd3fcf97d47106d659c4a0b8965102581401e67c9c
 PKG_SOURCE_URL:=https://codeload.github.com/libical/libical/tar.gz/v$(PKG_VERSION)?
 
 PKG_MAINTAINER:=Jose Zapater <jzapater@gmail.com>

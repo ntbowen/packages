@@ -7,12 +7,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=shairport-sync
-PKG_VERSION:=5.5
+PKG_VERSION:=5.5.2
 PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/mikebrady/shairport-sync/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=5fcce2ee6b6fbda5fcfb381d0000ab799ec7ce4c285098da6bef82a17237945f
+PKG_HASH:=6235ea0dae45ea137f59c09320406f5888383741924d98855bd2ce0d16b54f21
 
 PKG_MAINTAINER:=Ted Hess <thess@kitschensync.net>, \
 		Mike Brady <mikebrady@eircom.net>

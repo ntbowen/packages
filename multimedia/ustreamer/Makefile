@@ -6,13 +6,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ustreamer
-PKG_VERSION:=6.65
+PKG_VERSION:=6.67
 PKG_RELEASE:=1
 PKG_MAINTAINER:=Georgi Valkov <gvalkov@gmail.com>
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/pikvm/ustreamer/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=2e1392ef4e581046863ccb0a425ae1eeb6e6631a5a93085c08da24473ceaecd9
+PKG_HASH:=6ebdb8776e983ec6d5312a3f44eb34eec23ba5fc90a5a5fba6d5fb49a2c08044
 
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=LICENSE

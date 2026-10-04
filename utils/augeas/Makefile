@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=augeas
-PKG_VERSION:=1.14.1
+PKG_VERSION:=1.15.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/hercules-team/augeas/releases/download/release-$(PKG_VERSION)
-PKG_HASH:=368bfdd782e4b9c7163baadd621359c82b162734864b667051ff6bcb57b9edff
+PKG_HASH:=767a5fffc93bb27dcc02867523bf03d3876d15ecbe467a2ba272b0c4292400cc
 
 PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1

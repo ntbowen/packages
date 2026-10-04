@@ -6,7 +6,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libmariadb
-PKG_VERSION:=3.4.9
+PKG_VERSION:=3.4.11
 PKG_RELEASE:=1
 
 PKG_SOURCE:=mariadb-connector-c-$(PKG_VERSION)-src.tar.gz
@@ -14,7 +14,7 @@ PKG_SOURCE_URL:=\
 	https://mirror.netcologne.de/mariadb/connector-c-$(PKG_VERSION) \
 	https://ftp.yz.yamagata-u.ac.jp/pub/dbms/mariadb/connector-c-$(PKG_VERSION) \
 	https://dlm.mariadb.com/3907132/Connectors/c/connector-c-$(PKG_VERSION)
-PKG_HASH:=2c70b74393d589df0bde9b3e17cb7b571d30a45aaf006eda7a273120fb660f3a
+PKG_HASH:=641c6502a8fed03b2afe89375dc88cadd104baf5f87a7d6866e778a6cf675c32
 PKG_BUILD_DIR:=$(BUILD_DIR)/mariadb-connector-c-$(PKG_VERSION)-src
 
 PKG_MAINTAINER:=Michal Hrusecky <Michal@Hrusecky.net>

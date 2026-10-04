@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=stlink
-PKG_VERSION:=1.8.0
+PKG_VERSION:=1.9.0
 PKG_RELEASE:=2
 
 PKG_SOURCE_PROTO:=git

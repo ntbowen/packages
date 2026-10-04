@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=mocha
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=12.0.0
+PKG_VERSION:=12.0.3
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=d592fbcda28ad9b138e7aa36ee596f201f416af19e3b80fd08021248464d3731
+PKG_HASH:=3a93ba09b4b5f591a947ef5226ca9ae76220b124fe610dbcd5b76eb320512919
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT

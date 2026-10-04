@@ -9,12 +9,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=bmon
-PKG_VERSION:=4.0
+PKG_VERSION:=5.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/tgraf/bmon/releases/download/v$(PKG_VERSION)/
-PKG_HASH:=02fdc312b8ceeb5786b28bf905f54328f414040ff42f45c83007f24b76cc9f7a
+PKG_HASH:=cd7f5fb366a8c32c0e33c79a5daae78edd273993d0edf1036638f269400cf012
 PKG_MAINTAINER:=Baptiste Jonglez <openwrt-pkg@bitsofnetworks.org>
 PKG_LICENSE:=MIT
 

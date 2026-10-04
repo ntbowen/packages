@@ -6,7 +6,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=unrar
-PKG_VERSION:=7.2.7
+PKG_VERSION:=7.3.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=unrarsrc-$(PKG_VERSION).tar.gz

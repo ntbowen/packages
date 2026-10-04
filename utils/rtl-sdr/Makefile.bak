@@ -13,7 +13,7 @@ PKG_RELEASE:=1
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_VERSION:=v2.0.2
 PKG_SOURCE_URL:=https://gitea.osmocom.org/sdr/rtl-sdr
-PKG_MIRROR_HASH:=a6193da128f7bcba83c2af95896e6e34a31b1ac3419c976a32a67f13a0f6e864
+PKG_MIRROR_HASH:=c2840c219340addad7021a388050e264c8b8a1ee4315a2ff4dfee55db3fa42ac
 
 PKG_MAINTAINER:=Vasilis Tsiligiannis <b_tsiligiannis@silverton.gr>
 PKG_LICENSE:=GPL-2.0-or-later

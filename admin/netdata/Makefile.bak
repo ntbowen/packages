@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=netdata
-PKG_VERSION:=2.10.3
+PKG_VERSION:=2.11.0
 PKG_RELEASE:=3
 
 PKG_MAINTAINER:=Josef Schlehofer <pepe.schlehofer@gmail.com>, Daniel Engberg <daniel.engberg.lists@pyret.net>
@@ -18,7 +18,7 @@ PKG_CPE_ID:=cpe:/a:netdata:netdata
 
 PKG_SOURCE:=$(PKG_NAME)-v$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/netdata/netdata/releases/download/v$(PKG_VERSION)
-PKG_HASH:=d7f178b89dc327f4f761aeaf5bd6e76a13ba220497c64c30f587f98ddc65b42b
+PKG_HASH:=3e21070e084045757df8281a8de4213458a59a2d35a295c7d692370071797c86
 PKG_BUILD_DIR=$(BUILD_DIR)/$(PKG_NAME)-v$(PKG_VERSION)
 
 PKG_INSTALL:=1
@@ -63,7 +63,7 @@ CMAKE_OPTIONS += \
 	-DENABLE_EXPORTER_PROMETHEUS_REMOTE_WRITE=OFF \
 	-DENABLE_EXPORTER_MONGODB=OFF \
 	-DENABLE_BUNDLED_PROTOBUF=OFF \
-		-DProtobuf_PROTOC_EXECUTABLE=/home/zag/OpenWrt/zagwrt/staging_dir/hostpkg/bin/protoc-35.0.0 \
+		-DProtobuf_PROTOC_EXECUTABLE=$(STAGING_DIR_HOSTPKG)/bin/protoc \
 	-DENABLE_BUNDLED_JSONC=OFF \
 	-DENABLE_BUNDLED_YAML=OFF \
 	-DENABLE_SENTRY=OFF \

@@ -11,7 +11,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=xxhash
-PKG_VERSION:=0.8.3
+PKG_VERSION:=0.8.4
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git

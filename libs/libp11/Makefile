@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libp11
-PKG_VERSION:=0.4.20
+PKG_VERSION:=0.4.21
 PKG_RELEASE:=1
 
 PKG_SOURCE_URL:=https://github.com/OpenSC/libp11/releases/download/$(PKG_NAME)-$(PKG_VERSION)/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_HASH:=69c33eb6ed622244d08f0aa3e96417f8c8e216914950880d8c145c7e1441b25a
+PKG_HASH:=dc51f1b2ac1ce7393509d5f849420d51dc1282ce2d5a9c16f22e5d651b33522d
 
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 PKG_LICENSE:=LGPL-2.1-or-later

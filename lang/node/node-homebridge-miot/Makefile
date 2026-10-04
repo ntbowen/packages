@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=homebridge-miot
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=1.9.0
+PKG_VERSION:=2.0.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=25df3d7078dfb97d32d171b8f0aa1074117c02adaa706ad8e684df1fb1a3bb47
+PKG_HASH:=3dc485e5099e88f09c48859b4daf75b52e2e011cc4e0bc631bab4853fdcb0752
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT

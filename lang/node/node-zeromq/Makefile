@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=zeromq
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=6.7.0
+PKG_VERSION:=6.8.0
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=a22d3d07d6f8242567e965490b72bb6e1bc6204467fe65845af88498b94c9d7c
+PKG_HASH:=404f865b2b33a8ed47b46a36de8cc8b55671ceb7e41af14576d75960587be5ec
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT

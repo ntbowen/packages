@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libjuice
-PKG_VERSION:=1.7.3
+PKG_VERSION:=1.7.4
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/paullouisageneau/libjuice/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=86e075ca4732882746b6d5733ff1b6090f942e5750df58630b191b5f00f30010
+PKG_HASH:=95c088862aa1b88b73d62aa99577135010eb768fcafb252d13aa85a8515ef798
 
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 PKG_LICENSE:=MPL-2.0
