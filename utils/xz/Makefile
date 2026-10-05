@@ -15,7 +15,7 @@ PKG_RELEASE:=1
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/tukaani-project/xz/releases/download/v$(PKG_VERSION) \
 		@SF/lzmautils
-PKG_HASH:=be01c20923ed7642a5ad039f83252e3b7d09f0e3431d01284a5beff6c123671c
+PKG_HASH:=3340ae48f88665abc78d71dc43446fb3f7e70b48fd59844ac0e14958cef6e00b
 
 PKG_MAINTAINER:=
 PKG_LICENSE:=Public-Domain LGPL-2.1-or-later 0BSD
