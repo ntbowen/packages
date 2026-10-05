@@ -17,7 +17,10 @@ PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
 PKG_CPE_ID:=cpe:/a:libexpat_project:libexpat
 
+PKG_BUILD_DIR:=$(BUILD_DIR)/libexpat-R_$(subst .,_,$(PKG_VERSION))
+
 CMAKE_INSTALL:=1
+CMAKE_SOURCE_SUBDIR:=expat
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
