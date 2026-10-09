@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libndpi
 PKG_VERSION:=6.0
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/ntop/nDPI/tar.gz/$(PKG_VERSION)?
@@ -28,7 +28,7 @@ PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
-ifeq ($(LIBNDPI_NDPIREADER),)
+ifeq ($(CONFIG_LIBNDPI_NDPIREADER),)
 CONFIGURE_ARGS += --with-only-libndpi
 endif
 
@@ -114,7 +114,7 @@ define Package/libndpi/install
 	$(CP) $(PKG_BUILD_DIR)/src/lib/libndpi.so* \
 		$(1)/usr/lib/
 	$(INSTALL_DIR) $(1)/usr/bin/
-ifneq ($(LIBNDPI_NDPIREADER),)
+ifneq ($(CONFIG_LIBNDPI_NDPIREADER),)
 	$(CP) $(PKG_BUILD_DIR)/example/ndpiReader \
 		$(1)/usr/bin/
 endif
