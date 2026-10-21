@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=homebridge
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=2.4.1-beta.11
+PKG_VERSION:=2.4.1-beta.13
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=861a6b17d775aa6ac85d0d41e50d043096df9b69162c44ec8ec8ff9f13af90ad
+PKG_HASH:=8c18ba9859c964592f8eb5e5fb408b4e5ae5b582295abdadadebe2ee71ce55cd
 
 PKG_BUILD_DEPENDS:=node/host
 PKG_BUILD_FLAGS:=no-mips16

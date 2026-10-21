@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=telldus-mqtt
-PKG_VERSION:=0.3
+PKG_VERSION:=0.4.1
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/PeterFromSweden/telldus-mqtt.git
-PKG_SOURCE_VERSION:=ffcbadc3aa3e36a238e35319bab66819e93db347
+PKG_SOURCE_VERSION:=ce6445ca4dc467d8870bba1e1b45ad6957d758e6
 PKG_MIRROR_HASH:=20aa0e2d59ac8f37cc805f3b1a02559c278a99a577567d978ece264bac6bae61
 
 PKG_MAINTAINER:=Peter Liedholm <PeterFromSwe884@gmail.com>

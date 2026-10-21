@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libimobiledevice-glue
-PKG_VERSION:=1.3.2
+PKG_VERSION:=1.3.3
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/libimobiledevice/libimobiledevice-glue/releases/download/$(PKG_VERSION)
-PKG_HASH:=6489a3411b874ecd81c87815d863603f518b264a976319725e0ed59935546774
+PKG_HASH:=fbcc4a17363b9d048699d2445645be7dbe3d33b02c10f13d4f865c7d402ebdb3
 
 PKG_MAINTAINER:=Rosen Penev <rosenp@gmail.com>
 PKG_LICENSE:=LGPL-2.1-or-later

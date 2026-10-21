@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lyaml
-PKG_VERSION:=6.2.9
+PKG_VERSION:=6.2.10
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/gvvaughan/lyaml/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=515e81d21903c1e428b017f2fe9dffa4e29ae9881b0d49ddbe6ba625e3164fe3
+PKG_HASH:=ff2ae6c2c25941e44cd5bfd0fdc837f70c077571539e27fdf61443c5e6654de7
 
 PKG_MAINTAINER:=Mathew McBride <matt@traverse.com.au>
 PKG_LICENSE:=MIT

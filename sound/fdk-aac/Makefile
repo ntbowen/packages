@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=fdk-aac
-PKG_VERSION:=2.0.3
+PKG_VERSION:=3.0.0
 PKG_RELEASE:=5
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/mstorsjo/fdk-aac/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=e25671cd96b10bad896aa42ab91a695a9e573395262baed4e4a2ff178d6a3a78
+PKG_HASH:=82293f6ce08204d7324972a07bea3cd6f9efdc297c35cde462a4a5d5aa8b97da
 
 PKG_MAINTAINER:=Ted Hess <thess@kitschensync.net>
 PKG_LICENSE:=Fraunhofer-FDK-AAC-for-Android

@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=hev-socks5-tunnel
-PKG_VERSION:=2.17.1
+PKG_VERSION:=2.18.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/heiher/hev-socks5-tunnel/releases/download/$(PKG_VERSION)
-PKG_HASH:=3c2635be2f73528c2d90db745e47761e78c27dd2f97b342c8edbdecff278f2b4
+PKG_HASH:=8a6364e3ffc4f3186c0a22b7ce0d03f0cf6464e562846913a3702eefae8c7991
 
 PKG_MAINTAINER:=Ray Wang <git@hev.cc>
 PKG_LICENSE:=MIT

@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cqueues
-PKG_VERSION:=20200726
+PKG_VERSION:=20261006
 PKG_RELEASE:=2
 PKG_MAINTAINER:=Siger Yang <siger.yang@outlook.com>
 

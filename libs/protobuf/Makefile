@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=protobuf
-PKG_VERSION:=36.1
+PKG_VERSION:=36.2
 PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/protocolbuffers/protobuf/releases/download/v$(PKG_VERSION)
-PKG_HASH:=dc74fa582f559cbd31614ddfefb4868f43c919d7184bde514bb47f90c6025eb8
+PKG_HASH:=7e7eaf580ec77f1a392ff1ab1013c13d3b04a6716f002f697f67f3c1113f0530
 
 PKG_MAINTAINER:=
 PKG_LICENSE:=BSD-3-Clause

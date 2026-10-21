@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=perl-text-csv_xs
-PKG_VERSION:=1.64
+PKG_VERSION:=1.65
 PKG_RELEASE:=1
 
 PKG_SOURCE:=Text-CSV_XS-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://cpan.metacpan.org/authors/id/H/HM/HMBRAND
-PKG_HASH:=65c5662d4fe8ef3039a1b32f641634d0aae6ab10eabbb24f740c75332f2caf30
+PKG_HASH:=4f0c16457c87def295a994e9c4ba397a8baafad96cefaf2d61483125f90ff974
 PKG_BUILD_DIR:=$(BUILD_DIR)/perl/Text-CSV_XS-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Philip Prindeville <philipp@redfish-solutions.com>

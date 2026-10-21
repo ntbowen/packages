@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=memtest86plus
-PKG_VERSION:=8.10
+PKG_VERSION:=9.00
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/memtest86plus/memtest86plus/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=5617bc42ae4572158988efd466954d08f25cbb78f1714164280064784c484f4d
+PKG_HASH:=57ca5e0c0b0abcb8deee75735d0aa814f303e801c8a41e6b9b2ed1dfa733c684
 
 PKG_MAINTAINER:=John Audia <therealgraysky@proton.me>
 PKG_LICENSE:=GPL-2.0-only

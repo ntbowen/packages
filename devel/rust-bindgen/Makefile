@@ -5,12 +5,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rust-bindgen
-PKG_VERSION:=0.72.1
+PKG_VERSION:=0.73.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/rust-lang/rust-bindgen/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=4ffb17061b2d71f19c5062d2e17e64107248f484f9775c0b7d30a16a8238dfd1
+PKG_HASH:=5fc3277dd334e4bbbd7bdb8cad5d4fb87a667b2e95a2bae350a8d5424c280629
 
 PKG_MAINTAINER:=Tianling Shen <cnsztl@immortalwrt.org>
 PKG_LICENSE:=BSD-3-Clause

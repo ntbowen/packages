@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libxmp
-PKG_VERSION:=4.7.2
+PKG_VERSION:=4.7.3
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/$(PKG_NAME)/$(PKG_NAME)/releases/download/$(PKG_NAME)-$(PKG_VERSION)
-PKG_HASH:=3a6ad7d154d931e21db79e1c0af3253998555c73706083ce9ab2b634180a6e99
+PKG_HASH:=716b013943bac9dbe0616fccf828451d15aa862d5bac42b5286dac4572bfbd8b
 
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 PKG_LICENSE:=MIT

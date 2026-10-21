@@ -7,12 +7,12 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/openssl-module.mk
 
 PKG_NAME:=libopenssl-oqsprovider
-PKG_VERSION:=0.11.0
+PKG_VERSION:=0.12.0
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/open-quantum-safe/oqs-provider.git
-PKG_SOURCE_VERSION:=c2953adbfa950e2eca084804feda0c73a8b1fed1
+PKG_SOURCE_VERSION:=7e9d095aff7967fab9a8ce693e3da5357dc59d58
 PKG_MIRROR_HASH:=cf8fcc4b1cd8fc914bc7948c35666769d5f4a1ca40a36c049f116d6e216b3f82
 
 PKG_MAINTAINER:=Christian Marangi <ansuelsmth@gmail.com>

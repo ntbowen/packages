@@ -5,12 +5,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=3proxy
-PKG_VERSION:=1.0.0
+PKG_VERSION:=1.0.1
 PKG_RELEASE:=4
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/3proxy/3proxy/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=35b07de1046f3aaeac4a7085101b7e5c453efa3527cbdc42a84690366c7ecfa8
+PKG_HASH:=fa4b4e72b98950f8a4de4a5b7df47f3f67e88a79c50a53d43792f5bc17648d27
 
 PKG_CPE_ID:=cpe:/a:3proxy:3proxy
 PKG_LICENSE:=3proxy Apache-2.0 GPL-2.0-or-later LGPL-2.1-or-later
