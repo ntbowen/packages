@@ -15,7 +15,7 @@ PKG_RELEASE:=1
 PKG_SOURCE:=fuse-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/libfuse/libfuse/releases/download/fuse-$(PKG_VERSION)
 PKG_HASH:=a26f46edc8db4e2cbf1b46d36d3e18ea208871671e56434d9ceb8f7887a690d2
-PKG_BUILD_DIR:=$(BUILD_DIR)/fuse-$(PKG_VERSION)
+PKG_BUILD_DIR:=$(BUILD_DIR)/libfuse-fuse-$(PKG_VERSION)
 
 PKG_MAINTAINER:=
 PKG_CPE_ID:=cpe:/a:fuse_project:fuse
