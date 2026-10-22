@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=kcptun
-PKG_VERSION:=20260314
+PKG_VERSION:=20261018
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://codeload.github.com/xtaci/kcptun/tar.gz/v${PKG_VERSION}?
-PKG_HASH:=09054b52d5799a8e47edb36f2db335d929d5bbb63a26f7ba2fe03c64ec39d550
+PKG_SOURCE_URL:=https://codeload.github.com/smithwhere/kcptun/tar.gz/v${PKG_VERSION}?
+PKG_HASH:=c3ef2508c28862cbe83ed0124c6860dad15e868750fc4094bb7144fe3513a282
 
 PKG_MAINTAINER:=Dengfeng Liu <liudf0716@gmail.com>, Chao Liu <expiron18@gmail.com>
 PKG_LICENSE:=MIT
@@ -16,7 +16,7 @@ PKG_BUILD_DEPENDS:=golang/host
 PKG_BUILD_PARALLEL:=1
 PKG_BUILD_FLAGS:=no-mips16
 
-GO_PKG:=github.com/xtaci/kcptun
+GO_PKG:=github.com/smithwhere/kcptun
 
 GO_PKG_LDFLAGS_X:=main.VERSION=$(PKG_VERSION)
 
@@ -28,7 +28,7 @@ define Package/kcptun-config
   CATEGORY:=Network
   SUBMENU:=Web Servers/Proxies
   TITLE:=Kcptun Config Scripts
-  URL:=https://github.com/xtaci/kcptun
+  URL:=https://github.com/smithwhere/kcptun
   DEPENDS:=$(GO_ARCH_DEPENDS)
 endef
 
@@ -49,7 +49,7 @@ define Package/kcptun/Default
     CATEGORY:=Network
     SUBMENU:=Web Servers/Proxies
     TITLE:=KCP-based Secure Tunnel $(1)
-    URL:=https://github.com/xtaci/kcptun
+    URL:=https://github.com/smithwhere/kcptun
     DEPENDS:=+kcptun-config
   endef
 
