@@ -14,7 +14,7 @@ PKG_RELEASE:=2
 PKG_SOURCE:=v$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/stevegrubb/libcap-ng/tar.gz/refs/tags/v$(PKG_VERSION)?
 
-PKG_HASH:=a2b4211f59b231d607c61ea2a13e9ecb38f446fe769b44e12da939d5af6d978a
+PKG_HASH:=399040138e0ca62fa2bcabd63da9af4431a246ef7a654561a0ca3cb00010a539
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Lucian CRISTIAN <lucian.cristian@gmail.com>
