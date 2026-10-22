@@ -1,0 +1,14 @@
+netif_utils.c uses caddr_t which is defined in <sys/types.h> when
+_GNU_SOURCE/_BSD_SOURCE is set. The file relies on transitive includes
+that no longer provide it, so include <sys/types.h> explicitly.
+
+--- a/netif_utils.c
++++ b/netif_utils.c
+@@ -28,6 +28,7 @@
+ #include <fcntl.h>
+ #include <limits.h>
+ #include <sys/ioctl.h>
++#include <sys/types.h>
+ #include <net/if.h>
+ #include <linux/if_ether.h>
+ #include <linux/ethtool.h>
