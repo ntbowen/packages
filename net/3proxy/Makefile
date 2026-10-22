@@ -10,7 +10,7 @@ PKG_RELEASE:=4
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/3proxy/3proxy/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=fa4b4e72b98950f8a4de4a5b7df47f3f67e88a79c50a53d43792f5bc17648d27
+PKG_HASH:=d339c75c6dba0928027e38b85b123e1720dbb2a0ccadeacbf75eddbef1cefed8
 
 PKG_CPE_ID:=cpe:/a:3proxy:3proxy
 PKG_LICENSE:=3proxy Apache-2.0 GPL-2.0-or-later LGPL-2.1-or-later
