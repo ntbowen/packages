@@ -1,0 +1,15 @@
+The non-USE_NSCD stub of nscd_flush_cache() takes int, but callers pass
+const char * ("passwd"/"group"). With GCC 14 / C23 the int-conversion is
+a hard error. Match the real prototype's argument type.
+
+--- a/lib/nscd.h
++++ b/lib/nscd.h
+@@ -8,7 +8,7 @@
+ extern int nscd_flush_cache (const char *service);
+ #else
+ static inline int
+-nscd_flush_cache(MAYBE_UNUSED int _1)
++nscd_flush_cache(MAYBE_UNUSED const char *_1)
+ {
+ 	return 0;
+ }
