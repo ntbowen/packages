@@ -12,12 +12,12 @@ PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 PKG_LICENSE:=GPLv2
 PKG_LICENSE_FILES:=COPYING
 
+PKG_BUILD_DEPENDS:=rust/host
+PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
-PKG_FIXUP:=autoreconf
 
 include $(INCLUDE_DIR)/package.mk
-
-CONFIGURE_ARGS+= --disable-doxygen
+include ../../lang/rust/rust-values.mk
 
 ifneq ($(CONFIG_USE_MUSL),)
   TARGET_CFLAGS += -D_LARGEFILE64_SOURCE
@@ -32,6 +32,27 @@ define Build/Prepare
 	$(CP) $(PKG_BUILD_DIR)/README.md $(PKG_BUILD_DIR)/README
 endef
 
+# Upstream ships a hand-written Makefile driving cargo; it also generates
+# the compatibility headers and man pages and installs lib + tools.
+define Build/Compile
+	+$(CARGO_PKG_CONFIG_VARS) \
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) \
+		TARGET="$(RUSTC_TARGET_ARCH)" \
+		CC="$(TARGET_CC)" CXX="$(TARGET_CXX)" \
+		CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" \
+		LDFLAGS="$(TARGET_LDFLAGS)" \
+		all
+endef
+
+define Build/Install
+	+$(CARGO_PKG_CONFIG_VARS) \
+	$(MAKE) -C $(PKG_BUILD_DIR) \
+		TARGET="$(RUSTC_TARGET_ARCH)" \
+		prefix=/usr \
+		DESTDIR="$(PKG_INSTALL_DIR)" \
+		install
+endef
+
 define Package/inotify-tools/Default
   URL:=https://github.com/rvoicilas/inotify-tools/wiki
 endef
@@ -40,6 +61,7 @@ define Package/libinotifytools
   $(call Package/inotify-tools/Default)
   SECTION:=libs
   CATEGORY:=Libraries
+  DEPENDS:=$(RUST_ARCH_DEPENDS)
   TITLE=libinotifytools
 endef
 
@@ -47,7 +69,7 @@ define Package/inotifywait
   $(call Package/inotify-tools/Default)
   SECTION:=utils
   CATEGORY:=Utilities
-  DEPENDS:=+libinotifytools
+  DEPENDS:=$(RUST_ARCH_DEPENDS) +libinotifytools
   TITLE=inotifywait tool
 endef
 
@@ -55,7 +77,7 @@ define Package/inotifywatch
   $(call Package/inotify-tools/Default)
   SECTION:=utils
   CATEGORY:=Utilities
-  DEPENDS:=+libinotifytools
+  DEPENDS:=$(RUST_ARCH_DEPENDS) +libinotifytools
   TITLE=inotifywatch tool
 endef
 
@@ -105,7 +127,7 @@ define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include/inotifytools
 	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/include/inotifytools/* $(1)/usr/include/inotifytools/
 	$(INSTALL_DIR) $(1)/usr/lib/
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/*.{so*,a,la} $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/*.{so*,a} $(1)/usr/lib/
 endef
 
 $(eval $(call BuildPackage,libinotifytools))
