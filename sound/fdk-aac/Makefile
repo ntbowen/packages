@@ -11,7 +11,7 @@ PKG_RELEASE:=5
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/mstorsjo/fdk-aac/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=82293f6ce08204d7324972a07bea3cd6f9efdc297c35cde462a4a5d5aa8b97da
+PKG_HASH:=8538ea8f0f9915e460c106a13e1866a9e13c7ee48c1b67d0b2cf7b4e8159bd1a
 
 PKG_MAINTAINER:=Ted Hess <thess@kitschensync.net>
 PKG_LICENSE:=Fraunhofer-FDK-AAC-for-Android
