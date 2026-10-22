@@ -13,7 +13,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/shadow-maint/shadow/releases/download/$(PKG_VERSION)
-PKG_HASH:=17cf141ef01c7f75d0bb42e20d10d7d84dffae538328e067a62575cca4e543af
+PKG_HASH:=623be9429f64fa2165bfc5957c6a642ec309c5cf23c0d53855c99f7591922297
 
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE:=BSD-3-Clause
