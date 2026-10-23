@@ -13,7 +13,7 @@ PKG_SOURCE_URL:= \
 		http://www.nic.funet.fi/index/samba/pub/samba/stable/ \
 		http://samba.mirror.bit.nl/samba/ftp/stable/ \
 		https://download.samba.org/pub/samba/stable/
-PKG_HASH:=810cc955acb367e9bde556dccfb50db177a02b7c553aa1629a0b905fa7616267
+PKG_HASH:=2e2cb7296833b35b8f7a7fb76045e0c57adc0c2cd03264b37df5d58e40f28437
 
 PKG_BUILD_FLAGS:=gc-sections
 
