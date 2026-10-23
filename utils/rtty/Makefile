@@ -13,7 +13,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL=https://github.com/zhaojh329/rtty/releases/download/v$(PKG_VERSION)
-PKG_HASH:=cfaa65eafb7cdb69ea5ad6faa700b0e1839b6c24e543797bb24295b8d816211c
+PKG_HASH:=3764ec2537a5ae2b3a93853dda13fc20b0c0a57184cac30ed2ac1317312c3e2a
 
 PKG_MAINTAINER:=Jianhui Zhao <zhaojh329@gmail.com>
 PKG_LICENSE:=MIT
