@@ -13,7 +13,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/libimobiledevice/libplist/releases/download/$(PKG_VERSION)
-PKG_HASH:=9c8923a74ad95f16e07fef94b43f7d8c9a5583b4973f1e41dbf25427f388fdee
+PKG_HASH:=b1f59f7634c58b2481325a23ff4e3bf51574a42d868cbe466d2b39b04550752a
 
 PKG_MAINTAINER:=Rosen Penev <rosenp@gmail.com>
 PKG_CPE_ID:=cpe:/a:libimobiledevice:libplist
