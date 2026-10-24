@@ -2,8 +2,8 @@
 +++ b/include/libtorrent/version.hpp
 @@ -24,6 +24,7 @@
  
- #define LIBTORRENT_VERSION "2.1.1.0"
- #define LIBTORRENT_REVISION "d918e4152"
+ #define LIBTORRENT_VERSION "2.1.2.0"
+ #define LIBTORRENT_REVISION "a610c6ef4"
 +#define TORRENT_ABI_VERSION 3
  
  namespace libtorrent {
