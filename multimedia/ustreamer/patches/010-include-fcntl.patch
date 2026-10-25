@@ -1,0 +1,10 @@
+--- a/src/ustreamer/stream.c
++++ b/src/ustreamer/stream.c
+@@ -26,6 +26,7 @@
+ #include <stdlib.h>
+ #include <stdatomic.h>
+ #include <limits.h>
++#include <fcntl.h>
+ #include <unistd.h>
+ #include <errno.h>
+ #include <math.h>
