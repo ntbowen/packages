@@ -59,7 +59,7 @@ define Download/v2raya-web
 	URL:=https://github.com/v2rayA/v2rayA/releases/download/v$(PKG_VERSION)/
 	URL_FILE:=web.tar.gz
 	FILE:=$(WEB_FILE)
-	HASH:=19f475b43a95bcc6f71fa6228c6aaeffeaffffb9b061c8909d507001a26ca76d
+	HASH:=c25071a27f7b98eebb1a80d44b8d6a65d7533cf4cdff475ec86343d7deca5c86
 endef
 
 define Build/Prepare
